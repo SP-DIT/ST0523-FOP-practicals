@@ -18,7 +18,19 @@
  * For the second example, there are no common prefix, so the length is 0.
  * For the third example, the longest common prefix is 'ab', which has a length of 2.
  */
-function longestCommonPrefix(string1, string2, string3, string4) {}
+function longestCommonPrefix(string1, string2, string3, string4) {
+    // Write your code here
+    let min = Math.min(string1.length, string2.length, string3.length, string4.length);
+    let count = 0;
+    for (let i = 0; i < min; i++) {
+        if (string1[i] === string2[i] && string2[i] === string3[i] && string3[i] === string4[i]) {
+            count++;
+        } else {
+            break;
+        }
+    }
+    return count;
+}
 
 // Your own test cases
 // e.g.;
