@@ -8,7 +8,7 @@
  * Change the value of year accordingly to test your code
  */
 const year = 2020;
-const isLeapYear; // Determine if the year is a leap year
-console.log("Q8 " + isLeapYear);
+const isLeapYear = (year % 4 === 0 && !(year % 100 === 0)) || year % 400 === 0; // Determine if the year is a leap year
+console.log('Q8 ' + isLeapYear);
 
 // Run the program with `node ./q8.js`

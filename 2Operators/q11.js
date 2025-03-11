@@ -6,6 +6,9 @@ let num3 = 10;
 let num4 = 20;
 
 // write your code here
+num3 = num3 + num4;
+num4 = num3 - num4;
+num3 = num3 - num4;
 
 console.log('Q11 ' + num3 + ' ' + num4);
 
