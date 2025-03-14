@@ -13,8 +13,21 @@
  *            |
  *
  * Given a coordinate, determine which quadrant it is in.
+ *
+ * You can be sure that x != 0 and y != 0
  */
-function whichQuadrant(x, y) {}
+function whichQuadrant(x, y) {
+    // Write your code here
+    if (x > 0 && y > 0) {
+        return 1;
+    } else if (x < 0 && y > 0) {
+        return 2;
+    } else if (x < 0 && y < 0) {
+        return 3;
+    } else if (x > 0 && y < 0) {
+        return 4;
+    }
+}
 
 // Your own test cases
 // e.g.;

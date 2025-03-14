@@ -23,7 +23,11 @@
  *      rounded up = 7
  *      divide by 2 = 3.5
  */
-function toGetTargetGPA(gpa, creditsFulfilled, totalCredits, targetGPA) {}
+function toGetTargetGPA(gpa, creditsFulfilled, totalCredits, targetGPA) {
+    const remainingCredits = totalCredits - creditsFulfilled;
+    const remainingGPA = targetGPA * totalCredits - gpa * creditsFulfilled;
+    return Math.ceil((remainingGPA / remainingCredits) * 2) / 2;
+}
 
 // Your own test cases
 // e.g.;

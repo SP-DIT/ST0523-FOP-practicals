@@ -39,7 +39,9 @@
  * - Each ? should be either B, D, or E
  * - Assume B, D, or E are all True
  */
-function foobar(number) {}
+function foobar(number) {
+    return (number % 15 === 0 && 'foobar') || (number % 3 === 0 && 'foo') || (number % 5 === 0 && 'bar') || number;
+}
 
 console.log(foobar(3));
 

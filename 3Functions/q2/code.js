@@ -23,7 +23,10 @@
  * 2. Compute the slope of the line passing through the points (x1, y1) and (x2, y2), store it in a variable
  * 3. Return the variable
  */
-function findSlope() {}
+function findSlope(x1, y1, x2, y2) {
+    // Write your code here
+    return (y2 - y1) / (x2 - x1);
+}
 
 // Your own test cases
 // e.g.;

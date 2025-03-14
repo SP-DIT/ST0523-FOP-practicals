@@ -43,7 +43,46 @@
  * - The tenth command calculates programming - is + fun, which is 10 - 4 + 1 = 7, and 7 maps to the variable "bar"
  *
  */
-function evaluateCommands(commands) {}
+function evaluateCommands(commands) {
+    // Write your code here
+    const variables = {};
+    const reverseVariables = {};
+    let result = [];
+    for (let i = 0; i < commands.length; i++) {
+        const command = commands[i];
+        const commandsArray = command.split(' ');
+        const action = commandsArray[0];
+
+        if (action === 'def') {
+            const variable = commandsArray[1];
+            const value = +commandsArray[2];
+            variables[variable] = value;
+            reverseVariables[value] = variable;
+        } else if (action === 'calc') {
+            let value = variables[commandsArray[1]];
+            let invalid = value === undefined;
+            for (let j = 2; j < commandsArray.length && !invalid; j += 2) {
+                const operator = commandsArray[j];
+                const variable = commandsArray[j + 1];
+                if (variables[variable] === undefined) {
+                    invalid = true;
+                } else if (operator === '+') {
+                    value += variables[variable];
+                } else {
+                    value -= variables[variable];
+                }
+            }
+            if (invalid) {
+                result.push('invalid');
+            } else if (reverseVariables[value] === undefined) {
+                result.push('unknown');
+            } else {
+                result.push(reverseVariables[value]);
+            }
+        }
+    }
+    return result;
+}
 
 // Your own test cases
 // e.g.;
