@@ -31,7 +31,16 @@
  * getStudentIds(1) => [6,9,2] // Not Found!
  *
  */
-function findStudent(getStudentIds, targetStudentId) {}
+function findStudent(getStudentIds, targetStudentId) {
+    let records = [null, null, null, null, null];
+    let page = 0;
+    let found = false;
+    while (!found && records.length === 5) {
+        records = getStudentIds(page++);
+        found = records.includes(targetStudentId);
+    }
+    return found;
+}
 
 // Your own test cases
 // e.g.;
