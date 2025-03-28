@@ -187,7 +187,7 @@ function runQuestions() {
         results.forEach((result) => {
             result.forEach((testCase) => {
                 if (testCase.error) {
-                    console.log(
+                    console.error(
                         `\tTest case ${testCase.testIndex + 1}.${testCase.index + 1}: Error - ${
                             testCase.error.message
                         }`,

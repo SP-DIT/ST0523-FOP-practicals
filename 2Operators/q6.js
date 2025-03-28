@@ -7,7 +7,7 @@
 
 const a = 21;
 const b = 7;
-const divisible; // Determine if a is divisible by b
-console.log("Q6 " + divisible);
+const divisible = a % b === 0; // Determine if a is divisible by b
+console.log('Q6 ' + divisible);
 
 // Run the program with `node ./q6.js`
