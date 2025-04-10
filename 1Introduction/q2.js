@@ -4,7 +4,7 @@
 
 const height;
 const weight;
-const bmi = height / weight / weight;
+const bmi = weight / height / height;
 
 console.log('height', height, typeof height);
 console.log('weight', weight, typeof weight);

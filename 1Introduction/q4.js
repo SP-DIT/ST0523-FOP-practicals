@@ -9,4 +9,4 @@
  * Refer to screenshots folder for the expected output
  */
 
-console.log('');
+console.log(' ____\n/.  .\\\n| \\/ |\n\\____/'); // Print the shape to the console
