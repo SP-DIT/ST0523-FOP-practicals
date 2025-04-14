@@ -5,8 +5,8 @@
  */
 const firstAngle = 33;
 const secondAngle = 56;
-const thirdAngle; // Calculate the third angle here
+const thirdAngle = 180 - 33 - 56; // Calculate the third angle here
 
-console.log("Q4 :" + thirdAngle);
+console.log('Q4 :' + thirdAngle);
 
 // Run the program with `node ./q4.js`
