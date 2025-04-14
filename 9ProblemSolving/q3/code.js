@@ -44,7 +44,35 @@
  * @hint
  * You can use .sort() to sort the array
  */
-function tripYear(trips, queries) {}
+function tripYear(trips, queries) {
+    // Write your code here
+    let countries = {};
+    const countriesList = [];
+    for (let i = 0; i < trips.length; i++) {
+        const trip = trips[i];
+        const tripArray = trip.split(' ');
+        const country = tripArray[0];
+        const year = tripArray[1];
+        if (!countries[country]) {
+            countries[country] = [];
+            countriesList.push(country);
+        }
+        countries[country].push(+year);
+    }
+    for (let i = 0; i < countriesList.length; i++) {
+        countries[countriesList[i]].sort((a, b) => a - b);
+    }
+
+    let result = [];
+    for (let i = 0; i < queries.length; i++) {
+        const query = queries[i];
+        const queryArray = query.split(' ');
+        const country = queryArray[0];
+        const nthTrip = queryArray[1] - 1;
+        result.push(countries[country][nthTrip]);
+    }
+    return result;
+}
 
 // Your own test cases
 // e.g.;

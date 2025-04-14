@@ -69,7 +69,26 @@
  * [0][1], [1][1], [2][1],
  * [0][0], [1][0], [2][0],
  */
-function decodeMessage(message) {}
+function decodeMessage(message) {
+    // Write your code here
+    const n = Math.sqrt(message.length);
+    const matrix = [];
+    for (let i = 0; i < n; i++) {
+        matrix.push([]);
+    }
+    for (let i = 0; i < message.length; i++) {
+        const row = Math.floor(i / n);
+        const col = i % n;
+        matrix[row][col] = message[i];
+    }
+    const decodedMessage = [];
+    for (let i = n - 1; i >= 0; i--) {
+        for (let j = 0; j < n; j++) {
+            decodedMessage.push(matrix[j][i]);
+        }
+    }
+    return decodedMessage.join('');
+}
 
 // Your own test cases
 // e.g.;
