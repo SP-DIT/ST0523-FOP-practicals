@@ -19,7 +19,11 @@
  * canCoverPoster(4, 1, 30); // false
  *
  */
-function canCoverPoster(R, W, H) {}
+function canCoverPoster(R, W, H) {
+    // Write your code here
+    const diagonal = (W ** 2 + H ** 2) ** 0.5;
+    return R * 2 >= diagonal;
+}
 
 console.log(canCoverPoster(2.5, 3, 4)); // true
 

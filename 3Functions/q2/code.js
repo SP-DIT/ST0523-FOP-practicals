@@ -26,7 +26,10 @@
  * @hint
  * Google for the formula to find gradient on line
  */
-function findGradient() {}
+function findGradient(x1, y1, x2, y2) {
+    // Write your code here
+    return (y2 - y1) / (x2 - x1);
+}
 
 // Your own test cases
 // e.g.;
