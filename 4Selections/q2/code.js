@@ -21,7 +21,16 @@
  * dateFormat(1, 1, 2025); // 'Either'
  *
  */
-function dateFormat(AA, BB, CCCC) {}
+function dateFormat(AA, BB, CCCC) {
+    // Write your code here
+    if (AA <= 12 && BB <= 12) {
+        return 'Either';
+    } else if (AA > 12) {
+        return 'US';
+    } else {
+        return 'EU';
+    }
+}
 
 // Your own test cases
 // e.g.;

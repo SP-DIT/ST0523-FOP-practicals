@@ -23,7 +23,16 @@
  * chickens(10, 11); // 'You have a surplus of 1 chicken'
  *
  */
-function chickens(required, available) {}
+function chickens(required, available) {
+    // Write your code here
+    if (available === required) {
+        return 'Enough';
+    } else if (available < required) {
+        return `You lack ${required - available} chicken${required - available === 1 ? '' : 's'}`;
+    } else {
+        return `You have a surplus of ${available - required} chicken${available - required === 1 ? '' : 's'}`;
+    }
+}
 
 // Your own test cases
 // e.g.;
