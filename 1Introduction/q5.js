@@ -16,4 +16,4 @@
  * Refer to screenshots folder for the expected output
  */
 
-console.log('');
+console.log('"Fundamentals of Programming"\nCA 1\t\t\t:40%\nCA 2\t\t\t:20%\nEXAM\t\t\t:40%\nTotal\t\t\t:100%'); // Print the assessment criteria to the console
