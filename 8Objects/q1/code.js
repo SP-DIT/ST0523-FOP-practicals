@@ -17,7 +17,14 @@
  * makeObject('Alice', '02/02/2001', 'Bob', 'Charlie', 'David'); // { name: 'Alice', birthday: '02/02/2001', friends: [ 'Bob', 'Charlie', 'David' ] }
  *
  */
-function makeObject(name, birthday, friend1, friend2, friend3) {}
+function makeObject(name, birthday, friend1, friend2, friend3) {
+    // Write your code here
+    return {
+        name: name,
+        birthday: birthday,
+        friends: [friend1, friend2, friend3],
+    };
+}
 
 // Your own test cases
 // e.g.;

@@ -12,7 +12,23 @@
  *      // returns:  { 'Alice': ['ST0523', 'ST0501'], 'Bob': ['ST0523'], 'John': ['ST0501', 'ST2413'], 'Charlie': ['ST0501', 'ST2413'] }
  *
  */
-function reverseMapping(modules, moduleToTutors) {}
+function reverseMapping(modules, moduleToTutors) {
+    // Write your code here
+    let tutorToModules = {};
+    for (let i = 0; i < modules.length; i++) {
+        const module = modules[i];
+        const tutors = moduleToTutors[module];
+        for (let j = 0; j < tutors.length; j++) {
+            const tutor = tutors[j];
+            if (tutorToModules[tutor]) {
+                tutorToModules[tutor].push(module);
+            } else {
+                tutorToModules[tutor] = [module];
+            }
+        }
+    }
+    return tutorToModules;
+}
 
 // Your own test cases
 // e.g.;
