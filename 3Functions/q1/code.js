@@ -19,7 +19,10 @@
  * 2. Compute the sum and store it in a variable
  * 3. Return the variable
  */
-function sumTwoValue() {}
+function sumTwoValue(a, b) {
+    // Write your code here
+    return +a + +b;
+}
 
 // Your own test cases
 // e.g.
