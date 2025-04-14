@@ -12,7 +12,14 @@
  * multiplication(5, 3); // [5, 10, 15]
  *
  */
-function multiplication(n, k) {}
+function multiplication(n, k) {
+    // Write your code here
+    let result = [];
+    for (let i = 1; i <= k; i++) {
+        result.push(n * i);
+    }
+    return result;
+}
 
 // Your own test cases
 // e.g.;
