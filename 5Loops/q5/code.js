@@ -12,7 +12,14 @@
  *
  * Hint: You can access the nth digit of a number by dividing it by 10**(n-1) and taking the remainder when divided by 10.
  */
-function digitSum(n) {}
+function digitSum(n) {
+    let sum = 0;
+    for (let i = 0; i < (n + '').length; i++) {
+        const digit = Math.floor(n / 10 ** i) % 10;
+        sum += digit;
+    }
+    return sum;
+}
 
 // Your own test cases
 // e.g.;
