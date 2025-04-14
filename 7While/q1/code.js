@@ -17,16 +17,34 @@
  *  23 = 2 + 3 = 5
  *  32 = 3 + 2 = 5
  *  41 = 4 + 1 = 5
- * 
+ *
  * In the second example, the first 3 numbers whose digits sum to 10 are 19, 28, and 37.
  *  19 = 1 + 9 = 10
  *  28 = 2 + 8 = 10
  *  37 = 3 + 7 = 10
- * 
+ *
  * Hint: Refer to the digitSum function in ../4Loops/q6/code.js
  */
+function digitSum(n) {
+    let sum = 0;
+    for (let i = 0; i < (n + '').length; i++) {
+        const digit = Math.floor(n / 10 ** i) % 10;
+        sum += digit;
+    }
+    return sum;
+}
+
 function digitsSumToTarget(n, k) {
-    
+    // Write your code here
+    let result = [];
+    let num = 0;
+    while (result.length < n) {
+        if (digitSum(num) === k) {
+            result.push(num);
+        }
+        num++;
+    }
+    return result;
 }
 
 // Your own test cases

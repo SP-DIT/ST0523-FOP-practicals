@@ -21,7 +21,21 @@
  * @hint
  * This uses nested for-loop
  */
-function zoomOut(array, zoomLevel) {}
+function zoomOut(array, zoomLevel) {
+    // Write your code here
+    let result = [];
+    for (let i = 0; i < array.length; i += zoomLevel) {
+        let sum = 0;
+        let count = 0;
+        for (let j = 0; i + j < array.length && j < zoomLevel; j++) {
+            sum += array[i + j];
+            count++;
+        }
+        const average = sum / count;
+        result.push(average);
+    }
+    return result;
+}
 
 // Your own test cases
 // e.g.;

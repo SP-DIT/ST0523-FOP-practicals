@@ -16,7 +16,19 @@
  * detectCycle([2, 4, 1, 6, 3, 9, 5]); // false
  * detectCycle([2, 4, 1, 6, 3, 0, 5]); // true
  */
-function detectCycle(jumps) {}
+function detectCycle(jumps) {
+    // Write your code here
+    let visited = new Array(jumps.length).fill(false);
+    let index = 0;
+    while (index < jumps.length) {
+        if (visited[index]) {
+            return true;
+        }
+        visited[index] = true;
+        index = jumps[index];
+    }
+    return false;
+}
 
 // Your own test cases
 // e.g.;

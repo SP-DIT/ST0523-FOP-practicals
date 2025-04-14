@@ -14,7 +14,21 @@
  * For the second example, the longest substring without repeating characters is 'b', which has a length of 1.
  * For the third example, the longest substring without repeating characters is 'wke or 'kew', both which has a length of 3.
  */
-function longestSubstringWithoutRepeats(string) {}
+function longestSubstringWithoutRepeats(string) {
+    // sliding window
+    let start = 0;
+    let maxLength = 0;
+    let charIndexMap = {};
+    for (let i = 0; i < string.length; i++) {
+        const char = string[i];
+        if (charIndexMap[char] !== undefined) {
+            start = Math.max(start, charIndexMap[char] + 1);
+        }
+        charIndexMap[char] = i;
+        maxLength = Math.max(maxLength, i - start + 1);
+    }
+    return maxLength;
+}
 
 // Your own test cases
 // e.g.;
