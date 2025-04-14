@@ -25,7 +25,17 @@
  * In the last example, everything is bar, but only 20 should be bar, hence 9 out of 10 is wrong, 0.8 error rate.
  *
  */
-function isFooBarCorrect(foobar, x, y) {}
+function isFooBarCorrect(foobar, x, y) {
+    let correct = 0;
+    for (let i = x; i <= y; i++) {
+        const actual = foobar(i);
+        const expected = (i % 15 === 0 && 'foobar') || (i % 3 === 0 && 'foo') || (i % 5 === 0 && 'bar') || i;
+        correct += +(actual === expected);
+    }
+
+    const total = y - x + 1;
+    return (total - correct) / total;
+}
 
 // Your own test cases
 // e.g.;
