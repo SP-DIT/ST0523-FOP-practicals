@@ -35,7 +35,22 @@
  * Whole step:     E-->F#
  * Half step :     G->G#
  */
-function musicScale(rootNote) {}
+function musicScale(rootNote) {
+    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const steps = [2, 2, 1, 2, 2, 2, 1];
+    const scale = [];
+    const rootIndex = notes.indexOf(rootNote);
+    let currentIndex = rootIndex;
+    scale.push(notes[currentIndex]);
+    for (let i = 0; i < steps.length; i++) {
+        currentIndex += steps[i];
+        if (currentIndex >= notes.length) {
+            currentIndex -= notes.length;
+        }
+        scale.push(notes[currentIndex]);
+    }
+    return scale;
+}
 
 // Your own test cases
 // e.g.;
