@@ -23,7 +23,9 @@
  * This question focuses on calling functions and checking their returned value.
  * There is no obscure hidden edge cases.
  */
-function isCorrect(fn) {}
+function isCorrect(fn) {
+    return fn(2, 1) > 0 && fn(1, 2) < 0 && fn(1, 1) === 0;
+}
 
 // Your own test cases
 // e.g.;
