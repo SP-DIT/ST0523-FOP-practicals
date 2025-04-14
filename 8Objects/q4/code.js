@@ -47,7 +47,41 @@
  * 2. To keep track of how many order a location has - e.g. locations['South']
  * 3. To keep track of how many order a (driver, location) pair has - e.g. combo['Alice']['South']
  */
-function deliveryAssignment(commands) {}
+function deliveryAssignment(commands) {
+    // Write your code here
+    let drivers = {};
+    let locations = {};
+    let result = [];
+    for (let i = 0; i < commands.length; i++) {
+        const command = commands[i];
+        const commandsArray = command.split(' ');
+        const action = commandsArray[0];
+
+        if (action === 'assign') {
+            const driver = commandsArray[1];
+            const location = commandsArray[2];
+            if (!drivers[driver]) drivers[driver] = {};
+            if (!locations[location]) locations[location] = {};
+            drivers[driver][location] = (drivers[driver][location] || 0) + 1;
+            locations[location][driver] = (locations[location][driver] || 0) + 1;
+        } else if (action === 'queryDriver') {
+            const driver = commandsArray[1];
+            result.push(Object.values(drivers[driver] || {}).reduce((acc, val) => acc + val, 0));
+        } else if (action === 'queryLocation') {
+            const location = commandsArray[1];
+            result.push(Object.values(locations[location] || {}).reduce((acc, val) => acc + val, 0));
+        } else if (action === 'query') {
+            const driver = commandsArray[1];
+            const location = commandsArray[2];
+            if (drivers[driver] && drivers[driver][location]) {
+                result.push(drivers[driver][location]);
+            } else {
+                result.push(0);
+            }
+        }
+    }
+    return result;
+}
 
 // Your own test cases
 // e.g.;
