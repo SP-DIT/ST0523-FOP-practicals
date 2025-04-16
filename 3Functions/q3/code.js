@@ -3,7 +3,7 @@
  * The requirements are:
  * - The person must be at least 120cm tall AND
  * - The person must be at least 16 years old, or be with a parent or guardian AND
- * - The person must not have a heart condition AND
+ * - The person must not have a heart condition
  *
  * @param {number} height - The height of the person in cm
  * @param {number} age - The age of the person in years
@@ -17,7 +17,7 @@
  * canSitRollercoaster(130, 15, true, true); // false
  * canSitRollercoaster(100, 16, false, false); // false
  *
- * @explaination
+ * @explanation
  * The person is allowed to sit on the rollercoaster even though the age is less than 16 as they are with their parent.
  * The person is not allowed to sit on the rollercoaster as the age is less than 16.
  * The person is not allowed to sit on the rollercoaster as the person has a heart condition.
