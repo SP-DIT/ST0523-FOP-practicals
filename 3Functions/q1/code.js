@@ -16,7 +16,7 @@
  *
  * @steps
  * 1. Add the parameters a and b to the function signature
- * 2. Compute the sum an store it in a variable
+ * 2. Compute the sum and store it in a variable
  * 3. Return the variable
  */
 function sumTwoValue() {}
