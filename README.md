@@ -8,14 +8,6 @@ Quick start without downloading:
 
 1. NodeJs - https://nodejs.org/en/download - Download latest LTS (Long Term Support)
 2. VSCode - https://code.visualstudio.com/download
-3. Git - https://git-scm.com/downloads - _Note: It's `git` not `GitHub Desktop`_
-    - Set your username: `git config --global user.name "MY_NAME"`
-    - Set your email address: `git config --global user.email "MY_NAME@example.com"`
-
-## Setting up
-
-1. Clone the repository
-2. Follow the instructions below
 
 ## Table of Content
 
@@ -31,26 +23,12 @@ Quick start without downloading:
 
 ## Instructions
 
-1. Change directory to the relevant set
-    - e.g. `cd 3Functions`
-2. Solve the problems by modifying the `code.js` in each question folder.
-3. To run the program:
-    - Run `node run.js q#` replacing # with the question number.
-    - e.g. `node run.js q1` to run q1.
-4. To add your own test cases:
+1. Solve the problems by modifying the `code.js` in each question folder.
+2. To run the program:
+    - Run `node run p# q#` replacing # with the problem set number and question number.
+    - e.g. `node run p3 q1` to run q1.
+3. To add your own test cases:
     - Add additional function calls at the bottom of the `code.js`
-    - Run `node ./q#/code.js` replace # with the question number.
-    - e.g. `node ./q4/code.js`
-5. Do not modify the `testcases.js` of each question.
-6. Alternatively, you can run from the root:
-    - `node run p# q#` - to run a specific question in a problem set (e.g. `node run p3 q3`)
-    - `node run p#` - to run all question in a problem set (e.g. `node run p4`)
-
-## Visualizing effort
-
-1. **Pre-requisite:**
-    1. Git must be installed
-    2. The project must be cloned with .git folder
-2. run `npm run watch` to start auto committing and pushing
-3. run `npm run extract-git-history` to extract the history
-4. Open `.vscode/visualizer/visualize-git-history.html` to view
+    - Run `node ./PPPPPPPPP/q#/code.js` replace PPPPPPPPP with the name of the folder and # with the question number.
+    - e.g. `node ./5Loops/q4/code.js`
+4. Do not modify the `testcases.js` of each question.
