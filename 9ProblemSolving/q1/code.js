@@ -47,6 +47,18 @@
  * @hint - Also applies for bigger matrices
  * original:
  *
+ * 1, 2, 3
+ * 4, 5, 6
+ * 7, 8, 9
+ *
+ * Rotated 90deg counter-clockwise:
+ *
+ * 3, 6, 9,
+ * 2, 5, 8,
+ * 1, 4, 7,
+ *
+ * Based on their array indices:
+ *
  * [0][0], [0][1], [0][2]
  * [1][0], [1][1], [1][2]
  * [2][0], [2][1], [2][2]
