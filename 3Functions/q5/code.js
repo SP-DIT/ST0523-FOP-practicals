@@ -17,7 +17,7 @@
  * @explanation
  * In the first example, the student has a GPA of 0 and has not fulfilled any credits. They need a GPA of 3 for the remaining 120 credits to achieve a target GPA of 3.
  * In the second example, the student has a GPA of 3 and has fulfilled 11 credits. They need a GPA of 4 for the remaining 120 - 11 = 109 credits to achieve a target GPA of 3.5.
- * In the third example, the student has a GPA of 2.07 and has fulfilled 29 credits. They need a GPA of 3.5 for the remaining 220 - 29 = 91 credits to achieve a target GPA of 3.14.
+ * In the third example, the student has a GPA of 2.07 and has fulfilled 29 credits. They need a GPA of 3.5 for the remaining 220 - 29 = 191 credits to achieve a target GPA of 3.14.
  *
  * @hint
  * You can round to .5 by first multiplying by 2, round it up, then divide by 2 again
