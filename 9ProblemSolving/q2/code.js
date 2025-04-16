@@ -38,7 +38,7 @@
  * - "gta" --> not assigned before, remains "gta"
  * - "gta(2)" --> not assigned before, remains "gta(2)"
  * - "gta" --> already assigned, system adds (k), the smallest positive valid k is 1, becoming "gta(1)"
- * - "gta" --> already assigned, system adds (k), the smallest positive valid k is 4, becoming "gta(4)"
+ * - "gta" --> already assigned, system adds (k), the smallest positive valid k is 3, becoming "gta(3)"
  *
  * For the fourth example:
  * - "pikachu" --> not assigned before, remains "pikachu"
