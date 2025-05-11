@@ -17,24 +17,22 @@
  *  23 = 2 + 3 = 5
  *  32 = 3 + 2 = 5
  *  41 = 4 + 1 = 5
- * 
+ *
  * In the second example, the first 3 numbers whose digits sum to 10 are 19, 28, and 37.
  *  19 = 1 + 9 = 10
  *  28 = 2 + 8 = 10
  *  37 = 3 + 7 = 10
- * 
+ *
  * Hint: Refer to the digitSum function in ../4Loops/q6/code.js
  */
-function digitsSumToTarget(n, k) {
-    
-}
+function digitsSumToTarget(n, k) {}
 
 // Your own test cases
 // e.g.;
 
 // console.log(digitsSumToTarget([5, 5])); // [5, 14, 23, 32, 41]
 
-// To test your code against the test cases: node run.js q1
-// To test your code against custom input: node ./q1/code.js
+// To test your code against the test cases: node run.js p7 q1
+// To test your code against custom input: node ./7While/q1/code.js
 
 module.exports = digitsSumToTarget;

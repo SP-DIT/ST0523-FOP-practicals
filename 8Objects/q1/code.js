@@ -24,7 +24,7 @@ function makeObject(name, birthday, friend1, friend2, friend3) {}
 
 console.log(makeObject('John', '01/01/2000', 'Alice', 'Bob', 'Charlie')); // { name: 'John', birthday: '01/01/2000', friends: [ 'Alice', 'Bob', 'Charlie' ] }
 
-// To test your code against the test cases: node run.js q1
-// To test your code against custom input: node ./q1/code.js
+// To test your code against the test cases: node run.js p8 q1
+// To test your code against custom input: node ./8Objects/q1/code.js
 
 module.exports = makeObject;

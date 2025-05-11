@@ -19,7 +19,7 @@ function multiplication(n, k) {}
 
 console.log(multiplication(2, 5)); // [2, 4, 6, 8, 10]
 
-// To test your code against the test cases: node run.js q1
-// To test your code against custom input: node ./q1/code.js
+// To test your code against the test cases: node run.js p6 q1
+// To test your code against custom input: node ./6Arrays/q1/code.js
 
 module.exports = multiplication;

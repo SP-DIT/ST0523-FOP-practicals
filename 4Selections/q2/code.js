@@ -28,7 +28,7 @@ function dateFormat(AA, BB, CCCC) {}
 
 console.log(dateFormat(12, 30, 2025)); // "EU"
 
-// To test your code against the test cases: node run.js q2
-// To test your code against custom input: node ./q2/code.js
+// To test your code against the test cases: node run.js p4 q2
+// To test your code against custom input: node ./4Selections/q2/code.js
 
 module.exports = dateFormat;

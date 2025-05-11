@@ -46,7 +46,7 @@ function combineAndSort(sortedArray1, sortedArray2) {}
 
 console.log(combineAndSort([1, 3, 5], [2, 4, 6]));
 
-// To test your code against the test cases: node run.js q2
-// To test your code against custom input: node ./q2/code.js
+// To test your code against the test cases: node run.js p7 q2
+// To test your code against custom input: node ./7While/q2/code.js
 
 module.exports = combineAndSort;

@@ -25,7 +25,7 @@ function checkArray(array) {}
 
 console.log(checkArray([1, 2, 3, 4, 5])); // 'Ascending'
 
-// To test your code against the test cases: node run.js q4
-// To test your code against custom input: node ./q4/code.js
+// To test your code against the test cases: node run.js p6 q4
+// To test your code against custom input: node ./6Arrays/q4/code.js
 
 module.exports = checkArray;

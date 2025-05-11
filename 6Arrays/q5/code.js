@@ -41,7 +41,7 @@ function toGetTargetGPA(moduleCredits, moduleGrades, totalCredits, targetGPA) {}
 
 console.log(toGetTargetGPA([6, 5], [3, 3], 120, 3.5));
 
-// To test your code against the test cases: node run.js q5
-// To test your code against custom input: node ./q5/code.js
+// To test your code against the test cases: node run.js p6 q5
+// To test your code against custom input: node ./6Arrays/q5/code.js
 
 module.exports = toGetTargetGPA;

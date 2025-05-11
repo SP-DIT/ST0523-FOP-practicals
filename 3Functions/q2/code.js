@@ -33,7 +33,7 @@ function findGradient() {}
 
 console.log(findGradient(1, 1, 2, 2));
 
-// To test your code against the test cases: node run.js q2
-// To test your code against custom input: node ./q2/code.js
+// To test your code against the test cases: node run.js p3 q2
+// To test your code against custom input: node ./3Functions/q2/code.js
 
 module.exports = findGradient;

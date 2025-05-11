@@ -42,7 +42,7 @@ function musicScale(rootNote) {}
 
 console.log(musicScale('C')); // ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'];
 
-// To test your code against the test cases: node run.js q3
-// To test your code against custom input: node ./q3/code.js
+// To test your code against the test cases: node run.js p6 q3
+// To test your code against custom input: node ./6Arrays/q3/code.js
 
 module.exports = musicScale;

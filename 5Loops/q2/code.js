@@ -30,7 +30,7 @@ function fibonacci(n) {}
 
 console.log(fibonacci(10)); // 34
 
-// To test your code against the test cases: node run.js q2
-// To test your code against custom input: node ./q2/code.js
+// To test your code against the test cases: node run.js p5 q2
+// To test your code against custom input: node ./5Loops/q2/code.js
 
 module.exports = fibonacci;

@@ -43,7 +43,7 @@ function mockGetStudentIds(pageNumber) {
 
 console.log(findStudent(mockGetStudentIds, 18)); // true
 
-// To test your code against the test cases: node run.js q5
-// To test your code against custom input: node ./q5/code.js
+// To test your code against the test cases: node run.js p7 q6
+// To test your code against custom input: node ./7While/q6/code.js
 
 module.exports = findStudent;

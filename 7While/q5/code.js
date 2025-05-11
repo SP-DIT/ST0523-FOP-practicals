@@ -28,7 +28,7 @@ function zoomOut(array, zoomLevel) {}
 
 console.log(zoomOut([1, 2, 3, 4, 5, 6, 7, 8], 2));
 
-// To test your code against the test cases: node run.js q5
-// To test your code against custom input: node ./q5/code.js
+// To test your code against the test cases: node run.js p7 q5
+// To test your code against custom input: node ./7While/q5/code.js
 
 module.exports = zoomOut;

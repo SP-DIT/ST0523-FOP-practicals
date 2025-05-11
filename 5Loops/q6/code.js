@@ -40,7 +40,7 @@ console.log(
     ),
 );
 
-// To test your code against the test cases: node run.js q5
-// To test your code against custom input: node ./q5/code.js
+// To test your code against the test cases: node run.js p5 q6
+// To test your code against custom input: node ./5Loops/q6/code.js
 
 module.exports = isFooBarCorrect;

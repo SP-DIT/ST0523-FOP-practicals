@@ -29,7 +29,7 @@ function calculateArea(shape) {}
 
 console.log(calculateArea({ type: 'circle', radius: 5 })); // 78.54
 
-// To test your code against the test cases: node run.js q2
-// To test your code against custom input: node ./q2/code.js
+// To test your code against the test cases: node run.js p8 q2
+// To test your code against custom input: node ./8Objects/q2/code.js
 
 module.exports = calculateArea;

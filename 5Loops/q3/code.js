@@ -22,7 +22,7 @@ function pi(numberOfFractions) {}
 
 console.log(pi(6));
 
-// To test your code against the test cases: node run.js q3
-// To test your code against custom input: node ./q3/code.js
+// To test your code against the test cases: node run.js p5 q3
+// To test your code against custom input: node ./5Loops/q3/code.js
 
 module.exports = pi;

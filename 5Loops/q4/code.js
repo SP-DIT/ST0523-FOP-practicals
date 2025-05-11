@@ -25,7 +25,7 @@ function longestCommonPrefix(string1, string2, string3, string4) {}
 
 console.log(longestCommonPrefix('hello', 'world', 'hello', 'world'));
 
-// To test your code against the test cases: node run.js q4
-// To test your code against custom input: node ./q4/code.js
+// To test your code against the test cases: node run.js p5 q4
+// To test your code against custom input: node ./5Loops/q4/code.js
 
 module.exports = longestCommonPrefix;

@@ -30,7 +30,7 @@ function adjacentMatchCount(strings) {}
 
 console.log(adjacentMatchCount(['A', 'A', 'A', 'A', ' '])); // 3
 
-// To test your code against the test cases: node run.js q2
-// To test your code against custom input: node ./q2/code.js
+// To test your code against the test cases: node run.js p6 q2
+// To test your code against custom input: node ./6Arrays/q2/code.js
 
 module.exports = adjacentMatchCount;

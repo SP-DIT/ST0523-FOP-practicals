@@ -29,7 +29,7 @@ function canSitRollercoaster(height, age, withParent, hasHeartCondition) {}
 
 console.log(canSitRollercoaster(130, 15, true, false)); // true
 
-// To test your code against the test cases: node run.js q3
-// To test your code against custom input: node ./q3/code.js
+// To test your code against the test cases: node run.js p3 q3
+// To test your code against custom input: node ./3Functions/q3/code.js
 
 module.exports = canSitRollercoaster;

@@ -32,7 +32,7 @@ function roundToNearestGrade(gradePoint) {
 
 console.log(toGetTargetGPA(0, 0, 120, 3));
 
-// To test your code against the test cases: node run.js q5
-// To test your code against custom input: node ./q5/code.js
+// To test your code against the test cases: node run.js p3 q5
+// To test your code against custom input: node ./3Functions/q5/code.js
 
 module.exports = toGetTargetGPA;

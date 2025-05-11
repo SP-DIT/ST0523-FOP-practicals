@@ -51,7 +51,7 @@ function tripYear(trips, queries) {}
 
 console.log(tripYear(['Paris 2019', 'Paris 2020', 'London 2021'], ['Paris 1', 'Paris 2', 'London 1']));
 
-// To test your code against the test cases: node run.js q3
-// To test your code against custom input: node ./q3/code.js
+// To test your code against the test cases: node run.js p9 q3
+// To test your code against custom input: node ./9ProblemSolving/q3/code.js
 
 module.exports = tripYear;
