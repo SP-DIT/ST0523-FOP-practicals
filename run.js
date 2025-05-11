@@ -8,7 +8,7 @@ const { studentId, className } = package;
 if (
     !studentId ||
     !className ||
-    !/^p[0-9]{7}$/.test(studentId) ||
+    !/^(p|P)[0-9]{7}$/.test(studentId) ||
     !/^(DIT|DAAA|DCDF|DCITP)\/FT\/1A\/(\d{2})$/.test(className)
 ) {
     console.error(
