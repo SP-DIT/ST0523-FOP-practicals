@@ -1,20 +1,38 @@
 module.exports = {
     testcases: [
         {
-            input: [(x) => x, 1, 5],
+            input: [
+                function (x) {
+                    return x;
+                },
+                1,
+                5,
+            ],
             expected: 0.4,
         },
         {
-            input: [(x) => 'foo', 6, 10],
+            input: [
+                function (x) {
+                    return 'foo';
+                },
+                6,
+                10,
+            ],
             expected: 0.6,
         },
         {
-            input: [(x) => 'bar', 11, 20],
+            input: [
+                function (x) {
+                    return 'bar';
+                },
+                11,
+                20,
+            ],
             expected: 0.9,
         },
         {
             input: [
-                (x) => {
+                function (x) {
                     const i = x + 1;
                     return (i % 15 === 0 && 'foobar') || (i % 3 === 0 && 'foo') || (i % 5 === 0 && 'bar') || i;
                 },
@@ -25,7 +43,7 @@ module.exports = {
         },
         {
             input: [
-                (i) => {
+                function (i) {
                     return (i % 15 === 0 && 'foobar') || (i % 3 === 0 && 'foo') || (i % 5 === 0 && 'bar') || i;
                 },
                 1,
@@ -35,7 +53,7 @@ module.exports = {
         },
         {
             input: [
-                (i) => {
+                function (i) {
                     return (i % 15 === 0 && 'foobar') || (i % 3 === 0 && 'foo') || (i % 5 === 0 && 'bar') || i;
                 },
                 100,
@@ -45,7 +63,7 @@ module.exports = {
         },
         {
             input: [
-                (i) => {
+                function (i) {
                     return (i % 3 === 0 && 'foo') || (i % 5 === 0 && 'bar') || (i % 15 === 0 && 'foobar') || i;
                 },
                 1,
@@ -55,7 +73,7 @@ module.exports = {
         },
         {
             input: [
-                (i) => {
+                function (i) {
                     return (i % 3 === 0 && 'foo') || (i % 5 === 0 && 'bar') || (i % 15 === 0 && 'foobar') || i;
                 },
                 999,
@@ -65,7 +83,7 @@ module.exports = {
         },
         {
             input: [
-                (i) => {
+                function (i) {
                     return (i % 15 === 0 && 'foobar') || (i % 3 === 1 && 'foo') || (i % 5 === 0 && 'bar') || i;
                 },
                 100,

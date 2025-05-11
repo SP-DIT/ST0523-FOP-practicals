@@ -15,14 +15,14 @@
  * @return {decimal} the error rate of the foobar function, no rounding needed
  *
  * @example
- * isFooBarCorrect((x) => x, 1, 5) // 0.4
- * isFooBarCorrect((x) => "foo", 6, 10) // 0.6
- * isFooBarCorrect((x) => "bar", 11, 20) // 0.9
+ * isFooBarCorrect(function (x) { return x }, 1, 5) // 0.4
+ * isFooBarCorrect(function (x) { return "foo" }, 6, 10) // 0.6
+ * isFooBarCorrect(function (x) { return "bar" }, 11, 20) // 0.9
  *
  * @explanation
  * In the first example, the output would be 1,2,3,4,5, when it should be 1,2,"foo",4,"bar", so 2 out of 5 is wrong, hence 0.4 error rate.
  * In the second example, the output would be "foo","foo","foo","foo","foo", when it should be "foo",7,8,"foo","bar", 3 out of 5 is wrong, 0.6 error rate
- * In the last example, everything is bar, but only 20 should be bar, hence 9 out of 10 is wrong, 0.8 error rate.
+ * In the last example, everything is bar, but only 20 should be bar, hence 9 out of 10 is wrong, 0.9 error rate.
  *
  */
 function isFooBarCorrect(foobar, x, y) {}
@@ -30,7 +30,15 @@ function isFooBarCorrect(foobar, x, y) {}
 // Your own test cases
 // e.g.;
 
-console.log(isFooBarCorrect((x) => 'bar', 11, 20));
+console.log(
+    isFooBarCorrect(
+        function (x) {
+            return 'bar';
+        },
+        11,
+        20,
+    ),
+);
 
 // To test your code against the test cases: node run.js q5
 // To test your code against custom input: node ./q5/code.js
