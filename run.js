@@ -236,7 +236,13 @@ function runQuestions() {
                         testCase.expected,
                     )}, Got: ${JSON.stringify(testCase.actual)})`,
                 );
-                let str = util.inspect(testCase.input, {
+
+                const input = testCase.input.map((value) => {
+                    if (value instanceof Function) return value.toString().replace(/\s/g, '');
+                    return value;
+                });
+
+                let str = util.inspect(input, {
                     depth: 2,
                     maxArrayLength: 7,
                     breakLength: 80,
