@@ -46,6 +46,13 @@
  */
 function inbetween() {}
 
+// Overwrite Math.random to control it's behaviour;
+
+const oldMathRandom = Math.random;
+Math.random = function () {
+    return 1; // math.random() will always return 1 when testing manually.
+};
+
 console.log(inbetween());
 
 // To test your code against the test cases: node run.js q6

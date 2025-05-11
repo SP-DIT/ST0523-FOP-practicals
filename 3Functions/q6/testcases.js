@@ -28,7 +28,6 @@ module.exports = {
     options: {
         monkeyPatch: function (fn) {
             let called = 0;
-            const originalRandom = Math.random;
             return (a, b) => {
                 const newA = (a - 1) / 52;
                 const newB = (b - 1) / 52;
