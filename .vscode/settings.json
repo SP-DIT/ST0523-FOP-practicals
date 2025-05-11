@@ -1,1 +1,8 @@
-{ "github.copilot.editor.enableAutoCompletions": false }
+{
+    "github.copilot.editor.enableAutoCompletions": false,
+    "github.copilot.enable": {
+        "*": false
+    },
+    "chat.extensionTools.enabled": false,
+    "chat.agent.enabled": false
+}
