@@ -1,0 +1,26 @@
+table {
+    border: 1px solid;
+    border-color: black;
+    border-collapse: collapse;
+    text-align: center;
+}
+th {
+    border: 1px solid;
+    border-color: black;
+    border-collapse: collapse;
+    font-weight: bold;
+}
+td {
+    border: 1px solid;
+    border-color: black;
+    border-collapse: collapse;
+}
+.ErrorTC {
+    color: maroon;
+}
+.PassedTC {
+    color: green;
+}
+.FailedTC {
+    color: red;
+}
