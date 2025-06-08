@@ -23,9 +23,17 @@
  *  28 = 2 + 8 = 10
  *  37 = 3 + 7 = 10
  *
- * Hint: Refer to the digitSum function in ../4Loops/q6/code.js
  */
 function digitsSumToTarget(n, k) {}
+
+function digitSum(number) {
+    const digitString = number + '';
+    let sum = 0;
+    for (let i = 0; i < digitString.length; i++) {
+        sum = sum + +digitString[i];
+    }
+    return sum;
+}
 
 // Your own test cases
 // e.g.;
