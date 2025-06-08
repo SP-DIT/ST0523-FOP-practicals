@@ -1,24 +1,31 @@
 /**
- * Given a string, find the length of the longest substring without repeating characters.
+ * Given a large array of integers, we want to zoom out by a certain level.
+ * This means that we want to group the integers into subarrays of a certain size, and then take the average of each subarray.
+ * The result will be an array of the averages of each subarray.
  *
- * @param {string} string - The input string.
- * @returns {number} - The length of the longest substring without repeating characters.
+ * @param {number[]} array - An array of integers.
+ * @param {number} zoomLevel - The size of each subarray.
+ *
+ * @returns {number[]} - An array of the averages of each subarray.
  *
  * @example
- * longestSubstringWithoutRepeats('abcabcbb'); // 3
- * longestSubstringWithoutRepeats('bbbbb'); // 1
- * longestSubstringWithoutRepeats('pwwkew'); // 3
+ * zoomOut([1, 2, 3, 4, 5, 6, 7, 8], 2); // [1.5, 3.5, 5.5, 7.5]
+ * zoomOut([1, 2, 3, 4, 5, 6, 7, 8], 3); // [2, 5, 7.5]
  *
  * @explanation
- * For the first example, the longest substring without repeating characters is 'abc', which has a length of 3.
- * For the second example, the longest substring without repeating characters is 'b', which has a length of 1.
- * For the third example, the longest substring without repeating characters is 'wke or 'kew', both which has a length of 3.
+ * For the first example, we group the integers into subarrays of size 2: [1, 2], [3, 4], [5, 6], [7, 8].
+ * The averages of these subarrays are 1.5, 3.5, 5.5, 7.5.
+ * For the second example, we group the integers into subarrays of size 3: [1, 2, 3], [4, 5, 6], [7, 8].
+ * The averages of these subarrays are 2, 5, 7.5.
+ *
+ * @hint
+ * This uses nested for-loop
  */
-function longestSubstringWithoutRepeats(string) {}
+function zoomOut(array, zoomLevel) {}
 
 // Your own test cases
 // e.g.;
 
-console.log(longestSubstringWithoutRepeats('abcabcbb'));
+console.log(zoomOut([1, 2, 3, 4, 5, 6, 7, 8], 2));
 
-module.exports = longestSubstringWithoutRepeats;
+module.exports = zoomOut;
