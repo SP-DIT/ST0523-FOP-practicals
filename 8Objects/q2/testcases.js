@@ -1,81 +1,28 @@
 module.exports = {
     testcases: [
         {
-            input: [
-                {
-                    type: 'circle',
-                    radius: 5,
-                },
-            ],
-            expected: Math.PI * 5 * 5,
+            input: [{ name: 'John', class: '1A01' }],
+            expected: 'John is in class 1A01',
         },
         {
-            input: [
-                {
-                    type: 'rectangle',
-                    width: 5,
-                    length: 10,
-                },
-            ],
-            expected: 50,
+            input: [{ name: 'Alice', class: '1A02' }],
+            expected: 'Alice is in class 1A02',
         },
         {
-            input: [
-                {
-                    type: 'triangle',
-                    base: 5,
-                    height: 10,
-                },
-            ],
-            expected: 25,
+            input: [{ name: 'Bob', class: '1B05' }],
+            expected: 'Bob is in class 1B05',
         },
         {
-            input: [
-                {
-                    type: 'square',
-                    side: 5,
-                },
-            ],
-            expected: 25,
+            input: [{ name: 'Charlie', class: '1C99' }],
+            expected: 'Charlie is in class 1C99',
         },
         {
-            input: [
-                {
-                    type: 'circle',
-                    radius: 7,
-                },
-            ],
-            expected: Math.PI * 7 * 7,
-        },
-        {
-            input: [
-                {
-                    type: 'rectangle',
-                    width: 9,
-                    length: 12,
-                },
-            ],
-            expected: 108,
-        },
-        {
-            input: [
-                {
-                    type: 'triangle',
-                    base: 35,
-                    height: 22,
-                },
-            ],
-            expected: 385,
-        },
-        {
-            input: [
-                {
-                    type: 'square',
-                    side: 77,
-                },
-            ],
-            expected: 5929,
+            input: [{ name: 'Douglas', class: '1D87' }],
+            expected: 'Douglas is in class 1D87',
         },
     ],
-    options: {},
+    options: {
+        type: 'JSON',
+        s,
+    },
 };

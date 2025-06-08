@@ -1,31 +1,32 @@
 /**
- * You are given a a list of modules and their mapping from module to tutors. That is, a module can have multiple tutors.
+ * You are given two objects representing the information of students.
+ * Each object contains the student's `name` and `class`.
  *
- * You are to reverse the mapping such that each tutor is mapped to the modules they teach.
+ * While it is possible for two students to have the same name, the school ensures that
+ * no two students in the **same class** share the same name.
  *
- * @param {Array} modules - An array of all the modules in the mapping.
- * @param {Object} moduleToTutors - An object where each key is a module and the value is an array of tutors.
- * @returns {Object} - An object where each key is a tutor and the value is an array of modules they teach.
+ * This means that although there might be two students named "John" in the school,
+ * they will never be in the same class.
+ *
+ * Complete the function to check if the two objects refer to the same student.
+ * You can assume that two students are the same **only if both their `name` and `class` are the same**.
+ *
+ * @param {Object} student1 - The information (name and class) of the first student
+ * @param {Object} student2 - The information (name and class) of the second student
+ * @return {boolean} `true` if they are the same student, `false` otherwise
  *
  * @example
- * reverseMapping(['ST0523', 'ST0501', 'ST2413'], { 'ST0523': ['Alice', 'Bob'], 'ST0501': ['Alice', 'John', 'Charlie'], 'ST2413': ['John', 'Charlie'] });
- *      // returns:  { 'Alice': ['ST0523', 'ST0501'], 'Bob': ['ST0523'], 'John': ['ST0501', 'ST2413'], 'Charlie': ['ST0501', 'ST2413'] }
- *
+ * checkIsSameStudent({ name: "John", class: "1A01" }, { name: "Alice", class: "1A02" }) // false — different name, different class
+ * checkIsSameStudent({ name: "John", class: "1A01" }, { name: "John", class: "1A02" })  // false — same name, different class
+ * checkIsSameStudent({ name: "John", class: "1A01" }, { name: "Alice", class: "1A01" }) // false — different name, same class
+ * checkIsSameStudent({ name: "John", class: "1A01" }, { name: "John", class: "1A01" })  // true — both name and class match
  */
-function reverseMapping(modules, moduleToTutors) {}
+
+function checkIsSameStudent(student1, student2) {}
 
 // Your own test cases
 // e.g.;
 
-console.log(
-    reverseMapping(['ST0523', 'ST0501', 'ST2413'], {
-        ST0523: ['Alice', 'Bob'],
-        ST0501: ['Alice', 'John', 'Charlie'],
-        ST2413: ['John', 'Charlie'],
-    }),
-);
+console.log(checkIsSameStudent({ name: 'John', class: '1A01' }, { name: 'Alice', class: '1A02' })); // false
 
-// To test your code against the test cases: node run.js p8 q3
-// To test your code against custom input: node ./8Objects/q3/code.js
-
-module.exports = reverseMapping;
+module.exports = checkIsSameStudent;

@@ -1,35 +1,24 @@
 /**
- * Calculate the area of a shape
+ * You are given an object that contains information about a student.
+ * Each object includes the student's `name` and `class`.
  *
- * There are four types of shapes:
- * 1. Circle, e.g. { type: 'circle', radius: 5 }
- * 2. Rectangle, e.g. { type: 'rectangle', length: 5, width: 10 }
- * 3. Triangle, e.g. { type: 'triangle', base: 5, height: 10 }
- * 4. Square, e.g. { type: 'square', side: 5 }
+ * Complete the function to return a string that presents the student's information in the following format:
  *
- * The area of a shape is calculated as follows:
- * 1. Circle: π * r^2
- * 2. Rectangle: length * width
- * 3. Triangle: 0.5 * base * height
- * 4. Square: side * side
+ * "<name> is in class <class>"
  *
- * @param {Object} shape
- * @returns {number} - The area of the shape
+ * @param {Object} student - An object containing the student's information (e.g., `name` and `class`)
+ * @return {string} A string containing the formatted student information
  *
  * @example
- * calculateArea({ type: 'circle', radius: 5 }); // 78.54
- * calculateArea({ type: 'rectangle', length: 5, width: 10 }); // 50
- * calculateArea({ type: 'triangle', base: 5, height: 10 }); // 25
- * calculateArea({ type: 'square', side: 5 }); // 25
+ * getFormattedStudentInformation({ name: "John", class: "1A01" }) // returns "John is in class 1A01"
+ *
  */
-function calculateArea(shape) {}
+
+function getFormattedStudentInformation(student) {}
 
 // Your own test cases
 // e.g.;
 
-console.log(calculateArea({ type: 'circle', radius: 5 })); // 78.54
+console.log(getFormattedStudentInformation({ name: 'John', class: '1A01' })); // "John is in class 1A01"
 
-// To test your code against the test cases: node run.js p8 q2
-// To test your code against custom input: node ./8Objects/q2/code.js
-
-module.exports = calculateArea;
+module.exports = getFormattedStudentInformation;
