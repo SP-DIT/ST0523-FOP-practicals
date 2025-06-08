@@ -265,5 +265,4 @@ function runQuestions() {
     );
 }
 
-fetch(loggerUrl); // wake up server
 runQuestions();
