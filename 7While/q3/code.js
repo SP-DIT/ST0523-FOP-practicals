@@ -1,29 +1,37 @@
 /**
- * You are given an array of positive integers which represents a sequence of jumps.
- * Each element in the array represents the index of the array (0-based) to jump to.
- * You start at the 0th index.
- * Jumping out of bounds will end the sequence.
- * A cycle is formed if you jump to an index you've already visited.
- * Find out if the sequence of jumps forms a cycle.
+ * Continuing from the previous question, we now introduce an additional requirement:
+ * the input `k` may not always be a valid Fibonacci number.
  *
- * @param {number[]} jumps - An array of numbers where each element represents the index to jump to.
- * @returns {boolean} - Whether the sequence of jumps forms a cycle.
+ * Modify the function to return the position of `k` in the Fibonacci sequence
+ * (starting from the 3st term) if it is valid.
  *
- * @example
- * detectCycle([1, 2, 0]); // true
- * detectCycle([1, 2, 1]); // true
- * detectCycle([2, 1, 4, 1, 9]); // false
- * detectCycle([2, 4, 1, 6, 3, 9, 5]); // false
- * detectCycle([2, 4, 1, 6, 3, 0, 5]); // true
+ * If `k` is not a Fibonacci number, return -1.
+ *
+ * You may assume `k` is a non-negative integer greater than 1.
  */
-function detectCycle(jumps) {}
+
+function reverseFibonacci(k) {
+    // Start with the first two Fibonacci numbers: 0 (1st) and 1 (2nd)
+    let n1 = 1; // Represents the (n-1)th Fibonacci number
+    let n2 = 0; // Represents the (n-2)th Fibonacci number
+    let n = n1 + n2; // Start from the 3rd Fibonacci number
+    let index = 3; // Tracks the position of the current Fibonacci number (n)
+
+    // Continue generating Fibonacci numbers until we reach the target number k
+    while (n != k) {
+        n2 = n1; // Move forward: n2 becomes the previous n1
+        n1 = n; // n1 becomes the current Fibonacci number
+        n = n1 + n2; // Calculate the next Fibonacci number
+        index++; // Increment the index to reflect the new position
+    }
+
+    // Return the position of the Fibonacci number k
+    return index;
+}
 
 // Your own test cases
 // e.g.;
 
-console.log(detectCycle([1, 2, 0])); // true
+console.log(reverseFibonacci(8)); //7
 
-// To test your code against the test cases: node run.js p7 q3
-// To test your code against custom input: node ./7While/q3/code.js
-
-module.exports = detectCycle;
+module.exports = reverseFibonacci;

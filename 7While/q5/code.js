@@ -1,34 +1,49 @@
 /**
- * Given a large array of integers, we want to zoom out by a certain level.
- * This means that we want to group the integers into subarrays of a certain size, and then take the average of each subarray.
- * The result will be an array of the averages of each subarray.
+ * Given two sorted arrays, combine them into one sorted array
  *
- * @param {number[]} array - An array of integers.
- * @param {number} zoomLevel - The size of each subarray.
- *
- * @returns {number[]} - An array of the averages of each subarray.
+ * @param {number[]} sortedArray1 - A sorted array of numbers
+ * @param {number[]} sortedArray2 - A sorted array of numbers
+ * @returns {number[]} - A sorted array of numbers
  *
  * @example
- * zoomOut([1, 2, 3, 4, 5, 6, 7, 8], 2); // [1.5, 3.5, 5.5, 7.5]
- * zoomOut([1, 2, 3, 4, 5, 6, 7, 8], 3); // [2, 5, 7.5]
+ * combineAndSort([1, 3, 5], [2, 4, 6]); // [1, 2, 3, 4, 5, 6]
+ * combineAndSort([1, 11, 27, 39], [9, 10, 15, 17]); // [1, 9, 10, 11, 15, 17, 27, 39]
  *
- * @explanation
- * For the first example, we group the integers into subarrays of size 2: [1, 2], [3, 4], [5, 6], [7, 8].
- * The averages of these subarrays are 1.5, 3.5, 5.5, 7.5.
- * For the second example, we group the integers into subarrays of size 3: [1, 2, 3], [4, 5, 6], [7, 8].
- * The averages of these subarrays are 2, 5, 7.5.
+ * You are not allowed to use Array.sort() and Array.toSorted() method
  *
  * @hint
- * This uses nested for-loop
+ * You can gradually interleave the 2 arrays together:
+ * combined: []
+ * 1: [1, 3, 5], 2:[2, 4, 6]
+ * Since 1 is smaller than 2, we can put 1 into the combined array first
+ *
+ * combined: [1]
+ * 1: [3, 5], 2:[2, 4, 6]
+ * Since 2 is smaller than 3, we can put 2 into the combined array
+ *
+ * combined: [1, 2]
+ * 1: [3, 5], 2:[4, 6]
+ * Since 3 is smaller than 4, we can put 3 into the combined array
+ *
+ * combined: [1, 2, 3]
+ * 1: [5], 2:[4, 6]
+ * Since 4 is smaller than 5, we can put 4 into the combined array
+ *
+ * combined: [1, 2, 3, 4]
+ * 1: [5], 2:[6]
+ * Since 5 is smaller than 6, we can put 5 into the combined array
+ *
+ * combined: [1, 2, 3, 4, 5]
+ * 1: [], 2:[6]
+ * Since there is nothing else in the first, array we can put 6 into the combined array
+ *
+ * final: [1,2,3,4,5,6]
  */
-function zoomOut(array, zoomLevel) {}
+function combineAndSort(sortedArray1, sortedArray2) {}
 
 // Your own test cases
 // e.g.;
 
-console.log(zoomOut([1, 2, 3, 4, 5, 6, 7, 8], 2));
+console.log(combineAndSort([1, 3, 5], [2, 4, 6]));
 
-// To test your code against the test cases: node run.js p7 q5
-// To test your code against custom input: node ./7While/q5/code.js
-
-module.exports = zoomOut;
+module.exports = combineAndSort;

@@ -1,45 +1,35 @@
 module.exports = {
     testcases: [
         {
-            input: ['dvdf'],
-            expected: 3,
+            input: [5, 5],
+            expected: [5, 14, 23, 32, 41],
         },
         {
-            input: ['ckilbkd'],
-            expected: 5,
+            input: [3, 10],
+            expected: [19, 28, 37],
         },
         {
-            input: ['tmmzuxt'],
-            expected: 5,
+            input: [7, 6],
+            expected: [6, 15, 24, 33, 42, 51, 60],
         },
         {
-            input: ['abcabcbb'],
-            expected: 3,
+            input: [8, 9],
+            expected: [9, 18, 27, 36, 45, 54, 63, 72],
         },
         {
-            input: ['bbbbb'],
-            expected: 1,
+            input: [3, 16],
+            expected: [79, 88, 97],
         },
         {
-            input: ['pwwkew'],
-            expected: 3,
+            input: [4, 20],
+            expected: [299, 389, 398, 479],
         },
         {
-            input: ['a'],
-            expected: 1,
-        },
-        {
-            input: ['abcdefghjiklmnopqrstuvwxyz'],
-            expected: 26,
-        },
-        {
-            input: ['aaabcdefgggg'],
-            expected: 7,
-        },
-        {
-            input: ['aaabcdefggggabcdefghijklmnopppp'],
-            expected: 16,
+            input: [10, 43],
+            expected: [79999, 88999, 89899, 89989, 89998, 97999, 98899, 98989, 98998, 99799],
         },
     ],
-    options: {},
+    options: {
+        type: 'JSON',
+    },
 };
