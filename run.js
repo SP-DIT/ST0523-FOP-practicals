@@ -4,6 +4,26 @@ const util = require('util');
 const package = require('./package.json');
 const { exit } = require('process');
 
+// create file
+fs.open('index.html', 'w', function (err, file) {
+    if (err) throw err;
+    //console.log('Saved!');
+});
+
+
+// function for writing file
+function writeToFile(scr) {
+    fs.writeFile('index.html', scr, function (err) {
+        if (err) throw err;
+        //console.log('Replaced!');
+    });
+}
+
+// constants for html file content
+const htmlDefStart = '<!DOCTYPE html><html><head><link rel="stylesheet" href="styles.css"></head><body>'
+const htmlDefEnd = '</body></html>'
+const htmlTableStart = '<table><tr><th>Testcase #</th><th>Input</th><th>Result</th><th>Expected</th><th>Actual</th></tr>'
+
 const { studentId, className } = package;
 if (
     !studentId ||
@@ -199,6 +219,9 @@ function runQuestions() {
     });
 
     // log results
+    let cont = ''
+    let tableCont = [1, ['input'], 'Error', 'expected', 'actual'] //initialise table content(testcase no, input, result, expected, actual)
+    let rowClass = ''
     const payload = {
         student_id: studentId,
         class: className,
@@ -255,6 +278,31 @@ function runQuestions() {
         });
     });
 
+    allResults.forEach(({ question, results }) => {
+        cont += `<h1>Question ${question.slice(1)}</h1>`
+        cont += htmlTableStart
+        results.forEach((testCase) => {
+            tableCont[0] = testCase.testIndex + 1
+            tableCont[1] = testCase.input
+            tableCont[3] = testCase.expected
+            if (testCase.error) {
+                tableCont[2] = 'Error'
+                tableCont[4] = 'ERROR: ' + testCase.error.message
+            } else if (testCase.passed) {
+                tableCont[2] = 'Passed'
+                tableCont[4] = testCase.actual
+            } else {
+                tableCont[2] = 'Failed'
+                tableCont[4] = testCase.actual
+            }
+            rowClass = tableCont[2] + 'TC'
+            cont += `<tr class='${rowClass}'><td class='tcNo'>`
+            cont += tableCont.join("</td><td>");
+            cont += '</tr>'
+        });
+        cont += '</table>'
+    });
+
     console.table(
         allResults.map(({ question, results }) => {
             const totalQuestions = results.length;
@@ -263,6 +311,7 @@ function runQuestions() {
             return { question, passed, failed, totalQuestions };
         }),
     );
+    writeToFile(htmlDefStart + cont + htmlDefEnd)
 }
 
 runQuestions();
