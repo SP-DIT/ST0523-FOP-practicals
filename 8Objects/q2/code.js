@@ -14,7 +14,9 @@
  *
  */
 
-function getFormattedStudentInformation(student) {}
+function getFormattedStudentInformation(student) {
+    return student.name + ' is in class ' + student.class;
+}
 
 // Your own test cases
 // e.g.;

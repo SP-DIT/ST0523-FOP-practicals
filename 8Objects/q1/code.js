@@ -12,7 +12,9 @@
  *
  * Note: Try accessing the name using both dot notation and bracket notation.
  */
-function getStudentName(student) {}
+function getStudentName(student) {
+    return student.name;
+}
 
 // Your own test cases
 // e.g.;

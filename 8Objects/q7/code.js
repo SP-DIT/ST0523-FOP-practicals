@@ -10,7 +10,9 @@
  * makeStudent("Mary", "1A02") // returns { name: "Mary", class: "1A02" }
  * Note: Try accessing the name using both dot notation and bracket notation.
  */
-function makeStudent(studentName, studentClass) {}
+function makeStudent(studentName, studentClass) {
+    return { name: studentName, class: studentClass };
+}
 
 // Your own test cases
 // e.g.;

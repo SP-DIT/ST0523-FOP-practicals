@@ -22,7 +22,9 @@
  * checkIsSameStudent({ name: "John", class: "1A01" }, { name: "John", class: "1A01" })  // true — both name and class match
  */
 
-function checkIsSameStudent(student1, student2) {}
+function checkIsSameStudent(student1, student2) {
+    return student1.name === student2.name && student1.class === student2.class;
+}
 
 // Your own test cases
 // e.g.;
