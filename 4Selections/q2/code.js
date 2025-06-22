@@ -26,9 +26,9 @@ function dateFormat(AA, BB, CCCC) {
     if (AA <= 12 && BB <= 12) {
         return 'Either';
     } else if (AA > 12) {
-        return 'US';
-    } else {
         return 'EU';
+    } else {
+        return 'US';
     }
 }
 
