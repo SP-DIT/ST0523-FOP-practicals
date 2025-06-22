@@ -54,7 +54,4 @@ function getFilenames(files) {}
 
 console.log(getFilenames(['file', 'file', 'file'])); //['file', 'file(1)', 'file(2)']
 
-// To test your code against the test cases: node run.js p9 q2
-// To test your code against custom input: node ./9ProblemSolving/q2/code.js
-
 module.exports = getFilenames;

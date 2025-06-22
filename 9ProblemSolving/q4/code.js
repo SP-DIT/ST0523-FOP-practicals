@@ -50,7 +50,4 @@ function evaluateCommands(commands) {}
 
 console.log(evaluateCommands(['def foo 3', 'calc foo + bar', 'def bar 7', 'def programming 10', 'calc foo + bar']));
 
-// To test your code against the test cases: node run.js p9 q4
-// To test your code against custom input: node ./9ProblemSolving/q4/code.js
-
 module.exports = evaluateCommands;

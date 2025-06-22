@@ -76,7 +76,4 @@ function decodeMessage(message) {}
 
 console.log(decodeMessage('RSTEEOTCP'));
 
-// To test your code against the test cases: node run.js p9 q1
-// To test your code against custom input: node ./9ProblemSolving/q1/code.js
-
 module.exports = decodeMessage;
