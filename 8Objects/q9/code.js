@@ -15,7 +15,12 @@
  * getStudentName({ name: "John", class: "1A01" }) // returns { name: "John", class: "1A01", getFormattedStudentInformation: [function] }
  * Note: Try accessing the name using both dot notation and bracket notation.
  */
-function addFunction(student) {}
+function addFunction(student) {
+    student.getFormattedStudentInformation = function () {
+        return this.name + ' is from class ' + this.class;
+    };
+    return student;
+}
 
 // Your own test cases
 // e.g.;

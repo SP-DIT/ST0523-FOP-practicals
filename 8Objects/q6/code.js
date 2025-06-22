@@ -23,7 +23,10 @@
  * // returns: { name: "John", class: "1A02" } (same object, updated in-place)
  *
  */
-function setStudentClassInPlace(student, newClassName) {}
+function setStudentClassInPlace(student, newClassName) {
+    student.class = newClassName;
+    return student;
+}
 
 // Your own test cases
 // e.g.;

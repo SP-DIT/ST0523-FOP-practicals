@@ -22,7 +22,17 @@
  * calculateArea({ type: 'triangle', base: 5, height: 10 }); // 25
  * calculateArea({ type: 'square', side: 5 }); // 25
  */
-function calculateArea(shape) {}
+function calculateArea(shape) {
+    if (shape.type === 'circle') {
+        return Math.PI * shape.radius ** 2;
+    } else if (shape.type === 'rectangle') {
+        return shape.length * shape.width;
+    } else if (shape.type === 'triangle') {
+        return 0.5 * shape.base * shape.height;
+    } else if (shape.type === 'square') {
+        return shape.side ** 2;
+    }
+}
 
 // Your own test cases
 // e.g.;

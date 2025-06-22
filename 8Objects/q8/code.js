@@ -28,7 +28,17 @@
  *
  */
 
-function makeStudentWithFunction(studentName, studentClass) {}
+const getFormattedStudentInformation = require('../q2/code');
+
+function makeStudentWithFunction(studentName, studentClass) {
+    return {
+        name: studentName,
+        class: studentClass,
+        getFormattedStudentInformation: function () {
+            return this.name + ' is in class ' + this.class;
+        },
+    };
+}
 
 // Your own test cases
 // e.g.;

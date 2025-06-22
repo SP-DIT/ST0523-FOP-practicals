@@ -13,7 +13,10 @@
  * // returns: { name: "John", class: "1A02" }
  *
  */
-function setStudentClass(student, newClassName) {}
+function setStudentClass(student, newClassName) {
+    student.class = newClassName;
+    return student;
+}
 
 // Your own test cases
 // e.g.;

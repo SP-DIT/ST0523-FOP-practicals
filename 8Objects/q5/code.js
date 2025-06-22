@@ -26,7 +26,9 @@
  * // returns: { name: "John", class: "1A02" } (original object is not changed)
  *
  */
-function setStudentClassNewObject(student, newClassName) {}
+function setStudentClassNewObject(student, newClassName) {
+    return { name: student.name, class: newClassName };
+}
 
 // Your own test cases
 // e.g.;
