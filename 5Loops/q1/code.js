@@ -25,7 +25,14 @@
  *     => "3 * 1 = 3\n3 * 2 = 6\n3 * 3 = 9\n3 * 4 = 12\n3 * 5 = 15\n"
  *
  */
-function multiplicationTable(n, m) {}
+function multiplicationTable(n, m) {
+    // Write your code here
+    let result = '';
+    for (let i = 1; i <= m; i++) {
+        result += `${n} * ${i} = ${n * i}\n`;
+    }
+    return result;
+}
 
 // Your own test cases
 // e.g.;
