@@ -6,8 +6,8 @@
  */
 
 const fahrenheit = 100;
-const celsius; // Calculate the temperature in celsius here
+const celsius = ((fahrenheit - 32) * 5) / 9; // Calculate the temperature in celsius here
 
-console.log("Q5: " + celsius);
+console.log('Q5: ' + celsius);
 
 // Run the program with `node ./q5.js`
