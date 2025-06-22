@@ -51,7 +51,18 @@
  *  south -> east
  *  east -> north
  */
-function canProceed(currentPosition, targetPosition, incomingVehiclePosition) {}
+function canProceed(currentPosition, targetPosition, incomingVehiclePosition) {
+    // Write your code here
+    if (
+        (currentPosition === 'north' && (targetPosition === 'west' || incomingVehiclePosition === 'west')) ||
+        (currentPosition === 'west' && (targetPosition === 'south' || incomingVehiclePosition === 'south')) ||
+        (currentPosition === 'south' && (targetPosition === 'east' || incomingVehiclePosition === 'east')) ||
+        (currentPosition === 'east' && (targetPosition === 'north' || incomingVehiclePosition === 'north'))
+    )
+        return 'Stop';
+
+    return 'Proceed';
+}
 
 // Your own test cases
 // e.g.;
