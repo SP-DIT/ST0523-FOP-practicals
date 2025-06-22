@@ -13,11 +13,11 @@
  * @returns {boolean} - `true` if a cycle is detected, `false` otherwise.
  *
  * @example
- * detectCycle([1, 2, 0]); // true (0 → 1 → 2 → 0 → ...)
- * detectCycle([1, 2, 1]); // true (0 → 1 → 2 → 1 → ...)
+ * detectCycle([1, 2, 0]); // true (0 → 1 → 2 → 0 [loop detected 0 → 0])
+ * detectCycle([1, 2, 1]); // true (0 → 1 → 2 → 1 [loop detected 1 → 1])
  * detectCycle([2, 1, 4, 1, 9]); // false (0 → 2 → 4 → 9 [out of bounds])
  * detectCycle([2, 4, 1, 6, 3, 9, 5]); // false (0 → 2 → 1 → 4 → 3 → 6 → 5 → 9 [out of bounds])
- * detectCycle([2, 4, 1, 6, 3, 0, 5]); // true (0 → 2 → 1 → 4 → 3 → 6 → 5 → 0 → ...)
+ * detectCycle([2, 4, 1, 6, 3, 0, 5]); // true (0 → 2 → 1 → 4 → 3 → 6 → 5 → 0 [loop detected 0 → 0])
  */
 
 function detectCycle(jumps) {}
