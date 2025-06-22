@@ -25,7 +25,10 @@
  *
  * Note that the function signature is completed for you.
  */
-function canSitRollercoaster(height, age, withParent, hasHeartCondition) {}
+function canSitRollercoaster(height, age, withParent, hasHeartCondition) {
+    // Write your code here
+    return height >= 120 && (age >= 16 || withParent) && !hasHeartCondition;
+}
 
 console.log(canSitRollercoaster(130, 15, true, false)); // true
 

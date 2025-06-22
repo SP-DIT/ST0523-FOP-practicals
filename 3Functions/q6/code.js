@@ -44,7 +44,11 @@
  *
  * Math.abs(x) returns the absolute number (e.g. Math.abs(-1) = 1)
  */
-function inbetween() {}
+function inbetween() {
+    const a = Math.floor(Math.random() * 52) + 1;
+    const b = Math.floor(Math.random() * 52) + 1;
+    return (Math.abs(a - b) - 1) / 50 >= 0.5;
+}
 
 // Overwrite Math.random to control it's behaviour;
 
