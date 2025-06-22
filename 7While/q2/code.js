@@ -1,33 +1,29 @@
 /**
- * Continuing from the reverse Fibonacci problem, a student suggests that the solution
- * can be implemented using a for-loop instead of a while-loop.
+ * Change the function below to use a while-loop instead of a for-loop.
+ * The function should generate 10 unique random numbers between 1 and 31 (not including 31).
  *
- * Can you help the student complete the function to correctly calculate the position
- * of a given Fibonacci number `k` using a for-loop?
+ * @returns an array of 10 unique random numbers.
  *
- * You can continue to assume that `k` is a valid Fibonacci number starting from the 3rd term onward.
+ * @note The test cases controls the values returned by Math.random.
  */
-
-function reverseFibonacci(k) {
-    // Start with the first two Fibonacci numbers: 0 (1st) and 1 (2nd)
-    let n1 = 1; // (n-1)th Fibonacci number, starting as the 2nd term
-    let n2 = 0; // (n-2)th Fibonacci number, starting as the 1st term
-    let index = 3; // Start from the 3rd Fibonacci number
-
-    // Compute Fibonacci numbers iteratively until we reach k, add 1 to n at the end of each loop
-    for (let n = n1 + n2; n !== k; n++) {
-        n2 = n1; // Move forward: n2 becomes the previous n1
-        n1 = n; // n1 becomes the current Fibonacci number
-        index++; // Increment the index to reflect the current position
+function generate10RandomNumber() {
+    const array = [];
+    for (let i = 0; i < 10; i++) {
+        const randomNumber = Math.random() * 30 + 1;
+        if (array.includes(randomNumber)) {
+            // randomNumber already exists, don't add it
+            // decrease i by 1 to repeat this iteration
+            i--;
+        } else {
+            array.push(randomNumber);
+        }
     }
-
-    // Return the position of the Fibonacci number k
-    return index;
+    return array;
 }
 
 // Your own test cases
 // e.g.;
 
-console.log(reverseFibonacci(8)); //7
+console.log(generate10RandomNumber());
 
-module.exports = reverseFibonacci;
+module.exports = generate10RandomNumber;

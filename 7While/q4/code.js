@@ -1,43 +1,37 @@
 /**
- * Find the first n numbers whose digits sum to the target k.
+ * Complete the function  `countNumberOfRolls` that uses the `rollDice` function.
+ * Keep rolling the dice and adding up the results until the total sum is 30 or more.
  *
- * @param {number} n - The number of elements to find.
- * @param {number} k - The target sum of the digits.
- *
- * @returns {number[]} - An array of the first n numbers whose digits sum to the target k.
+ * @param {() => number} rollDice - a function that returns a number between 1 and 6, like rolling a dice.
+ * @returns the number of rolls it took to make the total sum reach at least 30.
  *
  * @example
- * digitsSumToTarget(5, 5); // [5, 14, 23, 32, 41]
- * digitsSumToTarget(3, 10); // [19, 28, 37]
+ * If the dice always rolls 1, you need 30 rolls to reach 30.
+ * If the dice always rolls 6, you need 5 rolls to reach 30.
+ * If the dice rolls in the pattern 1, 2, 3, 4, 5, 6, 1, 2, 3, 4..., you need 10 rolls to reach 30.
  *
- * @explanation
- * In the first example, the first 5 numbers whose digits sum to 5 are 5, 14, 23, 32, and 41.
- *  5 = 5
- *  14 = 1 + 4 = 5
- *  23 = 2 + 3 = 5
- *  32 = 3 + 2 = 5
- *  41 = 4 + 1 = 5
- *
- * In the second example, the first 3 numbers whose digits sum to 10 are 19, 28, and 37.
- *  19 = 1 + 9 = 10
- *  28 = 2 + 8 = 10
- *  37 = 3 + 7 = 10
- *
+ * @note The dice rolls may not be random. The test cases can control the values returned by `rollDice`.
  */
-function digitsSumToTarget(n, k) {}
 
-function digitSum(number) {
-    const digitString = number + '';
+function countNumberOfRolls(rollDice) {
     let sum = 0;
-    for (let i = 0; i < digitString.length; i++) {
-        sum = sum + +digitString[i];
+    let count = 0;
+    while (sum < 30) {
+        sum += rollDice();
+        count += 1;
     }
-    return sum;
+    return count;
 }
 
 // Your own test cases
 // e.g.;
 
-console.log(digitsSumToTarget(5, 5)); // [5, 14, 23, 32, 41]
+function sampleRollDice() {
+    const roll = Math.floor(Math.random() * 6) + 1;
+    console.log(roll);
+    return roll;
+}
 
-module.exports = digitsSumToTarget;
+console.log(countNumberOfRolls(sampleRollDice));
+
+module.exports = countNumberOfRolls;

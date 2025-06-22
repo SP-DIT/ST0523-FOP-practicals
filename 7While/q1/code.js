@@ -1,48 +1,40 @@
 /**
- * You’ve previously learned about the Fibonacci sequence, where each number is the sum of the two preceding ones:
+ * The function `findNthPrimeNumber` is meant to return the nth prime number.
+ * It uses the helper function `isPrimeNumber` to check if a number is prime.
  *
- * 1st Fibonacci number = 0
- * 2nd Fibonacci number = 1
- * 3rd Fibonacci number = 0 + 1 = 1
- * 4th Fibonacci number = 1 + 1 = 2
- * 5th Fibonacci number = 1 + 2 = 3
- * 6th Fibonacci number = 2 + 3 = 5
- * 7th Fibonacci number = 3 + 5 = 8
- * ...and so on.
+ * For example: 2 is the first prime, followed by 3, 5, 7, 11, ...
  *
- * In this task, you're given a partially completed function that you need to fix.
- * The function should determine the *position* of a given number `k` in the Fibonacci sequence.
+ * @param {number} n - the position of the prime number to find (e.g. n = 1 returns 2).
+ * @returns the nth prime number.
  *
- * For example:
- *   - If the input is 5, the function should return 6 (since 5 is the 6th Fibonacci number).
- *   - If the input is 8, the function should return 7.
+ * @bug The while-loop has a bug that causes an infinite loop. Try to fix it!
  *
- * @param {number} k - A valid Fibonacci number (starting from the 3rd Fibonacci number onwards)
- * @return {number} The position of `k` in the Fibonacci sequence
  */
 
-function reverseFibonacci(k) {
-    // Start with the first two Fibonacci numbers: 0 (1st) and 1 (2nd)
-    let n1 = 1; // Represents the (n-1)th Fibonacci number
-    let n2 = 0; // Represents the (n-2)th Fibonacci number
-    let n = n1 + n2; // Start from the 3rd Fibonacci number
-    let index = 0; // Tracks the position of the current Fibonacci number (n)
-
-    // Continue generating Fibonacci numbers until we reach the target number k
-    while (n !== k) {
-        n2 = n1; // Move forward: n2 becomes the previous n1
-        n1 = n; // n1 becomes the current Fibonacci number
-        n = n1 + n2; // Calculate the next Fibonacci number
-        index++; // Increment the index to reflect the new position
+function findNthPrimeNumber(n) {
+    let numberOfPrimeFound = 1; // How many prime found so far
+    let currentNumber = 2; // Current number to check, starting from first prime number
+    while (numberOfPrimeFound < n) {
+        // Trying to find `n` prime numbers
+        currentNumber++; // Check the next number
+        if (isPrimeNumber(currentNumber)) {
+            // Check if the current number is a prime
+            n++; // if it is, increment the number of prime found so far
+        }
     }
+    return currentNumber; // Return the nth prime number
+}
 
-    // Return the position of the Fibonacci number k
-    return index;
+function isPrimeNumber(number) {
+    for (let i = 2; i < number; i++) {
+        if (number % i === 0) return false;
+    }
+    return true;
 }
 
 // Your own test cases
 // e.g.;
 
-console.log(reverseFibonacci(8)); //7
+console.log(findNthPrimeNumber(5)); // 11
 
-module.exports = reverseFibonacci;
+module.exports = findNthPrimeNumber;
