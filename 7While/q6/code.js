@@ -33,7 +33,15 @@
  * findStudentId(getStudentIds, 7) => false
  */
 
-function findStudent(getStudentIds, targetStudentId) {}
+function findStudent(getStudentIds, targetStudentId) {
+    let page = 0;
+    while (true) {
+        const records = getStudentIds(page);
+        if (records.includes(targetStudentId)) return true;
+        else if (records.length === 0) return false;
+        page += 1;
+    }
+}
 
 // Your own test cases
 // e.g.;
