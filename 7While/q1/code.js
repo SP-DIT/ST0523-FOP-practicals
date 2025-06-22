@@ -19,7 +19,7 @@ function findNthPrimeNumber(n) {
         currentNumber++; // Check the next number
         if (isPrimeNumber(currentNumber)) {
             // Check if the current number is a prime
-            n++; // if it is, increment the number of prime found so far
+            numberOfPrimeFound++; // if it is, increment the number of prime found so far
         }
     }
     return currentNumber; // Return the nth prime number

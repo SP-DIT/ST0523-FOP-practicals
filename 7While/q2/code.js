@@ -8,13 +8,9 @@
  */
 function generate10RandomNumber() {
     const array = [];
-    for (let i = 0; i < 10; i++) {
+    while (array.length < 10) {
         const randomNumber = Math.random() * 30 + 1;
-        if (array.includes(randomNumber)) {
-            // randomNumber already exists, don't add it
-            // decrease i by 1 to repeat this iteration
-            i--;
-        } else {
+        if (!array.includes(randomNumber)) {
             array.push(randomNumber);
         }
     }
