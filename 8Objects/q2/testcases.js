@@ -23,6 +23,5 @@ module.exports = {
     ],
     options: {
         type: 'JSON',
-        s,
     },
 };
