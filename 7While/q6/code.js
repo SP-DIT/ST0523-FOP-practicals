@@ -1,30 +1,48 @@
 /**
- * You are given an array of positive integers representing a sequence of jumps.
- * Each element in the array indicates the index (0-based) to jump to next.
+ * You are given a function that returns student IDs (as integers) from a database in a paginated manner.
  *
- * You always start at index 0. From there, you jump to the index specified by the value at that position.
- * The sequence ends if:
- *   - you jump to an index that is out of bounds, or
- *   - you revisit an index you've already visited (i.e., a cycle is detected).
+ * - This function takes **one parameter**: the page number (starting from 0).
+ * - Each page contains **at most 5 student IDs**.
+ * - If the function returns an **empty array**, it means there are no more records to fetch.
+ * - The returned student IDs are **not necessarily sorted** and **may contain gaps**.
  *
- * Your task is to determine if the sequence of jumps forms a cycle.
+ * You are also given a **target student ID**, and your task is to determine if this ID exists in the dataset.
  *
- * @param {number[]} jumps - An array of numbers where each element represents the next index to jump to.
- * @returns {boolean} - `true` if a cycle is detected, `false` otherwise.
+ * A student ID is a positive integer between 0 and 100000.
+ * A page number is a positive integer between 0 and 20000.
+ * The total number of records can range from 0 to 100000.
+ *
+ * Complete the function "findStudent" to search for the student ID across the paginated results.
+ *
+ * @param {(page: number) => number[]} getStudentIds - A function that returns an array of student IDs for the given page.
+ * @param {number} targetStudentId - The student ID to search for.
+ * @returns {boolean} - Returns true if the student ID is found; otherwise, false.
  *
  * @example
- * detectCycle([1, 2, 0]); // true (0 → 1 → 2 → 0 [loop detected 0 → 0])
- * detectCycle([1, 2, 1]); // true (0 → 1 → 2 → 1 [loop detected 1 → 1])
- * detectCycle([2, 1, 4, 1, 9]); // false (0 → 2 → 4 → 9 [out of bounds])
- * detectCycle([2, 4, 1, 6, 3, 9, 5]); // false (0 → 2 → 1 → 4 → 3 → 6 → 5 → 9 [out of bounds])
- * detectCycle([2, 4, 1, 6, 3, 0, 5]); // true (0 → 2 → 1 → 4 → 3 → 6 → 5 → 0 [loop detected 0 → 0])
+ * // Case 1: target is found on the 4th page
+ * getStudentIds(0) => [1, 2, 3, 4, 5]
+ * getStudentIds(1) => [6, 7, 8, 9, 10]
+ * getStudentIds(2) => [11, 12, 13, 14, 15]
+ * getStudentIds(3) => [16, 17, 18, 19, 20]
+ * findStudentId(getStudentIds, 18) => true
+ *
+ * // Case 2: target is not found
+ * getStudentIds(0) => [3, 8, 4, 1, 5]
+ * getStudentIds(1) => [6, 9, 2]
+ * getStudentIds(2) => []  // End of records
+ * findStudentId(getStudentIds, 7) => false
  */
 
-function detectCycle(jumps) {}
+function findStudent(getStudentIds, targetStudentId) {}
 
 // Your own test cases
 // e.g.;
 
-console.log(detectCycle([1, 2, 0])); // true
+function mockGetStudentIds(pageNumber) {
+    const students = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    return students.slice(pageNumber * 5, pageNumber * 5 + 5);
+}
 
-module.exports = detectCycle;
+console.log(findStudent(mockGetStudentIds, 18)); // true
+
+module.exports = findStudent;
