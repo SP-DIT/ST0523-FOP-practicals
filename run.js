@@ -41,7 +41,7 @@ function readProblemSetInput() {
         process.exit(1);
     }
 
-    const folderName = folderNames[folderIndex.slice(1) - 1];
+    const folderName = folderNames[folderIndex.slice(1) - 10];
     if (!folderName) {
         console.error(`Problem set "${folderIndex}" does not exist.`);
         process.exit(1);
