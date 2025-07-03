@@ -47,13 +47,20 @@ module.exports = {
     options: {
         type: 'JSON',
         monkeyPatch: (fn) => {
+            const originalArraySort = Array.prototype.sort;
+            const originalArrayToSorted = Array.prototype.toSorted;
             Array.prototype.sort = function () {
                 throw new Error('Array.sort() is disabled!');
             };
             Array.prototype.toSorted = function () {
-                throw new Error('Array.sort() is disabled!');
+                throw new Error('Array.toSorted() is disabled!');
             };
-            return fn;
+            return (...args) => {
+                const result = fn(...args);
+                Array.prototype.sort = originalArraySort;
+                Array.prototype.toSorted = originalArrayToSorted;
+                return result;
+            };
         },
     },
 };
