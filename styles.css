@@ -1,0 +1,57 @@
+body {
+    background-color: beige;
+}
+h1 {
+    color: chocolate;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 35px;
+}
+h2 {
+    color: saddlebrown;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+table {
+    border: 1px solid;
+    border-color: black;
+    border-collapse: collapse;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+th {
+    border: 1px solid;
+    border-color: black;
+    border-collapse: collapse;
+    padding: 2px 8px;
+    color: black;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+td {
+    border: 1px solid;
+    border-color: black;
+    border-collapse: collapse;
+    padding: 2px 8px;
+    font-family: Georgia, serif;
+    font-size: 15px;
+}
+.tcNo {
+    width: 9.2ch;
+    min-width: 9.2ch;
+    height: 1ex;
+}
+.ErrorTC {
+    color: maroon;
+}
+.PassedTC {
+    color: green;
+}
+.FailedTC {
+    color: red;
+}

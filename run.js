@@ -4,6 +4,28 @@ const util = require('util');
 const package = require('./package.json');
 const { exit } = require('process');
 
+// create file
+fs.open('index.html', 'w', function (err, file) {
+    if (err) throw err;
+    //console.log('Saved!');
+});
+
+
+// function for writing file
+function writeToFile(scr) {
+    fs.writeFile('index.html', scr, function (err) {
+        if (err) throw err;
+        //console.log('Replaced!');
+    });
+}
+
+// constants for html file content
+const htmlDefStart = '<!DOCTYPE html><html><head><link rel="stylesheet" href="styles.css"></head><body>'
+const htmlDefEnd = '</body></html>'
+function htmlTableStart(paramCount) {
+    return `<table><tr><th class='tcNo'>Testcase #</th><th colspan="${paramCount}">Input</th><th>Result</th><th>Expected</th><th>Actual</th></tr>`
+}
+
 const { studentId, className } = package;
 if (
     !studentId ||
@@ -198,6 +220,12 @@ function runQuestions() {
         return { question, results };
     });
 
+    // initialise for html generation
+    let cont = ''
+    let params = ['input'] //initialise input value
+    let tableCont = [1, 'input', 'Error', 'expected', 'actual'] //initialise table content(testcase no, input, result, expected, actual)
+    let rowClass = ''
+
     // log results
     const payload = {
         student_id: studentId,
@@ -255,6 +283,46 @@ function runQuestions() {
         });
     });
 
+    //for seperating problem set name and number
+    let nameID = -1
+    let nameIDNo = true
+    while (nameIDNo){
+        nameID++
+        nameIDNo = false
+        for (let k = 0; k < 10; k++) {
+            if (problemSet[nameID] == k) {
+                nameIDNo = true
+            }
+        }
+    }
+
+    cont += `<h1>Problem Set ${problemSet.slice(0, nameID)}: ${problemSet.slice(nameID)}</h1>`
+    allResults.forEach(({ question, results }) => {
+        cont += `<h2>Question ${question.slice(1)}</h2>`
+        cont += htmlTableStart(results[0].input.length)
+        results.forEach((testCase) => {
+            tableCont[0] = testCase.testIndex + 1
+            params = testCase.input
+            tableCont[3] = testCase.expected
+            if (testCase.error) {
+                tableCont[2] = 'Error'
+                tableCont[4] = 'ERROR: ' + testCase.error.message
+            } else if (testCase.passed) {
+                tableCont[2] = 'Passed'
+                tableCont[4] = testCase.actual
+            } else {
+                tableCont[2] = 'Failed'
+                tableCont[4] = testCase.actual
+            }
+            tableCont[1] = params.join("</td><td>");
+            rowClass = tableCont[2] + 'TC'
+            cont += `<tr class='${rowClass}'><td>`
+            cont += tableCont.join("</td><td>");
+            cont += '</tr>'
+        });
+        cont += '</table>'
+    });
+
     console.table(
         allResults.map(({ question, results }) => {
             const totalQuestions = results.length;
@@ -263,6 +331,7 @@ function runQuestions() {
             return { question, passed, failed, totalQuestions };
         }),
     );
+    writeToFile(htmlDefStart + cont + htmlDefEnd)
 }
 
 runQuestions();
