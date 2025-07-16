@@ -4,6 +4,28 @@ const util = require('util');
 const package = require('./package.json');
 const { exit } = require('process');
 
+// create file
+fs.open('index.html', 'w', function (err, file) {
+    if (err) throw err;
+    //console.log('Saved!');
+});
+
+
+// function for writing file
+function writeToFile(scr) {
+    fs.writeFile('index.html', scr, function (err) {
+        if (err) throw err;
+        //console.log('Replaced!');
+    });
+}
+
+// constants for html file content
+const htmlDefStart = '<!DOCTYPE html><html><head><link rel="stylesheet" href="styles.css"></head><body>'
+const htmlDefEnd = '</body></html>'
+function htmlTableStart(paramCount) {
+    return `<table><tr><th class='tcNo'>Testcase #</th><th colspan="${paramCount}">Input</th><th>Result</th><th>Expected</th><th>Actual</th></tr>`
+}
+
 const { studentId, className } = package;
 if (
     !studentId ||
@@ -161,7 +183,7 @@ function runTestCases(runCode, testcases, options) {
             const passed = compareResults(result, expected, options);
             return { testIndex, passed, input, expected, actual: result };
         } catch (error) {
-            return { testIndex, error: error };
+            return { testIndex, input, expected, error: error };
         }
     });
 }
@@ -197,6 +219,12 @@ function runQuestions() {
         const results = runTestCases(runCode, testcases, options);
         return { question, results };
     });
+
+    // initialise for html generation
+    let cont = ''
+    let params = ['input'] //initialise input value
+    let tableCont = [1, 'input', 'Error', 'expected', 'actual'] //initialise table content(testcase no, input, result, expected, actual)
+    let rowClass = ''
 
     // log results
     const payload = {
@@ -255,6 +283,80 @@ function runQuestions() {
         });
     });
 
+    //for seperating problem set name and number
+    let nameID = -1
+    let nameIDNo = true
+    while (nameIDNo){
+        nameID++
+        nameIDNo = false
+        for (let k = 0; k < 10; k++) {
+            if (problemSet[nameID] == k) {
+                nameIDNo = true
+            }
+        }
+    }
+    
+    //initialise for testcase counter and table html
+    let passCount = 0
+    let failCount = 0
+    let errorCount = 0
+    let counterHtml = ''
+    let tableHtml = ''
+
+    cont += `<h1>Problem Set ${problemSet.slice(0, nameID)}: ${problemSet.slice(nameID)}</h1>`
+    allResults.forEach(({ question, results }) => {
+        passCount = 0
+        failCount = 0
+        errorCount = 0
+        cont += `<h2>Question ${question.slice(1)}</h2>`
+        tableHtml = htmlTableStart(results[0].input.length)
+        results.forEach((testCase) => {
+            tableCont[0] = testCase.testIndex + 1
+            params = testCase.input
+            tableCont[3] = testCase.expected
+            if (testCase.error) {
+                tableCont[2] = 'Error'
+                tableCont[4] = 'ERROR: ' + testCase.error.message
+                errorCount++
+            } else if (testCase.passed) {
+                tableCont[2] = 'Passed'
+                tableCont[4] = testCase.actual
+                passCount++
+            } else {
+                tableCont[2] = 'Failed'
+                tableCont[4] = testCase.actual
+                failCount++
+            }
+            
+            for (let paramNo = 0; paramNo < params.length; paramNo++) {
+                if (typeof params[paramNo] == 'object' && params[paramNo] !== null) {
+                    params[paramNo] = JSON.stringify(params[paramNo], null, 1)
+                }
+            }
+            if (typeof tableCont[3] == 'object' && tableCont[3] !== null) {
+                tableCont[3] = JSON.stringify(tableCont[3], null, 1)
+            }
+            if (typeof tableCont[4] == 'object' && tableCont[4] !== null) {
+                tableCont[4] = JSON.stringify(tableCont[4], null, 1)
+            }
+
+            tableCont[1] = params.join("</td><td>");
+            rowClass = tableCont[2] + 'TC'
+            tableHtml += `<tr class='${rowClass}'><td>`
+            tableHtml += tableCont.join("</td><td>");
+            tableHtml += '</tr>'
+        });
+        tableHtml += '</table>'
+        counterHtml = `<div class='counter'><div class='counterTitle'>Testcases (${passCount+failCount+errorCount})</div><div class='passCounter'>${passCount} passed</div><div class='failCounter'>${failCount} failed</div><div class='errCounter'>${errorCount} error case`
+        if (errorCount == 1) {
+            counterHtml += '</div></div>'
+        } else {
+            counterHtml += 's</div></div>'
+        }
+        cont += counterHtml
+        cont += tableHtml
+    });
+
     console.table(
         allResults.map(({ question, results }) => {
             const totalQuestions = results.length;
@@ -263,6 +365,7 @@ function runQuestions() {
             return { question, passed, failed, totalQuestions };
         }),
     );
+    writeToFile(htmlDefStart + cont + htmlDefEnd)
 }
 
 runQuestions();
