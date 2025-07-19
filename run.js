@@ -17,8 +17,12 @@ if (
     exit(-1);
 }
 
-// Get all folders in the current directory
-const folders = fs.readdirSync(__dirname, { withFileTypes: true }).filter((dirent) => dirent.isDirectory());
+// Directory of test cases and questions
+const testcasesDir = path.join(__dirname, 'testcases');
+const questionsDir = path.join(__dirname, 'questions');
+
+// Get all folders in the questions directory
+const folders = fs.readdirSync(questionsDir, { withFileTypes: true }).filter((dirent) => dirent.isDirectory());
 
 // URL of logging service
 const loggerUrl = 'https://fop-practical-log-collector.azurewebsites.net';
@@ -49,7 +53,7 @@ function readProblemSetInput() {
 
     const invalidProblemSets = ['1Introduction', '2Operators'];
     if (invalidProblemSets.includes(folderName)) {
-        console.error(`Problem set "${folderName}" can be executed with run.js`);
+        console.error(`Problem set "${folderName}" cannot be executed with run.js`);
         process.exit(1);
     }
 
@@ -58,13 +62,14 @@ function readProblemSetInput() {
 
 function readQuestionInput(folderName) {
     const subFolderName = process.argv[3];
+    // Runs specific question if subFolderName is provided
     if (subFolderName) {
         return [subFolderName];
     }
 
-    // get all folders in the folderName
+    // runs all questions in the folder
     const subFolderNames = fs
-        .readdirSync(path.join(__dirname, folderName), { withFileTypes: true })
+        .readdirSync(path.join(questionsDir, folderName), { withFileTypes: true })
         .filter((dirent) => dirent.isDirectory())
         .map((dirent) => dirent.name)
         .sort();
@@ -88,21 +93,30 @@ function readQuestionInputFromCurrentFolder() {
 
 function getCodeAndTestCasesPath(folderName, subFolderName) {
     // Construct the folder path
-    const folderPath = path.join(__dirname, folderName, subFolderName);
+    const testcasesFolderPath = path.join(testcasesDir, folderName, subFolderName);
+    const questionFolderPath = path.join(questionsDir, folderName, subFolderName);
 
     // Check if the folder exists
-    if (!fs.existsSync(folderPath)) {
-        console.error(`Folder "${folderPath}" does not exist.`);
+    if (!fs.existsSync(questionFolderPath)) {
+        console.error(`Question Folder "${questionFolderPath}" does not exist.`);
+        process.exit(1);
+    }
+    if (!fs.existsSync(testcasesFolderPath)) {
+        console.error(`Testcases Folder "${testcasesFolderPath}" does not exist.`);
         process.exit(1);
     }
 
     // Import code.js and testcases.js
-    const codePath = path.join(folderPath, 'code.js');
-    const testCasesPath = path.join(folderPath, 'testcases.js');
+    const codePath = path.join(questionFolderPath, 'code.js');
+    const testCasesPath = path.join(testcasesFolderPath, 'testcases.js');
 
     // Check if both code and testcases files exist
-    if (!fs.existsSync(codePath) || !fs.existsSync(testCasesPath)) {
-        console.error(`Missing code.js or testcases.js in the folder "${subFolderName}".`);
+    if (!fs.existsSync(codePath)) {
+        console.error(`Missing code.js in the folder "${questionFolderPath}".`);
+        process.exit(1);
+    }
+    if (!fs.existsSync(testCasesPath)) {
+        console.error(`Missing testcases.js in the folder "${testcasesFolderPath}".`);
         process.exit(1);
     }
 
@@ -148,6 +162,11 @@ function compareResults(result, expected, options) {
         return Math.abs(result - expected) < Math.pow(10, -precision);
     } else if (options.type === 'JSON') {
         return deepEqual(result, expected);
+    } else if (options.type === 'unsorted array') {
+        if (!Array.isArray(result)) return false;
+        const sortedResult = [...result].sort();
+        const sortedExpected = [...expected].sort();
+        return deepEqual(sortedResult, sortedExpected);
     }
     return result === expected;
 }
@@ -227,42 +246,14 @@ function runQuestions() {
         console.log(`${problemSet}/${question}`);
         results.forEach((testCase) => {
             if (testCase.error) {
-                console.error(`\tTest case ${testCase.testIndex + 1}: Error - ${testCase.error.message}`);
+                console.error(`\tTest case ${testCase.testIndex + 1}: ⚠️ Error - ${testCase.error.message}`);
             } else if (testCase.passed) {
-                console.log(`\tTest case ${testCase.testIndex + 1}: Passed`);
+                console.log(`\tTest case ${testCase.testIndex + 1}: ✅ Passed`);
             } else {
-                console.log(
-                    `\tTest case ${testCase.testIndex + 1}: Failed (Expected: ${JSON.stringify(
-                        testCase.expected,
-                    )}, Got: ${JSON.stringify(testCase.actual)})`,
-                );
-
-                const input = testCase.input.map((value) => {
-                    if (value instanceof Function) return value.toString().replace(/\s/g, '');
-                    return value;
-                });
-
-                let str = util.inspect(input, {
-                    depth: 2,
-                    maxArrayLength: 7,
-                    breakLength: 80,
-                    compact: 5,
-                    showHidden: false,
-                });
-                console.log('\tInputs:\n\t\t' + str.split('\n').join('\n\t\t'));
-                console.log();
+                console.log(`\tTest case ${testCase.testIndex + 1}: ❌ Failed`);
             }
         });
     });
-
-    console.table(
-        allResults.map(({ question, results }) => {
-            const totalQuestions = results.length;
-            const failed = results.filter((testCase) => !testCase.passed).flat().length;
-            const passed = totalQuestions - failed;
-            return { question, passed, failed, totalQuestions };
-        }),
-    );
 }
 
 runQuestions();
