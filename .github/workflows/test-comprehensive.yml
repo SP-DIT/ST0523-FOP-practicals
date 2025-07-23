@@ -97,13 +97,8 @@ jobs:
           failed_count=$(echo "$output" | grep -c "❌ Failed" || echo "0")
           error_count=$(echo "$output" | grep -c "⚠️ Error" || echo "0")
           
-          # Convert to integers for comparison
-          passed_count=$((passed_count))
-          failed_count=$((failed_count))
-          error_count=$((error_count))
-          
           # Store summary data with simple string concatenation
-          if [ $failed_count -gt 0 ] || [ $error_count -gt 0 ]; then
+          if [ "$failed_count" -gt 0 ] || [ "$error_count" -gt 0 ]; then
             status="❌"
           else
             status="✅"
@@ -111,13 +106,13 @@ jobs:
           
           # Create summary with multi-line format - only show non-zero stats
           summary_line="$status $problem_set:\n"
-          if [ $passed_count -gt 0 ]; then
+          if [ "$passed_count" -gt 0 ]; then
             summary_line="$summary_line  $passed_count passed\n"
           fi
-          if [ $failed_count -gt 0 ]; then
+          if [ "$failed_count" -gt 0 ]; then
             summary_line="$summary_line  $failed_count failed\n"
           fi
-          if [ $error_count -gt 0 ]; then
+          if [ "$error_count" -gt 0 ]; then
             summary_line="$summary_line  $error_count errors\n"
           fi
           
