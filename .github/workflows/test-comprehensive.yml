@@ -57,10 +57,21 @@ jobs:
       if: github.event.inputs.problem_set == 'all' || github.event.inputs.problem_set == ''
       run: |
         echo "=== Running Comprehensive Test Suite ==="
-        echo "Testing all problem sets (p3-p9) with all questions"
         echo "NODE_ENV=test ensures testing against solution/ directory"
         
-        for problem_set in p3 p4 p5 p6 p7 p8 p9; do
+        # Dynamically discover all problem sets from solution directory
+        echo "Discovering available problem sets..."
+        problem_sets=$(find solution/ -maxdepth 1 -type d -name "[0-9]*" | sort | sed 's|solution/||' | while read dir; do
+          # Convert directory name to problem set format (e.g., 3Functions -> p3)
+          if [[ $dir =~ ^([0-9]+) ]]; then
+            echo "p${BASH_REMATCH[1]}"
+          fi
+        done)
+        
+        echo "Found problem sets: $problem_sets"
+        
+        # Test each discovered problem set
+        for problem_set in $problem_sets; do
           echo "=== Testing $problem_set ==="
           NODE_ENV=test node run.js $problem_set || echo "Some tests failed in $problem_set"
         done
