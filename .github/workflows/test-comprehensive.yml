@@ -104,14 +104,11 @@ jobs:
             status="✅"
           fi
           
-          # Create summary line without complex arithmetic
-          summary_line="$status $problem_set: $passed_count tests passed"
-          if [ "$failed_count" != "0" ]; then
-            summary_line="$summary_line, $failed_count failed"
-          fi
-          if [ "$error_count" != "0" ]; then
-            summary_line="$summary_line, $error_count errors"
-          fi
+          # Create summary with multi-line format
+          summary_line="$status $problem_set:\n"
+          summary_line="$summary_line  $passed_count passed\n"
+          summary_line="$summary_line  $failed_count failed\n"
+          summary_line="$summary_line  $error_count errors\n"
           
           # Add newline to summary data
           summary_data="$summary_data$summary_line\n"
