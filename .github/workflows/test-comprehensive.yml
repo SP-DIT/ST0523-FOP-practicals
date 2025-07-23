@@ -113,6 +113,7 @@ jobs:
             summary_line="$summary_line, $error_count errors"
           fi
           
+          # Add newline to summary data
           summary_data="$summary_data$summary_line\n"
           
           echo "📊 $problem_set completed"
