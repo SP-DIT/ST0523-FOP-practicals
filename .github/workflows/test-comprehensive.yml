@@ -27,7 +27,17 @@ jobs:
       with:
         node-version: '18'
         
-
+    - name: Setup Test Environment
+      run: |
+        echo "Setting up test environment with valid package.json"
+        cat > package.json << 'EOF'
+        {
+          "studentId": "p1234567",
+          "className": "DIT/FT/1A/01"
+        }
+        EOF
+        echo "Test package.json created:"
+        cat package.json
       
     - name: Test Specific Problem Set
       if: github.event.inputs.problem_set != 'all'
