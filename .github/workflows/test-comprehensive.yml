@@ -40,11 +40,11 @@ jobs:
         cat package.json
       
     - name: Test Specific Problem Set
-      if: github.event.inputs.problem_set != 'all'
+      if: github.event.inputs.problem_set != 'all' && github.event.inputs.problem_set != ''
       run: |
         echo "=== Testing Problem Set: ${{ github.event.inputs.problem_set }} ==="
         echo "NODE_ENV=test ensures testing against solution/ directory"
-        if [ "${{ github.event.inputs.question }}" != "all" ]; then
+        if [ "${{ github.event.inputs.question }}" != "all" ] && [ "${{ github.event.inputs.question }}" != "" ]; then
           echo "Testing specific question: ${{ github.event.inputs.question }}"
           NODE_ENV=test node run.js ${{ github.event.inputs.problem_set }} ${{ github.event.inputs.question }}
         else
@@ -54,7 +54,7 @@ jobs:
       continue-on-error: true
       
     - name: Test All Problem Sets
-      if: github.event.inputs.problem_set == 'all'
+      if: github.event.inputs.problem_set == 'all' || github.event.inputs.problem_set == ''
       run: |
         echo "=== Running Comprehensive Test Suite ==="
         echo "Testing all problem sets (p3-p9) with all questions"
