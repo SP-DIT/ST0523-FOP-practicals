@@ -104,11 +104,17 @@ jobs:
             status="✅"
           fi
           
-          # Create summary with multi-line format
+          # Create summary with multi-line format - only show non-zero stats
           summary_line="$status $problem_set:\n"
-          summary_line="$summary_line  $passed_count passed\n"
-          summary_line="$summary_line  $failed_count failed\n"
-          summary_line="$summary_line  $error_count errors\n"
+          if [ "$passed_count" != "0" ]; then
+            summary_line="$summary_line  $passed_count passed\n"
+          fi
+          if [ "$failed_count" != "0" ]; then
+            summary_line="$summary_line  $failed_count failed\n"
+          fi
+          if [ "$error_count" != "0" ]; then
+            summary_line="$summary_line  $error_count errors\n"
+          fi
           
           # Add newline to summary data
           summary_data="$summary_data$summary_line\n"
