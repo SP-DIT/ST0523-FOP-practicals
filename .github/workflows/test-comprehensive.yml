@@ -77,18 +77,58 @@ jobs:
         echo ""
         
         # Test each discovered problem set
+        total_tests=0
+        total_passed=0
+        total_failed=0
+        summary_data=""
+        
         for problem_set in $filtered_problem_sets; do
           echo "📋 === TESTING $problem_set ==="
           
-          # Run the test (don't capture output, let it display directly)
-          NODE_ENV=test node run.js $problem_set
+          # Run the test and capture output for analysis
+          output=$(NODE_ENV=test node run.js $problem_set 2>&1)
+          exit_code=$?
+          
+          # Display the output
+          echo "$output"
+          
+          # Count test results
+          passed_count=$(echo "$output" | grep -c "✅ Passed" || echo "0")
+          failed_count=$(echo "$output" | grep -c "❌ Failed" || echo "0")
+          error_count=$(echo "$output" | grep -c "⚠️ Error" || echo "0")
+          
+          # Calculate totals
+          problem_total=$((passed_count + failed_count + error_count))
+          total_tests=$((total_tests + problem_total))
+          total_passed=$((total_passed + passed_count))
+          total_failed=$((total_failed + failed_count + error_count))
+          
+          # Store summary data
+          if [ $failed_count -gt 0 ] || [ $error_count -gt 0 ]; then
+            status="❌"
+          else
+            status="✅"
+          fi
+          summary_data="$summary_data$status $problem_set: $passed_count/$problem_total passed\n"
           
           echo "📊 $problem_set completed"
           echo ""
         done
         
         echo "🎯 === TEST SUITE COMPLETE ==="
-        echo "✅ All problem sets tested successfully!"
+        echo ""
+        echo "📈 === SUMMARY REPORT ==="
+        echo "$summary_data"
+        echo "📊 === OVERALL STATISTICS ==="
+        echo "🎯 Total Tests: $total_tests"
+        echo "✅ Total Passed: $total_passed"
+        echo "❌ Total Failed: $total_failed"
+        
+        if [ $total_failed -eq 0 ]; then
+          echo "🎉 All tests passed successfully!"
+        else
+          echo "⚠️  Some tests failed. Check the logs above for details."
+        fi
       continue-on-error: true
       
     - name: Generate Detailed Report
