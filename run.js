@@ -19,7 +19,10 @@ if (
 
 // Directory of test cases and questions
 const testcasesDir = path.join(__dirname, 'testcases');
-const questionsDir = path.join(__dirname, 'questions');
+let questionsDir = path.join(__dirname, 'questions');
+if (process.env.NODE_ENV === 'test') {
+    questionsDir = path.join(__dirname, 'solution');
+}
 
 // Get all folders in the questions directory
 const folders = fs.readdirSync(questionsDir, { withFileTypes: true }).filter((dirent) => dirent.isDirectory());
