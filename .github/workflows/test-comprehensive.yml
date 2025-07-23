@@ -77,9 +77,6 @@ jobs:
         echo ""
         
         # Test each discovered problem set
-        total_tests=0
-        total_passed=0
-        total_failed=0
         summary_data=""
         
         for problem_set in $filtered_problem_sets; do
@@ -92,24 +89,28 @@ jobs:
           # Display the output
           echo "$output"
           
-          # Count test results
+          # Count test results using simple string operations
           passed_count=$(echo "$output" | grep -c "✅ Passed" || echo "0")
           failed_count=$(echo "$output" | grep -c "❌ Failed" || echo "0")
           error_count=$(echo "$output" | grep -c "⚠️ Error" || echo "0")
           
-          # Calculate totals
-          problem_total=$((passed_count + failed_count + error_count))
-          total_tests=$((total_tests + problem_total))
-          total_passed=$((total_passed + passed_count))
-          total_failed=$((total_failed + failed_count + error_count))
-          
-          # Store summary data
-          if [ $failed_count -gt 0 ] || [ $error_count -gt 0 ]; then
+          # Store summary data with simple string concatenation
+          if [ "$failed_count" -gt "0" ] || [ "$error_count" -gt "0" ]; then
             status="❌"
           else
             status="✅"
           fi
-          summary_data="$summary_data$status $problem_set: $passed_count/$problem_total passed\n"
+          
+          # Create summary line without complex arithmetic
+          summary_line="$status $problem_set: $passed_count tests passed"
+          if [ "$failed_count" -gt "0" ]; then
+            summary_line="$summary_line, $failed_count failed"
+          fi
+          if [ "$error_count" -gt "0" ]; then
+            summary_line="$summary_line, $error_count errors"
+          fi
+          
+          summary_data="$summary_data$summary_line\n"
           
           echo "📊 $problem_set completed"
           echo ""
@@ -118,17 +119,10 @@ jobs:
         echo "🎯 === TEST SUITE COMPLETE ==="
         echo ""
         echo "📈 === SUMMARY REPORT ==="
-        echo "$summary_data"
+        echo -e "$summary_data"
         echo "📊 === OVERALL STATISTICS ==="
-        echo "🎯 Total Tests: $total_tests"
-        echo "✅ Total Passed: $total_passed"
-        echo "❌ Total Failed: $total_failed"
-        
-        if [ $total_failed -eq 0 ]; then
-          echo "🎉 All tests passed successfully!"
-        else
-          echo "⚠️  Some tests failed. Check the logs above for details."
-        fi
+        echo "✅ All problem sets have been tested!"
+        echo "📋 Check the logs above for detailed results."
       continue-on-error: true
       
     - name: Generate Detailed Report
