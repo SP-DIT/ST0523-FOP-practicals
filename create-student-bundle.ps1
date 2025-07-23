@@ -170,9 +170,11 @@ Write-Host "📦 Creating temporary bundle folder..." -ForegroundColor Yellow
 
 # Remove existing temp folder and zip if they exist
 if (Test-Path $TempBundlePath) {
+    Write-Host "🧹 Removing existing temp folder: $BundleName/" -ForegroundColor Yellow
     Remove-Item $TempBundlePath -Recurse -Force
 }
 if (Test-Path $ZipPath) {
+    Write-Host "🧹 Removing existing zip file: $BundleName.zip" -ForegroundColor Yellow
     Remove-Item $ZipPath -Force
 }
 
