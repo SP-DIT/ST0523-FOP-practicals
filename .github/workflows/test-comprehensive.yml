@@ -56,11 +56,12 @@ jobs:
     - name: Test All Problem Sets
       if: github.event.inputs.problem_set == 'all' || github.event.inputs.problem_set == ''
       run: |
-        echo "=== Running Comprehensive Test Suite ==="
-        echo "NODE_ENV=test ensures testing against solution/ directory"
+        echo "🚀 === RUNNING COMPREHENSIVE TEST SUITE ==="
+        echo "📁 NODE_ENV=test ensures testing against solution/ directory"
+        echo ""
         
         # Dynamically discover all problem sets from solution directory
-        echo "Discovering available problem sets..."
+        echo "🔍 Discovering available problem sets..."
         problem_sets=$(find solution/ -maxdepth 1 -type d -name "[0-9]*" | sort | sed 's|solution/||' | while read dir; do
           # Convert directory name to problem set format (e.g., 3Functions -> p3)
           if [[ $dir =~ ^([0-9]+) ]]; then
@@ -68,15 +69,57 @@ jobs:
           fi
         done)
         
-        echo "Found problem sets: $problem_sets"
+        # Filter out p1 and p2 (they're not meant to be tested)
+        filtered_problem_sets=$(echo "$problem_sets" | grep -v "^p[12]$")
+        
+        echo "✅ Found problem sets: $filtered_problem_sets"
+        echo "⏭️  Skipping p1 and p2 (not meant for testing)"
+        echo ""
         
         # Test each discovered problem set
-        for problem_set in $problem_sets; do
-          echo "=== Testing $problem_set ==="
-          NODE_ENV=test node run.js $problem_set || echo "Some tests failed in $problem_set"
+        total_tests=0
+        passed_tests=0
+        failed_problem_sets=""
+        
+        for problem_set in $filtered_problem_sets; do
+          echo "📋 === TESTING $problem_set ==="
+          
+          # Capture the output and count test results
+          output=$(NODE_ENV=test node run.js $problem_set 2>&1)
+          exit_code=$?
+          
+          # Count passed tests (✅ Passed)
+          passed_count=$(echo "$output" | grep -c "✅ Passed" || echo "0")
+          # Count failed tests (❌ Failed)
+          failed_count=$(echo "$output" | grep -c "❌ Failed" || echo "0")
+          # Count error tests (⚠️ Error)
+          error_count=$(echo "$output" | grep -c "⚠️ Error" || echo "0")
+          
+          total_in_problem_set=$((passed_count + failed_count + error_count))
+          total_tests=$((total_tests + total_in_problem_set))
+          passed_tests=$((passed_tests + passed_count))
+          
+          # Display results
+          echo "$output"
+          
+          if [ $exit_code -ne 0 ] || [ $failed_count -gt 0 ] || [ $error_count -gt 0 ]; then
+            failed_problem_sets="$failed_problem_sets $problem_set"
+          fi
+          
+          echo "📊 $problem_set Summary: $passed_count passed, $failed_count failed, $error_count errors"
+          echo ""
         done
         
-        echo "=== Test Suite Complete ==="
+        echo "🎯 === TEST SUITE COMPLETE ==="
+        echo "📈 Total Tests: $total_tests"
+        echo "✅ Passed: $passed_tests"
+        echo "❌ Failed: $((total_tests - passed_tests))"
+        
+        if [ -n "$failed_problem_sets" ]; then
+          echo "⚠️  Problem sets with issues: $failed_problem_sets"
+        else
+          echo "🎉 All tests passed successfully!"
+        fi
       continue-on-error: true
       
     - name: Generate Detailed Report
