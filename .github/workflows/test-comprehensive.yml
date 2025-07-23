@@ -26,15 +26,14 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
         
-    - name: Install dependencies
-      run: npm install
+
       
     - name: Test Specific Problem Set
       if: github.event.inputs.problem_set != 'all'
       run: |
         echo "=== Testing Problem Set: ${{ github.event.inputs.problem_set }} ==="
+        echo "NODE_ENV=test ensures testing against solution/ directory"
         if [ "${{ github.event.inputs.question }}" != "all" ]; then
           echo "Testing specific question: ${{ github.event.inputs.question }}"
           NODE_ENV=test node run.js ${{ github.event.inputs.problem_set }} ${{ github.event.inputs.question }}
@@ -49,6 +48,7 @@ jobs:
       run: |
         echo "=== Running Comprehensive Test Suite ==="
         echo "Testing all problem sets (p3-p9) with all questions"
+        echo "NODE_ENV=test ensures testing against solution/ directory"
         
         for problem_set in p3 p4 p5 p6 p7 p8 p9; do
           echo "=== Testing $problem_set ==="
