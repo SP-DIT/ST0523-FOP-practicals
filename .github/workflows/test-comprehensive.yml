@@ -72,7 +72,10 @@ jobs:
         # Filter out p1 and p2 (they're not meant to be tested)
         filtered_problem_sets=$(echo "$problem_sets" | grep -v "^p[12]$")
         
-        echo "✅ Found problem sets: $filtered_problem_sets"
+        # Convert to single line with spaces
+        problem_sets_line=$(echo "$filtered_problem_sets" | tr '\n' ' ')
+        
+        echo "✅ Found problem sets: $problem_sets_line"
         echo "⏭️  Skipping p1 and p2 (not meant for testing)"
         echo ""
         
