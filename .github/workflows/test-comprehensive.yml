@@ -1,0 +1,81 @@
+name: Comprehensive Test Suite
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      problem_set:
+        description: 'Specific problem set to test (p3-p9)'
+        required: false
+        default: 'all'
+      question:
+        description: 'Specific question to test (q1, q2, etc.)'
+        required: false
+        default: 'all'
+
+jobs:
+  test-comprehensive:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Test Specific Problem Set
+      if: github.event.inputs.problem_set != 'all'
+      run: |
+        echo "=== Testing Problem Set: ${{ github.event.inputs.problem_set }} ==="
+        if [ "${{ github.event.inputs.question }}" != "all" ]; then
+          echo "Testing specific question: ${{ github.event.inputs.question }}"
+          NODE_ENV=test node run.js ${{ github.event.inputs.problem_set }} ${{ github.event.inputs.question }}
+        else
+          echo "Testing all questions in problem set"
+          NODE_ENV=test node run.js ${{ github.event.inputs.problem_set }}
+        fi
+      continue-on-error: true
+      
+    - name: Test All Problem Sets
+      if: github.event.inputs.problem_set == 'all'
+      run: |
+        echo "=== Running Comprehensive Test Suite ==="
+        echo "Testing all problem sets (p3-p9) with all questions"
+        
+        for problem_set in p3 p4 p5 p6 p7 p8 p9; do
+          echo "=== Testing $problem_set ==="
+          NODE_ENV=test node run.js $problem_set || echo "Some tests failed in $problem_set"
+        done
+        
+        echo "=== Test Suite Complete ==="
+      continue-on-error: true
+      
+    - name: Generate Detailed Report
+      if: always()
+      run: |
+        echo "=== Test Execution Summary ==="
+        echo "Workflow completed with the following configuration:"
+        echo "- Problem Set: ${{ github.event.inputs.problem_set || 'all' }}"
+        echo "- Question: ${{ github.event.inputs.question || 'all' }}"
+        echo "- Node Environment: test"
+        echo ""
+        echo "Check the logs above for detailed test results."
+        echo "Each problem set's test results are logged separately."
+        
+    - name: Upload Test Artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-artifacts-${{ github.run_id }}
+        path: |
+          *.log
+          test-results/
+        retention-days: 30 
