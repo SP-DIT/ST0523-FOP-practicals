@@ -84,24 +84,24 @@ jobs:
         for problem_set in $filtered_problem_sets; do
           echo "📋 === TESTING $problem_set ==="
           
-          # Capture the output and count test results
+          # Run the test and capture output in a single command
           output=$(NODE_ENV=test node run.js $problem_set 2>&1)
           exit_code=$?
           
-          # Count passed tests (✅ Passed)
+          # Display the output
+          echo "$output"
+          
+          # Count test results from the captured output
           passed_count=$(echo "$output" | grep -c "✅ Passed" || echo "0")
-          # Count failed tests (❌ Failed)
           failed_count=$(echo "$output" | grep -c "❌ Failed" || echo "0")
-          # Count error tests (⚠️ Error)
           error_count=$(echo "$output" | grep -c "⚠️ Error" || echo "0")
           
+          # Calculate totals (with proper bash arithmetic)
           total_in_problem_set=$((passed_count + failed_count + error_count))
           total_tests=$((total_tests + total_in_problem_set))
           passed_tests=$((passed_tests + passed_count))
           
-          # Display results
-          echo "$output"
-          
+          # Check for issues
           if [ $exit_code -ne 0 ] || [ $failed_count -gt 0 ] || [ $error_count -gt 0 ]; then
             failed_problem_sets="$failed_problem_sets $problem_set"
           fi
@@ -113,7 +113,8 @@ jobs:
         echo "🎯 === TEST SUITE COMPLETE ==="
         echo "📈 Total Tests: $total_tests"
         echo "✅ Passed: $passed_tests"
-        echo "❌ Failed: $((total_tests - passed_tests))"
+        failed_total=$((total_tests - passed_tests))
+        echo "❌ Failed: $failed_total"
         
         if [ -n "$failed_problem_sets" ]; then
           echo "⚠️  Problem sets with issues: $failed_problem_sets"
