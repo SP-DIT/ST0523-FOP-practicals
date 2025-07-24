@@ -29,15 +29,8 @@ jobs:
         
     - name: Setup Test Environment
       run: |
-        echo "Setting up test environment with valid package.json"
-        cat > package.json << 'EOF'
-        {
-          "studentId": "p1234567",
-          "className": "DIT/FT/1A/01"
-        }
-        EOF
-        echo "Test package.json created:"
-        cat package.json
+        echo "Setting up test environment"
+        echo "NODE_ENV=test will skip studentId and className validation"
       
     - name: Test Specific Problem Set
       if: github.event.inputs.problem_set != 'all' && github.event.inputs.problem_set != ''
