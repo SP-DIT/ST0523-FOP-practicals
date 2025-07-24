@@ -1,0 +1,148 @@
+name: Comprehensive Test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      problem_set:
+        description: 'Specific problem set to test (p3-p9)'
+        required: false
+        default: 'all'
+      question:
+        description: 'Specific question to test (q1, q2, etc.)'
+        required: false
+        default: 'all'
+
+jobs:
+  test-comprehensive:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Setup Test Environment
+      run: |
+        echo "Setting up test environment"
+        echo "NODE_ENV=test will skip studentId and className validation"
+      
+    - name: Test Specific Problem Set
+      if: github.event.inputs.problem_set != 'all' && github.event.inputs.problem_set != ''
+      run: |
+        echo "=== Testing Problem Set: ${{ github.event.inputs.problem_set }} ==="
+        echo "NODE_ENV=test ensures testing against solution/ directory"
+        if [ "${{ github.event.inputs.question }}" != "all" ] && [ "${{ github.event.inputs.question }}" != "" ]; then
+          echo "Testing specific question: ${{ github.event.inputs.question }}"
+          NODE_ENV=test node run.js ${{ github.event.inputs.problem_set }} ${{ github.event.inputs.question }}
+        else
+          echo "Testing all questions in problem set"
+          NODE_ENV=test node run.js ${{ github.event.inputs.problem_set }}
+        fi
+      continue-on-error: true
+      
+    - name: Test All Problem Sets
+      if: github.event.inputs.problem_set == 'all' || github.event.inputs.problem_set == ''
+      run: |
+        echo "🚀 === RUNNING COMPREHENSIVE TEST SUITE ==="
+        echo "📁 NODE_ENV=test ensures testing against solution/ directory"
+        echo ""
+        
+        # Dynamically discover all problem sets from solution directory
+        echo "🔍 Discovering available problem sets..."
+        problem_sets=$(find solution/ -maxdepth 1 -type d -name "[0-9]*" | sort | sed 's|solution/||' | while read dir; do
+          # Convert directory name to problem set format (e.g., 3Functions -> p3)
+          if [[ $dir =~ ^([0-9]+) ]]; then
+            echo "p${BASH_REMATCH[1]}"
+          fi
+        done)
+        
+        # Filter out p1 and p2 (they're not meant to be tested)
+        filtered_problem_sets=$(echo "$problem_sets" | grep -v "^p[12]$")
+        
+        # Convert to single line with spaces
+        problem_sets_line=$(echo "$filtered_problem_sets" | tr '\n' ' ')
+        
+        echo "✅ Found problem sets: $problem_sets_line"
+        echo "⏭️  Skipping p1 and p2 (not meant for testing)"
+        echo ""
+        
+        # Test each discovered problem set
+        summary_data=""
+        
+        for problem_set in $filtered_problem_sets; do
+          echo "📋 === TESTING $problem_set ==="
+          
+          # Run the test and capture output for analysis
+          output=$(NODE_ENV=test node run.js $problem_set 2>&1)
+          exit_code=$?
+          
+          # Display the output
+          echo "$output"
+          
+          # Count test results using simple string operations
+          passed_count=$(echo "$output" | grep -c "✅ Passed" || echo "0")
+          failed_count=$(echo "$output" | grep -c "❌ Failed" || echo "0")
+          error_count=$(echo "$output" | grep -c "⚠️ Error" || echo "0")
+          
+          # Store summary data with simple string concatenation
+          if [ "$failed_count" -ne 0 ] || [ "$error_count" -ne 0 ]; then
+            status="❌"
+          else
+            status="✅"
+          fi
+          
+          # Create summary with multi-line format - only show non-zero stats
+          summary_line="$status $problem_set:\n"
+          if [ "$passed_count" -ne 0 ]; then
+            summary_line="$summary_line  $passed_count passed\n"
+          fi
+          if [ "$failed_count" -ne 0 ]; then
+            summary_line="$summary_line  $failed_count failed\n"
+          fi
+          if [ "$error_count" -ne 0 ]; then
+            summary_line="$summary_line  $error_count errors\n"
+          fi
+          
+          # Add newline to summary data
+          summary_data="$summary_data$summary_line\n"
+          
+          echo "📊 $problem_set completed"
+          echo ""
+        done
+        
+        echo "🎯 === TEST SUITE COMPLETE ==="
+        echo ""
+        echo "📈 === SUMMARY REPORT ==="
+        echo -e "$summary_data"
+        echo "📊 === OVERALL STATISTICS ==="
+        echo "✅ All problem sets have been tested!"
+        echo "📋 Check the logs above for detailed results."
+      continue-on-error: true
+      
+    - name: Generate Detailed Report
+      if: always()
+      run: |
+        echo "=== Test Execution Summary ==="
+        echo "Workflow completed with the following configuration:"
+        echo "- Problem Set: ${{ github.event.inputs.problem_set || 'all' }}"
+        echo "- Question: ${{ github.event.inputs.question || 'all' }}"
+        echo "- Node Environment: test"
+        echo ""
+        echo "Check the logs above for detailed test results."
+        echo "Each problem set's test results are logged separately."
+        
+    - name: Upload Test Artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-artifacts-${{ github.run_id }}
+        path: |
+          *.log
+          test-results/
+        retention-days: 30 
