@@ -1,4 +1,5 @@
 /**
+ * [Division using functions]
  * Complete the function divideTwoValue that takes two values and returns the division of the two values.
  * You can be sure that the values will be either numbers or strings that can be converted to numbers.
  *

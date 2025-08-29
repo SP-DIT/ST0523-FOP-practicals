@@ -1,4 +1,5 @@
 /**
+ * [Calling another function to multiply numbers to find area of rectangle]
  * Complete the function areaOfRectangle that takes two values (width and height) and returns the area of the rectangle.
  * You must call a helper function `multiply` inside `areaOfRectangle` to compute the product.
  * You do not need to convert the strings to numbers for this question.

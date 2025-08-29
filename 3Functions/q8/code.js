@@ -1,4 +1,5 @@
 /**
+ * [Multiplication using functions]
  * Complete the function multiplyTwoValue that takes two values and returns the multiplication of the two values.
  * You can be sure that the values will be either numbers or strings that can be converted to numbers.
  *

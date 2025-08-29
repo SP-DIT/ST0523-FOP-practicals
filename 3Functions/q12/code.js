@@ -1,4 +1,5 @@
 /**
+ * [Calling another function to multiply numbers to find area of triangle]
  * Complete the function areaOfTriangle that takes two values (base and height) and returns the area of the triangle.
  * You must call a helper function `multiply` inside `areaOfTriangle` to compute part of the formula.
  * you do not need to convert strings to numbers for this question.

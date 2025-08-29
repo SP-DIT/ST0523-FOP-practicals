@@ -1,4 +1,5 @@
 /**
+ * [Calling another function to add numbers]
  * Complete the function addTwoNumbers that takes two values and returns their sum.
  * You must call a helper function `toNumber` inside `addTwoNumbers` to convert the values before adding them.
  *
