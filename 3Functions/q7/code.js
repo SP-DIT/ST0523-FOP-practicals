@@ -33,6 +33,6 @@ function subTwoValue(a, b) {
 console.log(subTwoValue(2, 1));
 
 // To test your code against the test cases: node run.js p3 q7
-// To test your code against custom input: node ./3Functions/q1/code.js
+// To test your code against custom input: node ./3Functions/q7/code.js
 
 module.exports = subTwoValue;

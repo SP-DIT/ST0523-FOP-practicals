@@ -33,6 +33,6 @@ function divideTwoValue(a, b) {
 console.log(divideTwoValue(6, 2));
 
 // To test your code against the test cases: node run.js p3 q9
-// To test your code against custom input: node ./3Functions/q1/code.js
+// To test your code against custom input: node ./3Functions/q9/code.js
 
 module.exports = divideTwoValue;

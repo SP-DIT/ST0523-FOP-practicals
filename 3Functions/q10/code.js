@@ -36,7 +36,7 @@ function addTwoValue(a, b) {
 // e.g.
 console.log(addTwoValue(2, 3));
 
-// To test your code against the test cases: node run.js p3 q7
-// To test your code against custom input: node ./3Functions/q1/code.js
+// To test your code against the test cases: node run.js p3 q10
+// To test your code against custom input: node ./3Functions/q10/code.js
 
 module.exports = addTwoValue;

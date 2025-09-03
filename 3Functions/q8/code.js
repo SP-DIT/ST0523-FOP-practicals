@@ -33,6 +33,6 @@ function multiplyTwoValue(a, b) {
 console.log(multiplyTwoValue(3, 2));
 
 // To test your code against the test cases: node run.js p3 q8
-// To test your code against custom input: node ./3Functions/q1/code.js
+// To test your code against custom input: node ./3Functions/q8/code.js
 
 module.exports = multiplyTwoValue;

@@ -29,7 +29,7 @@ function areaOfRectangle(width, height) {
 // e.g.
 console.log(areaOfRectangle(4, 5));
 
-// To test your code against the test cases: node run.js p3 q7
-// To test your code against custom input: node ./3Functions/q1/code.js
+// To test your code against the test cases: node run.js p3 q11
+// To test your code against custom input: node ./3Functions/q11/code.js
 
 module.exports = areaOfRectangle;
