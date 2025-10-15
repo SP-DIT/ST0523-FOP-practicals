@@ -6,10 +6,11 @@ const { exit } = require('process');
 
 const { studentId, className } = package;
 if (
-    !studentId ||
-    !className ||
-    !/^(p|P)[0-9]{7}$/.test(studentId) ||
-    !/^(DIT|DAAA|DCDF|DCITP)\/FT\/1A\/(\d{2})$/.test(className)
+    process.env.NODE_ENV !== 'test' &&
+    (!studentId ||
+        !className ||
+        !/^(p|P)[0-9]{7}$/.test(studentId) ||
+        !/^(DIT|DAAA|DCDF|DCITP)\/FT\/1A\/(\d{2})$/.test(className))
 ) {
     console.error(
         `Invalid studentId: ${studentId} or className: ${className}\nDo set your student Id (e.g. p1121782) and ClassName (e.g. DIT/FT/1A/01) in package.json`,
@@ -41,13 +42,13 @@ function readProblemSetInput() {
         process.exit(1);
     }
 
-    const folderName = folderNames[folderIndex.slice(1) - 10];
+    const folderName = folderNames[folderIndex.slice(1) - 1];
     if (!folderName) {
         console.error(`Problem set "${folderIndex}" does not exist.`);
         process.exit(1);
     }
 
-    const invalidProblemSets = ['1Introduction', '2Operators'];
+    invalidProblemSets = [];
     if (invalidProblemSets.includes(folderName)) {
         console.error(`Problem set "${folderName}" can be executed with run.js`);
         process.exit(1);
@@ -97,12 +98,13 @@ function getCodeAndTestCasesPath(folderName, subFolderName) {
     }
 
     // Import code.js and testcases.js
-    const codePath = path.join(folderPath, 'code.js');
+    const codeFile = process.env.NODE_ENV === 'test' ? 'solution.js' : 'code.js';
+    const codePath = path.join(folderPath, codeFile);
     const testCasesPath = path.join(folderPath, 'testcases.js');
 
     // Check if both code and testcases files exist
     if (!fs.existsSync(codePath) || !fs.existsSync(testCasesPath)) {
-        console.error(`Missing code.js or testcases.js in the folder "${subFolderName}".`);
+        console.error(`Missing ${codeFile} or testcases.js in the folder "${subFolderName}".`);
         process.exit(1);
     }
 
@@ -125,6 +127,55 @@ function silentRunCode(runCode) {
         console.log = originalLog;
         return result;
     };
+}
+
+// Function to format test case output for better readability
+function formatTestCaseOutput(input, expected, actual) {
+    const inputStr = util.inspect(input, {
+        depth: 5,
+        maxArrayLength: 100,
+        maxStringLength: 200,
+        breakLength: 60,
+        compact: 5,
+        colors: false,
+        showHidden: false,
+    });
+
+    const expectedStr = util.inspect(expected, {
+        depth: 5,
+        maxArrayLength: 100,
+        maxStringLength: 200,
+        breakLength: 60,
+        compact: false,
+        colors: false,
+        showHidden: false,
+    });
+
+    const actualStr = util.inspect(actual, {
+        depth: 5,
+        maxArrayLength: 100,
+        maxStringLength: 200,
+        breakLength: 60,
+        compact: false,
+        colors: false,
+        showHidden: false,
+    });
+
+    // Always use consistent multi-line formatting
+    const formattedInput = inputStr
+        .split('\n')
+        .map((line) => `\t\t  ${line}`)
+        .join('\n');
+    const formattedExpected = expectedStr
+        .split('\n')
+        .map((line) => `\t\t  ${line}`)
+        .join('\n');
+    const formattedActual = actualStr
+        .split('\n')
+        .map((line) => `\t\t  ${line}`)
+        .join('\n');
+
+    return `\t\tInput:\n${formattedInput}\n\t\tExpected:\n${formattedExpected}\n\t\tGot:\n${formattedActual}`;
 }
 
 function deepEqual(a, b) {
@@ -155,11 +206,11 @@ function compareResults(result, expected, options) {
 // Function to run the test cases
 function runTestCases(runCode, testcases, options) {
     return testcases.map((testCase, testIndex) => {
-        const { input, expected } = testCase;
+        const { input, expected, isPublic } = testCase;
         try {
             const result = runCode(...input);
             const passed = compareResults(result, expected, options);
-            return { testIndex, passed, input, expected, actual: result };
+            return { testIndex, passed, input, expected, isPublic, actual: result };
         } catch (error) {
             return { testIndex, error: error };
         }
@@ -229,28 +280,13 @@ function runQuestions() {
             if (testCase.error) {
                 console.error(`\tTest case ${testCase.testIndex + 1}: Error - ${testCase.error.message}`);
             } else if (testCase.passed) {
-                console.log(`\tTest case ${testCase.testIndex + 1}: Passed`);
+                console.log(`\tTest case ${testCase.testIndex + 1}: \tPassed ✅`);
             } else {
-                console.log(
-                    `\tTest case ${testCase.testIndex + 1}: Failed (Expected: ${JSON.stringify(
-                        testCase.expected,
-                    )}, Got: ${JSON.stringify(testCase.actual)})`,
-                );
-
-                const input = testCase.input.map((value) => {
-                    if (value instanceof Function) return value.toString().replace(/\s/g, '');
-                    return value;
-                });
-
-                let str = util.inspect(input, {
-                    depth: 2,
-                    maxArrayLength: 7,
-                    breakLength: 80,
-                    compact: 5,
-                    showHidden: false,
-                });
-                console.log('\tInputs:\n\t\t' + str.split('\n').join('\n\t\t'));
-                console.log();
+                console.log(`\tTest case ${testCase.testIndex + 1}: \tFailed ❌`);
+                if (testCase.isPublic) {
+                    console.log(formatTestCaseOutput(testCase.input, testCase.expected, testCase.actual));
+                    console.log();
+                }
             }
         });
     });
