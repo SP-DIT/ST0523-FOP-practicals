@@ -1,0 +1,136 @@
+name: Deploy to Student Repository
+
+on:
+    push:
+        branches: [main, master]
+    workflow_dispatch: # Allow manual triggering
+
+env:
+    # Configure the target student repository based on current branch/practical
+    STUDENT_REPO_NAME: auto # Change this for different practicals
+
+jobs:
+    deploy-student-version:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout source repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Generate GitHub App Token
+              id: app-token
+              uses: actions/create-github-app-token@v1
+              with:
+                  app-id: ${{ secrets.APP_ID }}
+                  private-key: ${{ secrets.APP_PRIVATE_KEY }}
+                  owner: SP-DIT
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '18'
+
+            - name: Install dependencies
+              run: |
+                  # Add any dependencies needed for processing
+                  echo "No additional dependencies required"
+
+            - name: Determine target repository
+              id: repo-config
+              run: |
+                  # Auto-detect repository name from branch or use environment variable
+                  BRANCH_NAME=${GITHUB_REF#refs/heads/}
+
+                  # If STUDENT_REPO_NAME is not set, try to derive from branch name
+                  if [ -z "$STUDENT_REPO_NAME" ] || [ "$STUDENT_REPO_NAME" = "auto" ]; then
+                    # Extract practical number from branch name (e.g., practical-1, practical-2)
+                    if [[ $BRANCH_NAME =~ practical-([0-9]+) ]]; then
+                      REPO_NAME="practical-${BASH_REMATCH[1]}"
+                    else
+                      # Fallback: use branch name directly
+                      REPO_NAME="$BRANCH_NAME"
+                    fi
+                  else
+                    REPO_NAME="$STUDENT_REPO_NAME"
+                  fi
+
+                  echo "TARGET_REPO=$REPO_NAME" >> $GITHUB_OUTPUT
+                  echo "Deploying to repository: SP-DIT/$REPO_NAME"
+
+            - name: Process files for student version
+              run: |
+                  # Remove solution files
+                  find . -name "solution.js" -type f -delete
+                  echo "Removed solution.js files"
+
+                  # Remove any other instructor-only files
+                  find . -name "*.instructor.*" -type f -delete
+                  find . -name "instructor-*" -type f -delete
+
+                  # Replace settings.json with student version (disable Copilot)
+                  if [ -f "instructor/student-settings.json" ]; then
+                    cp instructor/student-settings.json .vscode/settings.json
+                    echo "Replaced settings.json with student version (Copilot disabled)"
+                  fi
+
+                  # Clean up instructor files and folders
+                  rm -rf .github/workflows/deploy-to-student-repo.yml || true
+                  rm -rf instructor/ || true
+                  rm -rf instructor-notes/ || true
+                  rm -rf solutions/ || true
+
+                  # Reset test cases to template (optional - if you want to provide simpler test cases)
+                  # You can customize this section based on your needs
+                  find . -name "testcases.js" -type f -exec sed -i 's/isPublic: true/isPublic: false/g' {} \;
+
+                  echo "File processing completed"
+
+            - name: Configure Git credentials
+              run: |
+                  git config --global user.name 'GitHub Actions'
+                  git config --global user.email 'actions@github.com'
+
+            - name: Clone student repository
+              uses: actions/checkout@v4
+              with:
+                  repository: SP-DIT/${{ steps.repo-config.outputs.TARGET_REPO }}
+                  token: ${{ steps.app-token.outputs.token }}
+                  path: student-repo
+
+            - name: Deploy to student repository
+              run: |
+                  cd student-repo
+
+                  # Create or switch to main branch
+                  git checkout main 2>/dev/null || git checkout -b main
+
+                  # Clear existing content
+                  rm -rf * .github .vscode 2>/dev/null || true
+
+                  # Copy processed files from source
+                  cp -r ../. . 2>/dev/null || true
+
+                  # Remove any remaining git files from source
+                  rm -rf .git
+
+                  # Stage all changes
+                  git add .
+
+                  # Check if there are changes to commit
+                  if git diff --staged --quiet; then
+                    echo "No changes to commit"
+                  else
+                    git commit -m "Auto-deploy from instructor repository - $(date)"
+                    git push origin main
+                    echo "Successfully deployed to student repository"
+                  fi
+
+            - name: Summary
+              run: |
+                  TARGET_REPO="${{ steps.repo-config.outputs.TARGET_REPO }}"
+                  echo "✅ Deployment completed successfully!"
+                  echo "📚 Student repository updated: https://github.com/SP-DIT/${TARGET_REPO}"
+                  echo "🔄 Files processed and cleaned for student distribution"

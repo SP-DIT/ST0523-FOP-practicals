@@ -1,5 +1,5 @@
 function makeMessage(name, yearOfBirth, currentYear) {
-    // You can copy your solution from makeMessage.
+    // You can copy your solution from q1.
 }
 
 function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBirth3, currentYear) {}
