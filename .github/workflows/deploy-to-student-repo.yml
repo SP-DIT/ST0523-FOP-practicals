@@ -83,10 +83,6 @@ jobs:
                   rm -rf instructor-notes/ || true
                   rm -rf solutions/ || true
 
-                  # Reset test cases to template (optional - if you want to provide simpler test cases)
-                  # You can customize this section based on your needs
-                  find . -name "testcases.js" -type f -exec sed -i 's/isPublic: true/isPublic: false/g' {} \;
-
                   echo "File processing completed"
 
             - name: Configure Git credentials
@@ -108,14 +104,13 @@ jobs:
                   # Create or switch to main branch
                   git checkout main 2>/dev/null || git checkout -b main
 
-                  # Clear existing content
-                  rm -rf * .github .vscode 2>/dev/null || true
+                  # Clear existing content (but preserve .git)
+                  find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
 
-                  # Copy processed files from source
-                  cp -r ../. . 2>/dev/null || true
-
-                  # Remove any remaining git files from source
-                  rm -rf .git
+                  # Copy processed files from source (excluding .git)
+                  cd ..
+                  find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'student-repo' -exec cp -r {} student-repo/ \;
+                  cd student-repo
 
                   # Stage all changes
                   git add .
