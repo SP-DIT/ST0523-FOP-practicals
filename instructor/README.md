@@ -115,14 +115,53 @@ Using GitHub Apps instead of Personal Access Tokens provides several advantages:
 -   **Shared Access**: Multiple instructors can use the same app without sharing personal tokens
 -   **Automatic Token Refresh**: GitHub Actions handles token lifecycle automatically
 
+## Setting Up Repository Secrets
+
+After creating the GitHub App, you need to add these secrets to your instructor repository:
+
+### 1. APP_ID
+
+-   Go to your repository → Settings → Secrets and variables → Actions
+-   Click "New repository secret"
+-   Name: `APP_ID`
+-   Value: The numeric App ID from your GitHub App (found on the app's settings page)
+
+### 2. APP_PRIVATE_KEY
+
+-   Name: `APP_PRIVATE_KEY`
+-   Value: The complete private key content from the downloaded `.pem` file
+
+**CRITICAL: Private Key Formatting**
+
+```
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEA4f5wg5l2hKsTeNem/V41fGnJm6gOdrj8ym3rFkEjWT2btf31
+nmGWtu2WG2JILAJTqSI4L5SxQGGQA...
+[Rest of the key content]
+...8s+QjSjsYn3m1g2I2z/3d7Q==
+-----END RSA PRIVATE KEY-----
+```
+
+**Important Notes:**
+
+-   Copy the ENTIRE content including the BEGIN/END headers
+-   Preserve all line breaks exactly as they appear
+-   Do not add any extra spaces or formatting
+-   Do not remove any characters or modify the key in any way
+
 ## Troubleshooting
 
 ### GitHub App Issues
 
+-   **"A JSON web token could not be decoded" Error**: This is usually a private key formatting issue
+    -   Ensure the private key includes the full content including `-----BEGIN RSA PRIVATE KEY-----` and `-----END RSA PRIVATE KEY-----` headers
+    -   Copy the entire private key content exactly as downloaded from GitHub (including all line breaks)
+    -   Do not modify or reformat the private key in any way
+    -   In GitHub repository secrets, paste the key exactly as it appears in the downloaded `.pem` file
 -   Ensure the app is installed on the SP-DIT organization
--   Check that the app has access to the target student repositories
--   Verify the App ID and Private Key are correctly set in repository secrets
--   Ensure the private key includes the full content with BEGIN/END markers
+-   Check that the app has access to both the instructor repository and target student repositories
+-   Verify the App ID is correct (it's a numeric ID, not the app name)
+-   Ensure the GitHub App has `Contents: Write` and `Metadata: Read` permissions
 
 ### Workflow Failures
 
