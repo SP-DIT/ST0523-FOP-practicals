@@ -9,13 +9,15 @@ There are two main methods you can use to debug and test your solutions:
 You can modify the example inputs in each code file and run the file individually to see the output. For example:
 
 In `1Introduction/q1/code.js`, you can modify the example at the bottom:
+
 ```js
 // Change the inputs to test different cases
 console.log(makeMessage('Alice', 2000, 2025)); // Test with different values
-console.log(makeMessage('Bob', 1990, 2025));   // Add more test cases
+console.log(makeMessage('Bob', 1990, 2025)); // Add more test cases
 ```
 
 Then run the specific file:
+
 ```bash
 node 1Introduction/q1/code.js
 ```
@@ -34,6 +36,73 @@ node run.js p1 q3
 ```
 
 Where `pX` represents the practical number and `qY` represents the question number. This will run your code against predefined test cases and show you which tests pass or fail, helping you identify issues in your implementation.
+
+#### Understanding Test Output
+
+When you run tests, you'll see different types of test cases:
+
+**Public Test Cases:** These show you the exact input and expected output when they fail, helping you understand what your function should return.
+
+Example of a failing public test case:
+
+```
+Test case 1:    Failed ❌
+        Input:
+          [ 'John', 1994, 2025 ]
+        Expected:
+          'John (31)'
+        Got:
+          'John ( 31)'
+```
+
+This tells you:
+
+-   **Input:** What arguments were passed to your function: `'John'`, `1994`, `2025`
+-   **Expected:** What your function should return: `'John (31)'`
+-   **Got:** What your function actually returned: `'John ( 31)'` (notice the extra space)
+-   **Debugging hint:** Check your string formatting - you have an extra space before the age
+
+For complex outputs (objects, arrays, etc.), the formatting will automatically expand to show the full structure:
+
+```
+Test case 5:    Failed ❌
+        Input:
+          [
+            { name: 'Alice', age: 25 },
+            { name: 'Bob', age: 30 }
+          ]
+        Expected:
+          [
+            { name: 'Alice', age: 25, status: 'young' },
+            { name: 'Bob', age: 30, status: 'adult' }
+          ]
+        Got:
+          [
+            { name: 'Alice', age: 25 },
+            { name: 'Bob', age: 30 }
+          ]
+```
+
+**Private Test Cases:** These only show pass/fail status without revealing the inputs or expected outputs, testing edge cases and ensuring your solution works comprehensively.
+
+Example:
+
+```
+Test case 15:   Failed ❌
+Test case 16:   Passed ✅
+```
+
+**Summary Table:** Shows overall performance across all test cases:
+
+```
+┌─────────┬──────────┬────────┬────────┬────────────────┐
+│ (index) │ question │ passed │ failed │ totalQuestions │
+├─────────┼──────────┼────────┼────────┼────────────────┤
+│ 0       │ 'q1'     │ 18     │ 2      │ 20             │
+└─────────┴──────────┴────────┴────────┴────────────────┘
+```
+
+Use the detailed error messages from public test cases to identify and fix issues, then ensure your solution handles all edge cases tested by private test cases.
 
 ## 1. Make a message
 
