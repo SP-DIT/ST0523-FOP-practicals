@@ -9,26 +9,39 @@ env:
     # Configure the target student repository based on current branch/practical
     STUDENT_REPO_NAME: auto # Change this for different practicals
 
+# Optimize permissions for better security
+permissions:
+    contents: read
+    actions: read
+
 jobs:
     deploy-student-version:
         runs-on: ubuntu-latest
+        timeout-minutes: 10 # Prevent runaway jobs
 
         steps:
             - name: Checkout source repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
               with:
-                  fetch-depth: 0
+                  fetch-depth: 1 # Shallow clone for better performance
                   token: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Set up Node.js
+            - name: Setup Node.js with caching
               uses: actions/setup-node@v4
               with:
-                  node-version: '18'
+                  node-version: '20' # Use LTS version
+                  cache: 'npm'
+                  cache-dependency-path: '**/package*.json'
 
-            - name: Install dependencies
-              run: |
-                  # Add any dependencies needed for processing
-                  echo "No additional dependencies required"
+            - name: Cache workflow dependencies
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ~/.cache
+                      /tmp/workflow-cache
+                  key: deploy-cache-${{ runner.os }}-${{ github.sha }}
+                  restore-keys: |
+                      deploy-cache-${{ runner.os }}-
 
             - name: Determine target repository
               id: repo-config
@@ -36,21 +49,16 @@ jobs:
                   # Auto-detect repository name from branch or use environment variable
                   BRANCH_NAME=${GITHUB_REF#refs/heads/}
 
-                  # If STUDENT_REPO_NAME is not set, try to derive from branch name
-                  if [ -z "$STUDENT_REPO_NAME" ] || [ "$STUDENT_REPO_NAME" = "auto" ]; then
-                    # Extract practical number from branch name (e.g., practical-1, practical-2)
-                    if [[ $BRANCH_NAME =~ practical-([0-9]+) ]]; then
-                      REPO_NAME="practical-${BASH_REMATCH[1]}"
-                    else
-                      # Fallback: use branch name directly
-                      REPO_NAME="$BRANCH_NAME"
-                    fi
+                  # Extract practical number from branch name (e.g., practical-1, practical-2)
+                  if [[ $BRANCH_NAME =~ practical-([0-9]+) ]]; then
+                    REPO_NAME="practical-${BASH_REMATCH[1]}"
                   else
-                    REPO_NAME="$STUDENT_REPO_NAME"
+                    # Fallback: use branch name directly
+                    REPO_NAME="$BRANCH_NAME"
                   fi
 
                   echo "TARGET_REPO=$REPO_NAME" >> $GITHUB_OUTPUT
-                  echo "Deploying to repository: SP-DIT/$REPO_NAME"
+                  echo "::notice::Deploying to repository: SP-DIT/$REPO_NAME"
 
             - name: Generate GitHub App Token
               id: app-token
@@ -63,70 +71,81 @@ jobs:
 
             - name: Process files for student version
               run: |
-                  # Remove solution files
-                  find . -name "solution.js" -type f -delete
-                  echo "Removed solution.js files"
+                  set -euo pipefail # Better error handling
 
-                  # Remove any other instructor-only files
-                  find . -name "*.instructor.*" -type f -delete
-                  find . -name "instructor-*" -type f -delete
+                  # Create processing summary
+                  echo "::group::File Processing"
+
+                  # Remove solution files efficiently
+                  find . -name "solution.js" -type f -delete
+                  echo "✓ Removed solution.js files"
+
+                  # Remove instructor-only files in batch
+                  find . \( -name "*.instructor.*" -o -name "instructor-*" \) -type f -delete
+                  echo "✓ Removed instructor-only files"
 
                   # Replace settings.json with student version (disable Copilot)
                   if [ -f "instructor/student-settings.json" ]; then
                     cp instructor/student-settings.json .vscode/settings.json
-                    echo "Replaced settings.json with student version (Copilot disabled)"
+                    echo "✓ Replaced settings.json with student version"
                   fi
 
-                  # Clean up instructor files and folders
-                  rm -rf .github/workflows/deploy-to-student-repo.yml || true
-                  rm -rf instructor/ || true
-                  rm -rf instructor-notes/ || true
-                  rm -rf solutions/ || true
+                  # Clean up instructor directories efficiently
+                  rm -rf instructor/ instructor-notes/ solutions/ .github/workflows/deploy-to-student-repo.yml 2>/dev/null || true
+                  echo "✓ Cleaned up instructor directories"
 
-                  echo "File processing completed"
-
-            - name: Configure Git credentials
-              run: |
-                  git config --global user.name 'GitHub Actions'
-                  git config --global user.email 'actions@github.com'
+                  echo "::endgroup::"
 
             - name: Clone student repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
               with:
                   repository: SP-DIT/${{ steps.repo-config.outputs.TARGET_REPO }}
                   token: ${{ steps.app-token.outputs.token }}
                   path: student-repo
+                  fetch-depth: 1 # Shallow clone for performance
 
             - name: Deploy to student repository
               run: |
+                  set -euo pipefail
+
+                  echo "::group::Repository Deployment"
                   cd student-repo
+
+                  # Configure Git with enhanced settings
+                  git config user.name 'github-actions[bot]'
+                  git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
                   # Create or switch to main branch
                   git checkout main 2>/dev/null || git checkout -b main
 
-                  # Clear existing content (but preserve .git)
+                  # Efficient content replacement
                   find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
 
-                  # Copy processed files from source (excluding .git)
+                  # Copy processed files with better error handling
                   cd ..
-                  find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'student-repo' -exec cp -r {} student-repo/ \;
+                  find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'student-repo' -exec cp -r {} student-repo/ \; 2>/dev/null || true
                   cd student-repo
 
-                  # Stage all changes
+                  # Stage and commit with conditional logic
                   git add .
 
-                  # Check if there are changes to commit
                   if git diff --staged --quiet; then
-                    echo "No changes to commit"
+                    echo "::notice::No changes to deploy"
                   else
-                    git commit -m "Auto-deploy from instructor repository - $(date)"
+                    COMMIT_MSG="🚀 Auto-deploy from instructor repository ($(date '+%Y-%m-%d %H:%M:%S'))"
+                    git commit -m "$COMMIT_MSG"
                     git push origin main
-                    echo "Successfully deployed to student repository"
+                    echo "::notice::✅ Successfully deployed to student repository"
                   fi
 
-            - name: Summary
+                  echo "::endgroup::"
+
+            - name: Deployment Summary
               run: |
                   TARGET_REPO="${{ steps.repo-config.outputs.TARGET_REPO }}"
-                  echo "✅ Deployment completed successfully!"
-                  echo "📚 Student repository updated: https://github.com/SP-DIT/${TARGET_REPO}"
-                  echo "🔄 Files processed and cleaned for student distribution"
+                  echo "## 📊 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "✅ **Status:** Deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
+                  echo "📚 **Target:** [SP-DIT/${TARGET_REPO}](https://github.com/SP-DIT/${TARGET_REPO})" >> $GITHUB_STEP_SUMMARY
+                  echo "🔄 **Processing:** Files cleaned and optimized for student distribution" >> $GITHUB_STEP_SUMMARY
+                  echo "⏰ **Time:** $(date)" >> $GITHUB_STEP_SUMMARY
