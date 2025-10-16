@@ -107,14 +107,14 @@ jobs:
             - name: Deploy to student repository
               run: |
                   set -euo pipefail
-                  
+
                   echo "::group::Repository Deployment"
                   cd student-repo
 
                   # Configure Git with enhanced settings
                   git config user.name 'github-actions[bot]'
                   git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-                  
+
                   # Create or switch to main branch
                   git checkout main 2>/dev/null || git checkout -b main
 
@@ -138,8 +138,10 @@ jobs:
                     git push --force origin main
                     echo "::notice::✅ Successfully force-pushed to student repository (clean deployment)"
                   fi
-                  
-                  echo "::endgroup::"            - name: Deployment Summary
+
+                    echo "::endgroup::"
+
+            - name: Deployment Summary
               run: |
                   TARGET_REPO="${{ steps.repo-config.outputs.TARGET_REPO }}"
                   echo "## 📊 Deployment Summary" >> $GITHUB_STEP_SUMMARY
