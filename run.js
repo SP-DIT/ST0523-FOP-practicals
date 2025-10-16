@@ -302,14 +302,22 @@ function runQuestions() {
         });
     });
 
-    console.table(
-        allResults.map(({ question, results }) => {
-            const totalQuestions = results.length;
-            const failed = results.filter((testCase) => !testCase.passed).flat().length;
-            const passed = totalQuestions - failed;
-            return { question, passed, failed, totalQuestions };
-        }),
-    );
+    const summary = allResults.map(({ question, results }) => {
+        const totalQuestions = results.length;
+        const failed = results.filter((testCase) => !testCase.passed).flat().length;
+        const passed = totalQuestions - failed;
+        return { question, passed, failed, totalQuestions };
+    });
+
+    console.table(summary);
+
+    // Calculate overall score and exit code
+    const totalTests = summary.reduce((acc, cur) => acc + cur.totalQuestions, 0);
+    const totalPassed = summary.reduce((acc, cur) => acc + cur.passed, 0);
+    const allPassed = totalPassed === totalTests;
+
+    return { totalTests, totalPassed, allPassed };
 }
 
-runQuestions();
+const result = runQuestions();
+process.exit(result.allPassed ? 0 : 1);
