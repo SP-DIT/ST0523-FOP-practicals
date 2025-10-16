@@ -1,8 +1,8 @@
 function makeMessage(name, yearOfBirth, currentYear) {
     // Calculate the age by subtracting birth year from current year
     const age = currentYear - yearOfBirth;
-    // Return the formatted message
-    return `${name} (${age})`;
+    // Return the formatted message using string concatenation
+    return name + ' (' + age + ')';
 }
 
 function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBirth3, currentYear) {
@@ -11,11 +11,9 @@ function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBi
     const message2 = makeMessage(name2, yearOfBirth2, currentYear);
     const message3 = makeMessage(name3, yearOfBirth3, currentYear);
     
-    // Combine all three messages with commas and spaces
-    return `${message1}, ${message2}, ${message3}`;
-}
-
-module.exports = make3Messages;
+    // Combine all three messages with commas and spaces using string concatenation
+    return message1 + ', ' + message2 + ', ' + message3;
+}module.exports = make3Messages;
 
 // examples - these should work when the solution is implemented
 
