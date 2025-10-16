@@ -107,14 +107,14 @@ jobs:
             - name: Deploy to student repository
               run: |
                   set -euo pipefail
-
+                  
                   echo "::group::Repository Deployment"
                   cd student-repo
 
                   # Configure Git with enhanced settings
                   git config user.name 'github-actions[bot]'
                   git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-
+                  
                   # Create or switch to main branch
                   git checkout main 2>/dev/null || git checkout -b main
 
@@ -134,18 +134,18 @@ jobs:
                   else
                     COMMIT_MSG="🚀 Auto-deploy from instructor repository ($(date '+%Y-%m-%d %H:%M:%S'))"
                     git commit -m "$COMMIT_MSG"
-                    git push origin main
-                    echo "::notice::✅ Successfully deployed to student repository"
+                    # Force push to overwrite student repository completely
+                    git push --force origin main
+                    echo "::notice::✅ Successfully force-pushed to student repository (clean deployment)"
                   fi
-
-                  echo "::endgroup::"
-
-            - name: Deployment Summary
+                  
+                  echo "::endgroup::"            - name: Deployment Summary
               run: |
                   TARGET_REPO="${{ steps.repo-config.outputs.TARGET_REPO }}"
                   echo "## 📊 Deployment Summary" >> $GITHUB_STEP_SUMMARY
                   echo "" >> $GITHUB_STEP_SUMMARY
-                  echo "✅ **Status:** Deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
+                  echo "✅ **Status:** Clean deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
                   echo "📚 **Target:** [SP-DIT/${TARGET_REPO}](https://github.com/SP-DIT/${TARGET_REPO})" >> $GITHUB_STEP_SUMMARY
-                  echo "🔄 **Processing:** Files cleaned and optimized for student distribution" >> $GITHUB_STEP_SUMMARY
+                  echo "🔄 **Strategy:** Force push for clean student repository (no history preservation)" >> $GITHUB_STEP_SUMMARY
+                  echo "🧹 **Processing:** Files cleaned and optimized for student distribution" >> $GITHUB_STEP_SUMMARY
                   echo "⏰ **Time:** $(date)" >> $GITHUB_STEP_SUMMARY
