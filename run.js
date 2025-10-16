@@ -206,11 +206,11 @@ function compareResults(result, expected, options) {
 // Function to run the test cases
 function runTestCases(runCode, testcases, options) {
     return testcases.map((testCase, testIndex) => {
-        const { input, expected, isPublic } = testCase;
+        const { input, expected, isPublic, description } = testCase;
         try {
             const result = runCode(...input);
             const passed = compareResults(result, expected, options);
-            return { testIndex, passed, input, expected, isPublic, actual: result };
+            return { testIndex, passed, input, expected, isPublic, description, actual: result };
         } catch (error) {
             return { testIndex, error: error };
         }
@@ -278,11 +278,20 @@ function runQuestions() {
         console.log(`${problemSet}/${question}`);
         results.forEach((testCase) => {
             if (testCase.error) {
-                console.error(`\tTest case ${testCase.testIndex + 1}: Error - ${testCase.error.message}`);
+                console.error(
+                    `\tTest case ${testCase.testIndex + 1}: Error - ${testCase.error.message}` +
+                        (testCase.description ? ` (${testCase.description})` : ''),
+                );
             } else if (testCase.passed) {
-                console.log(`\tTest case ${testCase.testIndex + 1}: \tPassed ✅`);
+                console.log(
+                    `\tTest case ${testCase.testIndex + 1}: \tPassed ✅` +
+                        (testCase.description ? ` (${testCase.description})` : ''),
+                );
             } else {
-                console.log(`\tTest case ${testCase.testIndex + 1}: \tFailed ❌`);
+                console.log(
+                    `\tTest case ${testCase.testIndex + 1}: \tFailed ❌` +
+                        (testCase.description ? ` (${testCase.description})` : ''),
+                );
                 if (testCase.isPublic) {
                     console.log(formatTestCaseOutput(testCase.input, testCase.expected, testCase.actual));
                     console.log();
