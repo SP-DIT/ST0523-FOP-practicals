@@ -107,7 +107,7 @@ jobs:
             - name: Deploy to student repository
               run: |
                   set -euo pipefail
-                  
+
                   echo "::group::Repository Deployment with Commit Squashing"
                   cd student-repo
 
@@ -134,16 +134,16 @@ jobs:
                   else
                     # Create a single squashed commit with clean message
                     git commit -m "🎓 Practical content deployment - SP-DIT/ST0523-FOP-practicals (practical-1) - $(date '+%Y-%m-%d %H:%M:%S UTC') - Clean deployment with squashed commits"
-                    
+
                     # Delete the old main branch and rename temp-main to main
                     git branch -D main 2>/dev/null || true
                     git branch -m temp-main main
-                    
+
                     # Force push the new clean history
                     git push --force origin main
                     echo "::notice::✅ Successfully deployed with squashed commits (clean history)"
                   fi
-                  
+
                   echo "::endgroup::"
 
             - name: Deployment Summary
