@@ -102,6 +102,8 @@ function getCodeAndTestCasesPath(folderName, subFolderName) {
     const codePath = path.join(folderPath, codeFile);
     const testCasesPath = path.join(folderPath, 'testcases.js');
 
+    console.log(`Testing ${subFolderName}/${codeFile} against ${subFolderName}/testcases.js\n`);
+
     // Check if both code and testcases files exist
     if (!fs.existsSync(codePath) || !fs.existsSync(testCasesPath)) {
         console.error(`Missing ${codeFile} or testcases.js in the folder "${subFolderName}".`);
