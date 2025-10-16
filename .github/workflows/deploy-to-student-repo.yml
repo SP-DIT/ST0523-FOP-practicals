@@ -107,47 +107,53 @@ jobs:
             - name: Deploy to student repository
               run: |
                   set -euo pipefail
-
-                  echo "::group::Repository Deployment"
+                  
+                  echo "::group::Repository Deployment with Commit Squashing"
                   cd student-repo
 
                   # Configure Git with enhanced settings
                   git config user.name 'github-actions[bot]'
                   git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-                  # Create or switch to main branch
-                  git checkout main 2>/dev/null || git checkout -b main
+                  # Create a fresh orphan branch (no history)
+                  git checkout --orphan temp-main
 
-                  # Efficient content replacement
-                  find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+                  # Remove any existing content
+                  git rm -rf . 2>/dev/null || true
 
                   # Copy processed files with better error handling
                   cd ..
                   find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'student-repo' -exec cp -r {} student-repo/ \; 2>/dev/null || true
                   cd student-repo
 
-                  # Stage and commit with conditional logic
+                  # Stage all new content
                   git add .
 
                   if git diff --staged --quiet; then
                     echo "::notice::No changes to deploy"
                   else
-                    COMMIT_MSG="🚀 Auto-deploy from instructor repository ($(date '+%Y-%m-%d %H:%M:%S'))"
-                    git commit -m "$COMMIT_MSG"
-                    # Force push to overwrite student repository completely
+                    # Create a single squashed commit with clean message
+                    git commit -m "🎓 Practical content deployment - SP-DIT/ST0523-FOP-practicals (practical-1) - $(date '+%Y-%m-%d %H:%M:%S UTC') - Clean deployment with squashed commits"
+                    
+                    # Delete the old main branch and rename temp-main to main
+                    git branch -D main 2>/dev/null || true
+                    git branch -m temp-main main
+                    
+                    # Force push the new clean history
                     git push --force origin main
-                    echo "::notice::✅ Successfully force-pushed to student repository (clean deployment)"
+                    echo "::notice::✅ Successfully deployed with squashed commits (clean history)"
                   fi
-
-                    echo "::endgroup::"
+                  
+                  echo "::endgroup::"
 
             - name: Deployment Summary
               run: |
                   TARGET_REPO="${{ steps.repo-config.outputs.TARGET_REPO }}"
                   echo "## 📊 Deployment Summary" >> $GITHUB_STEP_SUMMARY
                   echo "" >> $GITHUB_STEP_SUMMARY
-                  echo "✅ **Status:** Clean deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
+                  echo "✅ **Status:** Clean deployment with squashed commits completed!" >> $GITHUB_STEP_SUMMARY
                   echo "📚 **Target:** [SP-DIT/${TARGET_REPO}](https://github.com/SP-DIT/${TARGET_REPO})" >> $GITHUB_STEP_SUMMARY
-                  echo "🔄 **Strategy:** Force push for clean student repository (no history preservation)" >> $GITHUB_STEP_SUMMARY
+                  echo "🔄 **Strategy:** Squashed all commits into single clean commit" >> $GITHUB_STEP_SUMMARY
                   echo "🧹 **Processing:** Files cleaned and optimized for student distribution" >> $GITHUB_STEP_SUMMARY
+                  echo "📜 **History:** No instructor development history preserved" >> $GITHUB_STEP_SUMMARY
                   echo "⏰ **Time:** $(date)" >> $GITHUB_STEP_SUMMARY
