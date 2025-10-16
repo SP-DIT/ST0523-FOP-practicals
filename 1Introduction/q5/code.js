@@ -1,6 +1,6 @@
 function wrapper(a, b, c, message) {}
 
-module.exports = aSquareMinusBSquare;
+module.exports = wrapper;
 
 // examples
 
