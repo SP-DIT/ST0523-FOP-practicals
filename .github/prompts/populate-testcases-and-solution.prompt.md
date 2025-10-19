@@ -8,8 +8,8 @@ Define the task to achieve, including specific requirements, constraints, and su
 
 1. For the given problem, problem ${input:problem}, read the problem statement from the README.md from the root directory.
     1. You can search for "## ${input:problem}" in the README.md to find the relevant section.
-2. Populate the testcase.js file with 20 testcases of different edge cases
-3. Generate a solution.js file that solves the problem.
+2. Populate the `testcase.js` file with 20 testcases of different normal and edge cases
+3. Generate a `solution.js` file that solves the problem.
 4. Stage and commit the changes.
 
 # Constraints
@@ -22,7 +22,8 @@ Define the task to achieve, including specific requirements, constraints, and su
             isPublic: true, // true for the first 3
         },
     ```
-2. The available syntax is to be read from `./instructor/syntax-list.md`
+2. The first three testcases will be public.
+3. The available syntax is to be read from `./instructor/syntax-list.md`
 
 # Success criteria
 
