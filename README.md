@@ -1,4 +1,4 @@
-# Practical 1
+# Practical 2
 
 ## Debugging Your Code
 
@@ -8,18 +8,18 @@ There are two main methods you can use to debug and test your solutions:
 
 You can modify the example inputs in each code file and run the file individually to see the output. For example:
 
-In `1Introduction/q1/code.js`, you can modify the example at the bottom:
+In `2Selection/q1/code.js`, you can modify the example at the bottom:
 
 ```js
 // Change the inputs to test different cases
-console.log(makeMessage('Alice', 2000, 2025)); // Test with different values
-console.log(makeMessage('Bob', 1990, 2025)); // Add more test cases
+console.log(isEven(8)); // Test with different values
+console.log(isEven(7)); // Add more test cases
 ```
 
 Then run the specific file:
 
 ```bash
-node 1Introduction/q1/code.js
+node 2Selection/q1/code.js
 ```
 
 ### Method 2: Automated Testing with Test Cases
@@ -27,12 +27,12 @@ node 1Introduction/q1/code.js
 Use the `run.js` file in the root directory to test your solutions against the provided test cases:
 
 ```bash
-# Test a specific question (e.g., Practical 1, Question 1)
-node run.js p1 q1
+# Test a specific question (e.g., Practical 2, Question 1)
+node run.js p2 q1
 
 # Test other questions by changing the parameters
-node run.js p1 q2
-node run.js p1 q3
+node run.js p2 q2
+node run.js p2 q3
 ```
 
 Where `pX` represents the practical number and `qY` represents the question number. This will run your code against predefined test cases and show you which tests pass or fail, helping you identify issues in your implementation.
@@ -48,19 +48,19 @@ Example of a failing public test case:
 ```
 Test case 1:    Failed ❌
         Input:
-          [ 'John', 1994, 2025 ]
+          [ 2 ]
         Expected:
-          'John (31)'
+          true
         Got:
-          'John ( 31)'
+          false
 ```
 
 This tells you:
 
--   **Input:** What arguments were passed to your function: `'John'`, `1994`, `2025`
--   **Expected:** What your function should return: `'John (31)'`
--   **Got:** What your function actually returned: `'John ( 31)'` (notice the extra space)
--   **Debugging hint:** Check your string formatting - you have an extra space before the age
+-   **Input:** What arguments were passed to your function: `2`
+-   **Expected:** What your function should return: `true`
+-   **Got:** What your function actually returned: `false`
+-   **Debugging hint:** Check your even number logic - 2 should be even
 
 For complex outputs (objects, arrays, etc.), the formatting will automatically expand to show the full structure:
 
@@ -98,117 +98,160 @@ Test case 16:   Passed ✅
 ┌─────────┬──────────┬────────┬────────┬────────────────┐
 │ (index) │ question │ passed │ failed │ totalQuestions │
 ├─────────┼──────────┼────────┼────────┼────────────────┤
-│ 0       │ 'q1'     │ 18     │ 2      │ 20             │
+│ 0       │ 'q2'     │ 18     │ 2      │ 20             │
 └─────────┴──────────┴────────┴────────┴────────────────┘
 ```
 
 Use the detailed error messages from public test cases to identify and fix issues, then ensure your solution handles all edge cases tested by private test cases.
 
-## 1. Make a message
+## 1. Is Even?
 
-Given the name, year of birth, and current year, return a message indicating the person's name and age.
+Apart from the usual `+`, `-`, `*`, `/` operators, there is also the modulo (`%`) operator that calculates the `remainder`.
 
-```js
-function makeMessage(name, yearOfBirth, currentYear) {}
-
-console.log(makeMessage('John', 1994, 2025)); // "John (31)"
-```
-
-## 2. Make 3 messages
-
-Given the name and the year of birth of 3 different person, along with the current year, return a message listing the name and age of the 3 person, each separated by a comma.
-
-> Hint: You should reuse your code from the previous question
+Example:
 
 ```js
-function makeMessage(name, yearOfBirth, currentYear) {}
-
-function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBirth3, currentYear) {}
-
-console.log(make3Messages('John', 1994, 'Mary', 1999, 'Tom', 1986, 2025)); // "John (31), Mary (26), Tom (39)"
+10 % 4 = 2
 ```
 
-## 3. Calculate $a^2 - b^2$
+Because 10 when divided by 4, has a remainder of 2.
 
-> Hint: $a \times a = a^2$
+Implement the function `isEven(x)` that returns `true` if a number is even, and `false` otherwise.
+
+> Hint: a number is even if the remainder when divided by 2 is 0.
 
 ```js
-function aSquareMinusBSquare(a, b) {}
+function isEven(x) {}
 
-console.log(aSquareMinusBSquare(10, 1)); // 99
+console.log(isEven(2)); // true
+console.log(isEven(3)); // false
+console.log(isEven(4)); // true
+console.log(isEven(5)); // false
 ```
 
-## 4. Calculate $(a^2 - b^2)^2 - (c^2 - d^2)^2$
+## 2. isDivisibleBy(x, y)
 
-> Hint: Reuse `aSquareMinusBSquare`
+Let's generalize it further.
+
+Implement the function `isDivisibleBy(x, y)` that returns `true` if `x` is divisible by `y`.
+
+`x` is considered divisible by `y` if `x % y = 0`.
 
 ```js
-function aSquareMinusBSquare(a, b) {}
+function isDivisibleBy(x, y) {}
 
-function multipleSquareMinusSquare(a, b, c, d) {}
-
-console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
+console.log(isDivisibleBy(5, 3)); // false, 5 divided by 3 has remainder of 2
+console.log(isDivisibleBy(10, 3)); // false, 10 divided by 3 has remainder of 1
+console.log(isDivisibleBy(10, 4)); // false, 10 divided by 4 has remainder of 2
+console.log(isDivisibleBy(13, 5)); // false, 13 divided by 5 has remainder of 3
+console.log(isDivisibleBy(15, 5)); // true, 15 divided by 5 has remainder of 0
+console.log(isDivisibleBy(21, 7)); // true, 21 divided by 7 has remainder of 0
 ```
 
-## 5. Multiple wrapper
+## 3. fizzbuzz
 
-Implement a function `wrapper(a, b, c, message)` that returns a string which wraps the message in a specific pattern of characters.
+Implement the function `fizzbuzz(x)` that returns a value based on the following rule:
 
-`a`, `b`, and `c` are single-character strings used as wrapping characters.
+1. `fizz` - if the number is divisible by 3
+2. `buzz` - if the number is divisible by 5
+3. `fizzbuzz` - if the number is divisible by both 3 and 5.
+4. The original value - if the number is NOT divisible by both 3 or 5
 
-The output string should be constructed as follows:
-
-1. The string starts with three repetitions of character `a`.
-2. This is followed by two repetitions of character `b`.
-3. Then a single instance of character `c`.
-4. Next comes the original `message` string.
-5. After the message, repeat character `c` once again.
-6. Then repeat character `b` twice.
-7. Finally, end the string with three repetitions of character `a`.
-
-Example 1:
+> Hint: You should reuse your `isDivisibleBy` function from the previous question to check if a number is divisible by 3 or 5.
 
 ```js
-wrapper('#', '%', '*', 'message');
+function isDivisibleBy(x, y) {}
+
+function fizzbuzz(x) {}
+
+console.log(fizzbuzz(3)); // "fizz"
+console.log(fizzbuzz(5)); // "buzz"
+console.log(fizzbuzz(15)); // "fizzbuzz"
+console.log(fizzbuzz(16)); // 16
+console.log(fizzbuzz(9)); // "fizz"
+console.log(fizzbuzz(10)); // "buzz"
+console.log(fizzbuzz(30)); // "fizzbuzz"
 ```
 
-Output 1:
+## 4. ChickenBanana(a, b, c)
+
+Given 3 strings `a`, `b`, and `c`.
+
+1. If all of the string is "chicken", returns "CHICKEN!"
+2. If all of the string is "banana", returns "BANANA!"
+3. If none of the string is either "chicken" or "banana", returns "none"
+4. Otherwise, if the strings contain a mix of "chicken" and/or "banana" along with other values, return the one ("chicken" or "banana") that appears first among the inputs a, b, and c in order.
 
 ```js
-###%%*message*%%###
+function chickenBanana(a, b, c) {}
+
+console.log(chickenBanana('chicken', 'chicken', 'chicken')); // "CHICKEN!"
+console.log(chickenBanana('banana', 'banana', 'banana')); // "BANANA!"
+console.log(chickenBanana('chicken', 'banana', 'apple')); // "chicken"
+console.log(chickenBanana('apple', 'chicken', 'banana')); // "chicken"
+console.log(chickenBanana('apple', 'banana', 'chicken')); // "banana"
+console.log(chickenBanana('banana', 'apple', 'chicken')); // "banana"
+console.log(chickenBanana('apple', 'orange', 'pear')); // "none"
 ```
 
-Example 2:
+## 5. Bigger number
+
+Implement the function `bigger(a, b)` that returns the bigger number.
 
 ```js
-wrapper('@', 'B', '(', 'message');
+function bigger(a, b) {}
+
+console.log(bigger(1, 2)); // 2
+console.log(bigger(3, 2)); // 3
+console.log(bigger(4, 4)); // 4
 ```
 
-Output 2:
+## 6. Biggest number
 
-```
-@@@BB(message(BB@@@
-```
-
-Code
+Implement the function `biggest(a, b, c, d)` that returns the biggest number.
 
 ```js
-function wrapper(a, b, c, message) {}
+function biggest(a, b, c, d) {}
 
-console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"
+console.log(biggest(1, 2, 3, 4)); // 4
+console.log(biggest(3, 2, 5, 1)); // 5
+console.log(biggest(9, 9, 9, 9)); // 9
 ```
 
-## 6. Challenge
+## 7. Challenge
 
-Same question as 5, but using as little `+` operator in the entire program as possible.
+Write the `biggest(a, b, c, d)` function by reusing the `bigger(a, b)` function you created earlier.
 
-You can use as many variables and functions as you want, and you cannot use anything else not taught in the module so far.
+You can keep the if-statement in `bigger(a, b)`, but do not use any if-statements in your solution of `biggest(a, b, c, d)`.
 
-i.e. Apart from creating variables and functions, you can't use things like:
+**Important:** You can only use syntax elements covered in this course (refer to syntax-list.md). You cannot use any advanced JavaScript features or methods not taught in the module.
 
-1. for-loop
-2. template literals (e.g. `${a}${a}${a}`)
-3. String methods (e.g. `'a'.repeat(3)`)
-4. Or any other mechanisms not taught in the module.
+**Examples of syntax/approaches that are NOT allowed:**
 
-> Hint: It is possible to achieve this with just 1 `+` operator. You can use new functions and variables to recreate the above behaviors.
+-   Array methods (e.g., `Math.max()`, `arr.sort()`, `arr.reduce()`)
+-   Spread operator (e.g., `Math.max(...array)`)
+-   Template literals (e.g., `` `${variable}` ``)
+-   Arrow functions (e.g., `(a, b) => a > b ? a : b`)
+-   Ternary operator (e.g., `a > b ? a : b`)
+-   Built-in global functions beyond basic operators
+
+**You CAN use:**
+
+-   Basic arithmetic operators (`+`, `-`, `*`, `/`, `%`)
+-   Comparison operators (`>`, `<`, `>=`, `<=`, `===`, `!==`)
+-   Boolean logical operators (`&&`, `||`, `!`)
+-   Variables (`let`, `const`)
+-   Functions (declaration and calls)
+-   if-else statements (only in the `bigger` function)
+
+```js
+function bigger(a, b) {}
+
+function biggest(a, b, c, d) {
+    // do not use if-statements here
+}
+
+console.log(biggest(1, 2, 3, 4)); // 4
+console.log(biggest(3, 2, 5, 1)); // 5
+console.log(biggest(9, 9, 9, 9)); // 9
+```
