@@ -988,7 +988,6 @@ arr[999] = 9;
 console.log(arr.length); // 1000
 ```
 
-<<<<<<< HEAD
 ### 7.5 Standard for-loop to iterate through the whole array
 
 #### 7.5.1 Front-to-back
@@ -1120,8 +1119,6 @@ function oddOnly(arr) {
 }
 ```
 
-=======
->>>>>>> 9bd7102 (Reorganize questions: Remove q7 and move ChickenBanana to be last question)
 ## 8. Wishful Thinking
 
 > Functions allow us to solve a problem by thinking about the solution at a higher level. We no longer concern with the implementation details.
@@ -1345,4 +1342,4 @@ Use wishful thinking when:
 -   You want to focus on the overall algorithm before implementation details
 -   You're working with a team and need to divide responsibilities
 
-**Remember**: Start with the big picture, then fill in the details. Don't get stuck on implementation details too early in the problem-solving process!
+# **Remember**: Start with the big picture, then fill in the details. Don't get stuck on implementation details too early in the problem-solving process!
