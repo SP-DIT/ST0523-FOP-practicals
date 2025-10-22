@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/default.min.css"
+        />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markdown-it-texmath/css/texmath.min.css" />
+        <link
+            rel="stylesheet"
+            href="file:///c:\Users\s43500\.vscode\extensions\goessner.mdmath-2.7.4\themes\default\style.css"
+        />
+        <style>
+            img {
+                max-width: 800px !important;
+            }
+        </style>
+    </head>
+    <body class="markdown-body">
+        <h1 dir="auto" id="setting-up">Setting Up</h1>
+        <h2 dir="auto" id="0-overview">0. Overview</h2>
+        <ol dir="auto">
+            <li dir="auto">Download Git</li>
+            <li dir="auto">Setup GitHub account</li>
+            <li dir="auto">Accepting GitHub Assignment</li>
+            <li dir="auto">Clone to your computer</li>
+            <li dir="auto">Saving and uploading changes</li>
+        </ol>
+        <h2 dir="auto" id="1-download-git">1. Download Git</h2>
+        <blockquote dir="auto">
+            <p dir="auto">
+                <strong>Skippable</strong> Before you start, check whether you have <code>git</code> already installed
+                using your terminal
+            </p>
+            <pre><code dir="auto">git --version
+</code></pre>
+            <p dir="auto">
+                If you see a version number (e.g. <code>git version 2.47.1.windows.1</code>) then you already have git
+                and can skip this step
+            </p>
+            <p dir="auto">
+                Otherwise, if you see an error that <code>git</code> is not a command (e.g.
+                <code>'git' is not recognized as an internal or external command</code>), then you need to follow the
+                instructions
+            </p>
+        </blockquote>
+        <h3 dir="auto" id="11-installing-git">1.1 Installing Git</h3>
+        <ol dir="auto">
+            <li dir="auto">
+                Go to git's download page: <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a>
+            </li>
+            <li dir="auto">Download the installer and install git into your computer.</li>
+            <li dir="auto">Go ahead and select all the default options.</li>
+            <li dir="auto">You can omit the installation of any additional software.</li>
+        </ol>
+        <p dir="auto">
+            Once you have downloaded Git, use your a new terminal/command prompt to double check the installation
+        </p>
+        <pre><code dir="auto">git --version
+</code></pre>
+        <h3 dir="auto" id="12-configuring-git">1.2 Configuring Git</h3>
+        <p dir="auto">You should now see a version number (e.g. <code>git version 2.47.1.windows.1</code>)</p>
+        <p dir="auto">Thereafter, set up the following information using the terminal/command prompt.</p>
+        <p dir="auto"><strong>Your name</strong></p>
+        <pre><code dir="auto">git config --global user.name &quot;YOUR NAME&quot;
+</code></pre>
+        <p dir="auto">and</p>
+        <p dir="auto"><strong>Email</strong></p>
+        <blockquote dir="auto">
+            <p dir="auto">You can use your ichat email address</p>
+        </blockquote>
+        <pre><code dir="auto">git config --global user.email &quot;YOUR_EMAIL&quot;
+</code></pre>
+        <h2 dir="auto" id="2-setting-up-github-account">2. Setting up GitHub account</h2>
+        <blockquote dir="auto">
+            <p dir="auto">If you previously already have a GitHub account, you can also skip this step.</p>
+        </blockquote>
+        <ol dir="auto">
+            <li dir="auto">
+                Go to: <a href="http://github.com/signup">http://github.com/signup</a> and sign up for an account.
+            </li>
+            <li dir="auto">You can use your ichat email address.</li>
+            <li dir="auto">You can choose any username.</li>
+        </ol>
+        <h2 dir="auto" id="3-accepting-github-assignment">3. Accepting GitHub Assignment</h2>
+        <p dir="auto">
+            You should receive a Github Assignment link by your tutor. Click on the link to accept the assignment.
+        </p>
+        <p dir="auto">Once you clicked on the link you will need to do the following:</p>
+        <ol dir="auto">
+            <li dir="auto">
+                (first time only) Select your name
+                <ol dir="auto">
+                    <li dir="auto">If you do not see your name, go ahead and skip the step and inform your tutor.</li>
+                </ol>
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/join-classroom-select-name.png"
+                            alt=""
+                            data-src="./images/setup-guide/join-classroom-select-name.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Accept the assignment and wait for it to generate
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/join-classroom-accept-assignment.png"
+                            alt=""
+                            data-src="./images/setup-guide/join-classroom-accept-assignment.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Click on the assignment link, it should be a link that contains the name of the practical and your
+                username (e.g. <code>www.github.com/practical-1-john-doe</code>)
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/join-classroom-accepted.png"
+                            alt=""
+                            data-src="./images/setup-guide/join-classroom-accepted.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Click on the generated link and you should see the files on GitHub.
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/repository.png"
+                            alt=""
+                            data-src="./images/setup-guide/repository.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <h2 dir="auto" id="4-clone-to-your-computer">4. Clone to your computer</h2>
+        <p dir="auto">
+            We will not be editing the files on GitHub directly, but instead, you will <em>clone</em> to your computer
+            and make your changes on your computer using VS Code.
+        </p>
+        <blockquote dir="auto">
+            <p dir="auto">
+                <em>Clone</em> and <em>Download as zip</em> is 2 different things, do not <em>Download as zip</em>.
+            </p>
+            <p dir="auto">
+                Tldr: <em>Clone</em> makes a copy while tracking history, whereas <em>Download as zip</em> does not
+                track history.
+            </p>
+        </blockquote>
+        <ol dir="auto">
+            <li dir="auto">Open up your VSCode</li>
+            <li dir="auto">
+                Use <code>CTRL + SHIFT + P</code> to open the command palette (You should see a <code>&gt;</code> at the
+                start of the textbox)
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/command-palette.png"
+                            alt=""
+                            data-src="./images/setup-guide/command-palette.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Enter <code>git:clone</code> and select the corresponding option.
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/git-clone.png"
+                            alt=""
+                            data-src="./images/setup-guide/git-clone.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Copy and paste your code's url (e.g. <code>www.github.com/practical-1-john-doe</code>)
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/repository-url.png"
+                            alt=""
+                            data-src="./images/setup-guide/repository-url.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Select <code>Clone for URL</code>.
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/clone-from-url.png"
+                            alt=""
+                            data-src="./images/setup-guide/clone-from-url.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                (First time only) You may need to login to VSCode with your GitHub account first.
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/auth-prompt.png"
+                            alt=""
+                            data-src="./images/setup-guide/auth-prompt.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">Select the destination that you want to save the files to.</li>
+            <li dir="auto">Once it is cloned, open with VSCode</li>
+        </ol>
+        <h2 dir="auto" id="5-saving-and-uploading-changes">5. Saving and uploading changes</h2>
+        <p dir="auto">Once you have cloned the repository, go ahead and make some changes (e.g. try solving q1)</p>
+        <p dir="auto">
+            Once you have made some changes, you can go ahead and save and upload the changes by following the steps:
+        </p>
+        <ol dir="auto">
+            <li dir="auto">Save as per usual (<code>CTRL + S</code>)</li>
+            <li dir="auto">
+                Click on the Source Control icon or click (<code>CTRL + SHIFT + G</code>)
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/source-control.png"
+                            alt=""
+                            data-src="./images/setup-guide/source-control.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Type a summary message (e.g. &quot;Complete q1&quot;) or click on the <code>sparkle</code>(✨) to use AI
+                to generate a message.
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/generate-commit-message.png"
+                            alt=""
+                            data-src="./images/setup-guide/generate-commit-message.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Click on the <code>✓ Commit</code> button. If a pop up appears, click &quot;Yes&quot; or &quot;Save all
+                and commit changes&quot;.
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/commit-changes.png"
+                            alt=""
+                            data-src="./images/setup-guide/commit-changes.png"
+                        />
+                    </li>
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/commit-prompt.png"
+                            alt=""
+                            data-src="./images/setup-guide/commit-prompt.png"
+                        />
+                    </li>
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/commit-prompt-2.png"
+                            alt=""
+                            data-src="./images/setup-guide/commit-prompt-2.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+            <li dir="auto">
+                Click on the <code>⟳ Sync</code> button to upload your changes. Once sync-ed you should see the changes
+                back on the github page.
+                <ul dir="auto">
+                    <li dir="auto">
+                        <img
+                            src="./images/setup-guide/sync-changes.png"
+                            alt=""
+                            data-src="./images/setup-guide/sync-changes.png"
+                        />
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <p dir="auto">That's it! Now try completing the remaining question and repeat the steps again.</p>
+        <h2 dir="auto" id="when-stuck">When stuck</h2>
+        <ol dir="auto">
+            <li dir="auto">Consult your tutor on MS Teams for more help.</li>
+        </ol>
+    </body>
+</html>

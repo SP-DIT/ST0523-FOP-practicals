@@ -72,9 +72,13 @@ Once you clicked on the link you will need to do the following:
 
 1. (first time only) Select your name
     1. If you do not see your name, go ahead and skip the step and inform your tutor.
+    - ![](./images/setup-guide/join-classroom-select-name.png)
 2. Accept the assignment and wait for it to generate
+    - ![](./images/setup-guide/join-classroom-accept-assignment.png)
 3. Click on the assignment link, it should be a link that contains the name of the practical and your username (e.g. `www.github.com/practical-1-john-doe`)
+    - ![](./images/setup-guide/join-classroom-accepted.png)
 4. Click on the generated link and you should see the files on GitHub.
+    - ![](./images/setup-guide/repository.png)
 
 ## 4. Clone to your computer
 
@@ -86,10 +90,15 @@ We will not be editing the files on GitHub directly, but instead, you will _clon
 
 1. Open up your VSCode
 2. Use `CTRL + SHIFT + P` to open the command palette (You should see a `>` at the start of the textbox)
+    - ![](./images/setup-guide/command-palette.png)
 3. Enter `git:clone` and select the corresponding option.
+    - ![](./images/setup-guide/git-clone.png)
 4. Copy and paste your code's url (e.g. `www.github.com/practical-1-john-doe`)
+    - ![](./images/setup-guide/repository-url.png)
 5. Select `Clone for URL`.
+    - ![](./images/setup-guide/clone-from-url.png)
 6. (First time only) You may need to login to VSCode with your GitHub account first.
+    - ![](./images/setup-guide/auth-prompt.png)
 7. Select the destination that you want to save the files to.
 8. Once it is cloned, open with VSCode
 
@@ -101,6 +110,18 @@ Once you have made some changes, you can go ahead and save and upload the change
 
 1. Save as per usual (`CTRL + S`)
 2. Click on the Source Control icon or click (`CTRL + SHIFT + G`)
+    - ![](./images/setup-guide/source-control.png)
 3. Type a summary message (e.g. "Complete q1") or click on the `sparkle`(✨) to use AI to generate a message.
+    - ![](./images/setup-guide/generate-commit-message.png)
 4. Click on the `✓ Commit` button. If a pop up appears, click "Yes" or "Save all and commit changes".
-5. Click on the `⟳ Sync` button to upload your changes
+    - ![](./images/setup-guide/commit-changes.png)
+    - ![](./images/setup-guide/commit-prompt.png)
+    - ![](./images/setup-guide/commit-prompt-2.png)
+5. Click on the `⟳ Sync` button to upload your changes. Once sync-ed you should see the changes back on the github page.
+    - ![](./images/setup-guide/sync-changes.png)
+
+That's it! Now try completing the remaining question and repeat the steps again.
+
+## When stuck
+
+1. Consult your tutor on MS Teams for more help.
