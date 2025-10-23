@@ -10,7 +10,7 @@ if (
     (!studentId ||
         !className ||
         !/^(p|P)[0-9]{7}$/.test(studentId) ||
-        !/^(DIT|DAAA|DCDF|DCITP)\/FT\/1A\/(\d{2})$/.test(className))
+        !/^(DIT|DAAA|DCDF|DCITP)\/FT\/1[AB]\/(\d{2})$/.test(className))
 ) {
     console.error(
         `Invalid studentId: ${studentId} or className: ${className}\nDo set your student Id (e.g. p1121782) and ClassName (e.g. DIT/FT/1A/01) in package.json`,
@@ -42,7 +42,7 @@ function readProblemSetInput() {
         process.exit(1);
     }
 
-    const folderName = folderNames[folderIndex.slice(1) - 1];
+    const folderName = folderNames[folderIndex.slice(1) - 2];
     if (!folderName) {
         console.error(`Problem set "${folderIndex}" does not exist.`);
         process.exit(1);

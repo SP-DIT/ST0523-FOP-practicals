@@ -1,9 +1,13 @@
-function biggest(a, b, c, d) {}
+function chickenBanana(a, b, c) {}
 
-module.exports = biggest;
+module.exports = chickenBanana;
 
 // examples
 
-console.log(biggest(1, 2, 3, 4)); // 4
-console.log(biggest(3, 2, 5, 1)); // 5
-console.log(biggest(9, 9, 9, 9)); // 9
+console.log(chickenBanana('chicken', 'chicken', 'chicken')); // "CHICKEN!"
+console.log(chickenBanana('banana', 'banana', 'banana')); // "BANANA!"
+console.log(chickenBanana('chicken', 'banana', 'apple')); // "chicken"
+console.log(chickenBanana('apple', 'chicken', 'banana')); // "chicken"
+console.log(chickenBanana('apple', 'banana', 'chicken')); // "banana"
+console.log(chickenBanana('banana', 'apple', 'chicken')); // "banana"
+console.log(chickenBanana('apple', 'orange', 'pear')); // "none"

@@ -173,7 +173,31 @@ console.log(fizzbuzz(10)); // "buzz"
 console.log(fizzbuzz(30)); // "fizzbuzz"
 ```
 
-## 4. ChickenBanana(a, b, c)
+## 4. Bigger number
+
+Implement the function `bigger(a, b)` that returns the bigger number.
+
+```js
+function bigger(a, b) {}
+
+console.log(bigger(1, 2)); // 2
+console.log(bigger(3, 2)); // 3
+console.log(bigger(4, 4)); // 4
+```
+
+## 5. Biggest number
+
+Implement the function `biggest(a, b, c, d)` that returns the biggest number.
+
+```js
+function biggest(a, b, c, d) {}
+
+console.log(biggest(1, 2, 3, 4)); // 4
+console.log(biggest(3, 2, 5, 1)); // 5
+console.log(biggest(9, 9, 9, 9)); // 9
+```
+
+## 6. ChickenBanana(a, b, c)
 
 Given 3 strings `a`, `b`, and `c`.
 
@@ -193,65 +217,5 @@ console.log(chickenBanana('apple', 'banana', 'chicken')); // "banana"
 console.log(chickenBanana('banana', 'apple', 'chicken')); // "banana"
 console.log(chickenBanana('apple', 'orange', 'pear')); // "none"
 ```
-
-## 5. Bigger number
-
-Implement the function `bigger(a, b)` that returns the bigger number.
-
-```js
-function bigger(a, b) {}
-
-console.log(bigger(1, 2)); // 2
-console.log(bigger(3, 2)); // 3
-console.log(bigger(4, 4)); // 4
-```
-
-## 6. Biggest number
-
-Implement the function `biggest(a, b, c, d)` that returns the biggest number.
-
-```js
-function biggest(a, b, c, d) {}
-
-console.log(biggest(1, 2, 3, 4)); // 4
-console.log(biggest(3, 2, 5, 1)); // 5
-console.log(biggest(9, 9, 9, 9)); // 9
-```
-
-## 7. Challenge
-
-Write the `biggest(a, b, c, d)` function by reusing the `bigger(a, b)` function you created earlier.
-
-You can keep the if-statement in `bigger(a, b)`, but do not use any if-statements in your solution of `biggest(a, b, c, d)`.
-
-**Important:** You can only use syntax elements covered in this course (refer to syntax-list.md). You cannot use any advanced JavaScript features or methods not taught in the module.
-
-**Examples of syntax/approaches that are NOT allowed:**
-
--   Array methods (e.g., `Math.max()`, `arr.sort()`, `arr.reduce()`)
--   Spread operator (e.g., `Math.max(...array)`)
--   Template literals (e.g., `` `${variable}` ``)
--   Arrow functions (e.g., `(a, b) => a > b ? a : b`)
--   Ternary operator (e.g., `a > b ? a : b`)
--   Built-in global functions beyond basic operators
-
-**You CAN use:**
-
--   Basic arithmetic operators (`+`, `-`, `*`, `/`, `%`)
--   Comparison operators (`>`, `<`, `>=`, `<=`, `===`, `!==`)
--   Boolean logical operators (`&&`, `||`, `!`)
--   Variables (`let`, `const`)
--   Functions (declaration and calls)
--   if-else statements (only in the `bigger` function)
-
-```js
-function bigger(a, b) {}
-
-function biggest(a, b, c, d) {
-    // do not use if-statements here
-}
-
-console.log(biggest(1, 2, 3, 4)); // 4
-console.log(biggest(3, 2, 5, 1)); // 5
 console.log(biggest(9, 9, 9, 9)); // 9
 ```

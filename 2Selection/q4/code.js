@@ -1,13 +1,9 @@
-function chickenBanana(a, b, c) {}
+function bigger(a, b) {}
 
-module.exports = chickenBanana;
+module.exports = bigger;
 
 // examples
 
-console.log(chickenBanana('chicken', 'chicken', 'chicken')); // "CHICKEN!"
-console.log(chickenBanana('banana', 'banana', 'banana')); // "BANANA!"
-console.log(chickenBanana('chicken', 'banana', 'apple')); // "chicken"
-console.log(chickenBanana('apple', 'chicken', 'banana')); // "chicken"
-console.log(chickenBanana('apple', 'banana', 'chicken')); // "banana"
-console.log(chickenBanana('banana', 'apple', 'chicken')); // "banana"
-console.log(chickenBanana('apple', 'orange', 'pear')); // "none"
+console.log(bigger(1, 2)); // 2
+console.log(bigger(3, 2)); // 3
+console.log(bigger(4, 4)); // 4
