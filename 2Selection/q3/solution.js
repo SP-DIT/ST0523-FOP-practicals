@@ -1,9 +1,13 @@
+function isDivisibleBy(x, y) {
+    return x % y === 0;
+}
+
 function fizzbuzz(x) {
-    if (x % 3 === 0 && x % 5 === 0) {
+    if (isDivisibleBy(x, 3) && isDivisibleBy(x, 5)) {
         return 'fizzbuzz';
-    } else if (x % 3 === 0) {
+    } else if (isDivisibleBy(x, 3)) {
         return 'fizz';
-    } else if (x % 5 === 0) {
+    } else if (isDivisibleBy(x, 5)) {
         return 'buzz';
     } else {
         return x;
