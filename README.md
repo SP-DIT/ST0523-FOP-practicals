@@ -157,7 +157,15 @@ Implement the function `fizzbuzz(x)` that returns a value based on the following
 3. `fizzbuzz` - if the number is divisible by both 3 and 5.
 4. The original value - if the number is NOT divisible by both 3 or 5
 
-> Hint: You should reuse your `isDivisibleBy` function from the previous question to check if a number is divisible by 3 or 5.
+> **Hint**: You should reuse your `isDivisibleBy` function from the previous question to check if a number is divisible by 3 or 5.
+>
+> **Practice Wishful Thinking:** Break down the logic by imagining helper functions for each condition. You could wish for functions like:
+>
+> -   `isDivisibleBy3(x)` - checks if x is divisible by 3
+> -   `isDivisibleBy5(x)` - checks if x is divisible by 5
+> -   `isDivisibleByBoth3And5(x)` - checks if x is divisible by both 3 and 5
+>
+> Write your `fizzbuzz` function using these imaginary helpers first, then implement them using the `isDivisibleBy` function you already have. This helps you focus on the conditional logic structure before worrying about the divisibility details.
 
 ```js
 function isDivisibleBy(x, y) {}
@@ -189,6 +197,8 @@ console.log(bigger(4, 4)); // 4
 
 Implement the function `biggest(a, b, c, d)` that returns the biggest number.
 
+> **Practice Wishful Thinking:** You already have a `bigger(a, b)` function from question 4 that finds the bigger of two numbers. Use wishful thinking to break this problem down - imagine you can use `bigger` multiple times to solve this step by step. How would you find the biggest of four numbers using a function that only compares two at a time?
+
 ```js
 function biggest(a, b, c, d) {}
 
@@ -206,6 +216,15 @@ Given 3 strings `a`, `b`, and `c`.
 3. If none of the string is either "chicken" or "banana", returns "none"
 4. Otherwise, if the strings contain a mix of "chicken" and/or "banana" along with other values, return the one ("chicken" or "banana") that appears first among the inputs a, b, and c in order.
 
+> **Practice Wishful Thinking:** Break this problem down by imagining you already have helper functions to solve the subproblems. For example:
+>
+> -   Wish for a function `allAreChicken(a, b, c)` that checks if all three strings are "chicken"
+> -   Wish for a function `allAreBanana(a, b, c)` that checks if all three strings are "banana"
+> -   Wish for a function `noneAreChickenOrBanana(a, b, c)` that checks if none are "chicken" or "banana"
+> -   Wish for a function `getFirstChickenOrBanana(a, b, c)` that returns the first "chicken" or "banana" found
+>
+> Write your main `chickenBanana` function using these imaginary helpers first, then implement each helper function afterward. This approach helps you focus on the overall logic before getting stuck on implementation details.
+
 ```js
 function chickenBanana(a, b, c) {}
 
@@ -216,6 +235,6 @@ console.log(chickenBanana('apple', 'chicken', 'banana')); // "chicken"
 console.log(chickenBanana('apple', 'banana', 'chicken')); // "banana"
 console.log(chickenBanana('banana', 'apple', 'chicken')); // "banana"
 console.log(chickenBanana('apple', 'orange', 'pear')); // "none"
-```
+
 console.log(biggest(9, 9, 9, 9)); // 9
 ```
