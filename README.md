@@ -1,4 +1,4 @@
-# Practical 2
+# Repetition Practical
 
 ## Debugging Your Code
 
@@ -8,7 +8,7 @@ There are two main methods you can use to debug and test your solutions:
 
 You can modify the example inputs in each code file and run the file individually to see the output. For example:
 
-In `2Selection/q1/code.js`, you can modify the example at the bottom:
+In `code.js`, you can modify the example at the bottom:
 
 ```js
 // Change the inputs to test different cases
@@ -19,7 +19,7 @@ console.log(isEven(7)); // Add more test cases
 Then run the specific file:
 
 ```bash
-node 2Selection/q1/code.js
+node code.js
 ```
 
 ### Method 2: Automated Testing with Test Cases
@@ -104,137 +104,245 @@ Test case 16:   Passed ✅
 
 Use the detailed error messages from public test cases to identify and fix issues, then ensure your solution handles all edge cases tested by private test cases.
 
-## 1. Is Even?
+## 1. Sum Numbers from 1 to N
 
-Apart from the usual `+`, `-`, `*`, `/` operators, there is also the modulo (`%`) operator that calculates the `remainder`.
+Complete the following function that sums numbers from 1 to n.
 
-Example:
-
-```js
-10 % 4 = 2
-```
-
-Because 10 when divided by 4, has a remainder of 2.
-
-Implement the function `isEven(x)` that returns `true` if a number is even, and `false` otherwise.
-
-> Hint: a number is even if the remainder when divided by 2 is 0.
+This is a fundamental looping problem that introduces the concept of accumulating values over multiple iterations. One way to solve this problem is to iterate through numbers from 1 to n and sum up the values.
 
 ```js
-function isEven(x) {}
+function sumFrom1ToN(n) {
+    // your code here
+}
 
-console.log(isEven(2)); // true
-console.log(isEven(3)); // false
-console.log(isEven(4)); // true
-console.log(isEven(5)); // false
+console.log(sumFrom1ToN(4)); // 10
+console.log(sumFrom1ToN(6)); // 21
 ```
 
-## 2. isDivisibleBy(x, y)
+## 2. Sum Even Numbers
 
-Let's generalize it further.
+Complete the following function that sums only even numbers from 1 to n.
 
-Implement the function `isDivisibleBy(x, y)` that returns `true` if `x` is divisible by `y`.
-
-`x` is considered divisible by `y` if `x % y = 0`.
-
-```js
-function isDivisibleBy(x, y) {}
-
-console.log(isDivisibleBy(5, 3)); // false, 5 divided by 3 has remainder of 2
-console.log(isDivisibleBy(10, 3)); // false, 10 divided by 3 has remainder of 1
-console.log(isDivisibleBy(10, 4)); // false, 10 divided by 4 has remainder of 2
-console.log(isDivisibleBy(13, 5)); // false, 13 divided by 5 has remainder of 3
-console.log(isDivisibleBy(15, 5)); // true, 15 divided by 5 has remainder of 0
-console.log(isDivisibleBy(21, 7)); // true, 21 divided by 7 has remainder of 0
-```
-
-## 3. fizzbuzz
-
-Implement the function `fizzbuzz(x)` that returns a value based on the following rule:
-
-1. `fizz` - if the number is divisible by 3
-2. `buzz` - if the number is divisible by 5
-3. `fizzbuzz` - if the number is divisible by both 3 and 5.
-4. The original value - if the number is NOT divisible by both 3 or 5
-
-> **Hint**: You should reuse your `isDivisibleBy` function from the previous question to check if a number is divisible by 3 or 5.
+> **Practice Wishful Thinking:** This builds on the previous problem but adds conditional logic. Use wishful thinking to break this down:
 >
-> **Practice Wishful Thinking:** Break down the logic by imagining helper functions for each condition. You could wish for functions like:
+> -   Wish for a function `isEven(number)` that checks if a number is even
+> -   Focus on the main algorithm: loop through numbers 1 to n, and only add to your sum if the number is even
+> -   Write your solution using the imaginary `isEven` helper first, then implement the helper function afterward
 >
-> -   `isDivisibleBy3(x)` - checks if x is divisible by 3
-> -   `isDivisibleBy5(x)` - checks if x is divisible by 5
-> -   `isDivisibleByBoth3And5(x)` - checks if x is divisible by both 3 and 5
->
-> Write your `fizzbuzz` function using these imaginary helpers first, then implement them using the `isDivisibleBy` function you already have. This helps you focus on the conditional logic structure before worrying about the divisibility details.
+> This approach lets you focus on the overall summation logic before worrying about the details of even number detection.
 
 ```js
-function isDivisibleBy(x, y) {}
+function isEven(x) {
+    // Refer back to Practical 2 on how to detect even numbers
+}
 
-function fizzbuzz(x) {}
+function sumEvenNumbers(n) {
+    // your code here
+}
 
-console.log(fizzbuzz(3)); // "fizz"
-console.log(fizzbuzz(5)); // "buzz"
-console.log(fizzbuzz(15)); // "fizzbuzz"
-console.log(fizzbuzz(16)); // 16
-console.log(fizzbuzz(9)); // "fizz"
-console.log(fizzbuzz(10)); // "buzz"
-console.log(fizzbuzz(30)); // "fizzbuzz"
+console.log(sumEvenNumbers(5)); // 6 (2 + 4)
+console.log(sumEvenNumbers(10)); // 30 (2 + 4 + 6 + 8 + 10)
 ```
 
-## 4. Bigger number
+## 3. Count Multiples of Three
 
-Implement the function `bigger(a, b)` that returns the bigger number.
+Complete the following function that counts how many numbers between 1 and n are divisible by 3.
+
+> **Practice Wishful Thinking:** What functions can you wish for to aid you in solving this problem?
 
 ```js
-function bigger(a, b) {}
+function countMultiplesOfThree(n) {
+    // your code here
+}
 
-console.log(bigger(1, 2)); // 2
-console.log(bigger(3, 2)); // 3
-console.log(bigger(4, 4)); // 4
+console.log(countMultiplesOfThree(10)); // 3 (3, 6, 9)
+console.log(countMultiplesOfThree(20)); // 6 (3, 6, 9, 12, 15, 18)
 ```
 
-## 5. Biggest number
+## 4. Count Multiples of X
 
-Implement the function `biggest(a, b, c, d)` that returns the biggest number.
+Like Question 3, but this time it is generalized to count any multiples of `x`.
 
-> **Practice Wishful Thinking:** You already have a `bigger(a, b)` function from question 4 that finds the bigger of two numbers. Use wishful thinking to break this problem down - imagine you can use `bigger` multiple times to solve this step by step. How would you find the biggest of four numbers using a function that only compares two at a time?
+> **Practice Wishful Thinking:** What functions can you wish for to aid you in solving this problem?
 
 ```js
-function biggest(a, b, c, d) {}
+function countMultiplesOfX(n, x) {
+    // your code here
+}
 
-console.log(biggest(1, 2, 3, 4)); // 4
-console.log(biggest(3, 2, 5, 1)); // 5
-console.log(biggest(9, 9, 9, 9)); // 9
+console.log(countMultiplesOfX(10, 3)); // 3 (3, 6, 9)
+console.log(countMultiplesOfX(20, 5)); // 4 (5, 10, 15, 20)
 ```
 
-## 6. ChickenBanana(a, b, c)
+## 5. String Repetition
 
-Given 3 strings `a`, `b`, and `c`.
-
-1. If all of the string is "chicken", returns "CHICKEN!"
-2. If all of the string is "banana", returns "BANANA!"
-3. If none of the string is either "chicken" or "banana", returns "none"
-4. Otherwise, if the strings contain a mix of "chicken" and/or "banana" along with other values, return the one ("chicken" or "banana") that appears first among the inputs a, b, and c in order.
-
-> **Practice Wishful Thinking:** Break this problem down by imagining you already have helper functions to solve the subproblems. For example:
->
-> -   Wish for a function `allAreChicken(a, b, c)` that checks if all three strings are "chicken"
-> -   Wish for a function `allAreBanana(a, b, c)` that checks if all three strings are "banana"
-> -   Wish for a function `noneAreChickenOrBanana(a, b, c)` that checks if none are "chicken" or "banana"
-> -   Wish for a function `getFirstChickenOrBanana(a, b, c)` that returns the first "chicken" or "banana" found
->
-> Write your main `chickenBanana` function using these imaginary helpers first, then implement each helper function afterward. This approach helps you focus on the overall logic before getting stuck on implementation details.
+Complete the following function that builds a new string by repeating a given string multiple times.
 
 ```js
-function chickenBanana(a, b, c) {}
+function repeat(string, n) {
+    // your code here
+}
 
-console.log(chickenBanana('chicken', 'chicken', 'chicken')); // "CHICKEN!"
-console.log(chickenBanana('banana', 'banana', 'banana')); // "BANANA!"
-console.log(chickenBanana('chicken', 'banana', 'apple')); // "chicken"
-console.log(chickenBanana('apple', 'chicken', 'banana')); // "chicken"
-console.log(chickenBanana('apple', 'banana', 'chicken')); // "banana"
-console.log(chickenBanana('banana', 'apple', 'chicken')); // "banana"
-console.log(chickenBanana('apple', 'orange', 'pear')); // "none"
+console.log(repeat('hello', 3)); // Expected output: "hellohellohello"
+console.log(repeat('*#', 4)); // Expected output: "*#*#*#*#"
+```
 
-console.log(biggest(9, 9, 9, 9)); // 9
+## 6. Count Vowels
+
+Complete the function that counts how many vowels (a, e, i, o, u) are in a string.
+
+This introduces string processing with loops. You'll need to examine each character in the string and check if it's a vowel.
+
+> **Practice Wishful Thinking:** The function `charAt(str, i)` is provided for you, what other functions do you need to help you with this problem? Perhaps one to check if a character is a vowel?
+
+```js
+// The `charAt` function is provided for you. It returns the character at a specific position.
+// Examples:
+//   charAt('abc', 0) returns 'a'
+//   charAt('donkey', 3) returns 'k'
+function charAt(str, i) {
+    return str[i];
+}
+
+function countVowels(str) {
+    // your code here
+}
+
+console.log(countVowels('apple')); // 2
+console.log(countVowels('javascript')); // 3
+console.log(countVowels('sky')); // 0
+```
+
+## 7. Right-Angled Triangle
+
+Complete the following function that returns an isosceles right-angled triangle of varying height.
+
+```
+height = 1
+*
+
+height = 2
+*
+* *
+
+height = 3
+*
+* *
+* * *
+
+height = 4
+*
+* *
+* * *
+* * * *
+```
+
+> **Practice Wishful Thinking:** How might the `repeat` function from Question 5 help you solve this problem?
+
+```js
+function rightAngledTriangle(height) {
+    // your code here
+}
+
+console.log(rightAngledTriangle(3));
+console.log(rightAngledTriangle(4));
+```
+
+## 8. Diamond
+
+Complete the following function that returns a diamond shape.
+
+```
+width = 1
+*
+
+width = 2
+ *
+* *
+ *
+
+width = 3
+  *
+ * *
+* * *
+ * *
+  *
+
+width = 4
+   *
+  * *
+ * * *
+* * * *
+ * * *
+  * *
+   *
+```
+
+Using width = 3 as an example, the actual string representation (with special characters) would be:
+
+```js
+'  *\n * *\n* * *\n * *\n  *';
+```
+
+> **Practice Wishful Thinking:** Consider what smaller functions you might need to help you piece together this shape. What patterns do you notice in the diamond structure?
+
+```js
+function diamond(width) {
+    // your code here
+}
+
+console.log(diamond(3));
+console.log(diamond(4));
+```
+
+## 9. Sum of Digits
+
+Complete the following function that returns the sum of all digits in a given number. The number of digits that `n` contains is provided to aid you in writing your loop.
+
+**Examples:**
+
+-   12345 → 1 + 2 + 3 + 4 + 5 = 15
+-   2025 → 2 + 0 + 2 + 5 = 9
+
+> **Practice Wishful Thinking:** Break this problem down by imagining you already have helper functions to solve the subproblems:
+>
+> -   Wish for a function `getLastDigit(number)` that extracts the rightmost digit (hint: use `% 10`)
+> -   Wish for a function `removeLastDigit(number)` that removes the rightmost digit (hint: use `Math.floor(number / 10)`)
+>
+> Write your main solution using these imaginary helpers first, focusing on the overall algorithm: repeatedly extract the last digit, add it to your sum, then remove it from the number. Once you understand this pattern, implement each helper function.
+
+```js
+function digitSum(n, numberOfDigits) {
+    // your code here
+}
+
+console.log(digitSum(12345, 5)); // 15
+console.log(digitSum(9876, 4)); // 30
+console.log(digitSum(1001, 4)); // 2
+```
+
+## 10. Challenge: Fibonacci Sequence
+
+The Fibonacci function can be expressed mathematically as follows:
+
+$$
+\begin{equation}
+       fibonacci(n) =
+        \begin{cases}
+            0 & \text{if } n = 1 \\
+            1 & \text{if } n = 2 \\
+            fibonacci(n - 1) + fibonacci(n - 2) & \text{if } n > 2
+        \end{cases}
+    \end{equation}
+$$
+
+This is a recursive definition where, apart from the base cases of `n = 1` and `n = 2` (which evaluate to 0 and 1 respectively), we wishfully think that the `fibonacci` function works as intended for smaller values.
+
+```js
+function fibonacci(n) {
+    // your code here
+}
+
+console.log(fibonacci(3)); // 1
+console.log(fibonacci(6)); // 5
 ```
