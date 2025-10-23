@@ -1,9 +1,9 @@
-function bigger(a, b) {}
+function biggest(a, b, c, d) {}
 
-module.exports = bigger;
+module.exports = biggest;
 
 // examples
 
-console.log(bigger(1, 2)); // 2
-console.log(bigger(3, 2)); // 3
-console.log(bigger(4, 4)); // 4
+console.log(biggest(1, 2, 3, 4)); // 4
+console.log(biggest(3, 2, 5, 1)); // 5
+console.log(biggest(9, 9, 9, 9)); // 9

@@ -31,4 +31,5 @@ Define the task to achieve, including specific requirements, constraints, and su
 1. You are to run the solution against the designed testcases and make sure all the test cases passes.
     1. You can use `node run pX qY` where `pX` and `qY` corresponds to the problem set number and the question number. (e.g. `node run p1 q3`)
     2. You need to set the NODE_ENV environment variable to `test` to run the testcases.
+    3. We are very very likely using powershell.
 2. You are to fix the test cases and/or the solution.js file accordingly.

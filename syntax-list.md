@@ -663,3 +663,228 @@ const arr = [1, 2, 3];
 arr[999] = 9;
 console.log(arr.length); // 1000
 ```
+
+## 8. Wishful Thinking
+
+> Functions allow us to solve a problem by thinking about the solution at a higher level. We no longer concern with the implementation details.
+>
+> For instance, in the example above, we no longer have to think about checking through the items in the list one-by-one and maintaining the maximum so far, or the minimum so far. We just have to think about how to compute the range, assuming that we already know how to compute the maximum and the minimum value.
+>
+> Such an assumption, that we already know how to solve a subproblem, is known as wishful thinking. Sometimes, it is useful to solve a problem assuming that you know how to solve the subproblem first, then worry about solving the subproblem later.
+>
+> https://nus-cs1010.github.io/2021-s1/03-func.html
+
+### 8.1 The Wishful Thinking Process
+
+Wishful thinking is a powerful problem-solving strategy that follows these steps:
+
+1. **Break down the problem** into smaller, more manageable subproblems
+2. **Assume the subproblems are already solved** (make a "wish")
+3. **Write the main solution** using these imaginary helper functions
+4. **Implement the helper functions** one by one
+
+This approach helps you focus on the overall logic first, then worry about implementation details later.
+
+### 8.2 Example 1: Computing the Area of a Circle
+
+**Problem:** Write a function to calculate the area of a circle given its radius.
+
+**Step 1: Wishful thinking approach**
+
+```javascript
+function circleArea(radius) {
+    // I wish I had a function to compute pi
+    const pi = getPi();
+
+    // I wish I had a function to square a number
+    const radiusSquared = square(radius);
+
+    return pi * radiusSquared;
+}
+```
+
+**Step 2: Implement the helper functions**
+
+```javascript
+function getPi() {
+    return 3.14159;
+}
+
+function square(number) {
+    return number * number;
+}
+
+function circleArea(radius) {
+    const pi = getPi();
+    const radiusSquared = square(radius);
+    return pi * radiusSquared;
+}
+```
+
+### 8.3 Example 2: Grade Calculator
+
+**Problem:** Calculate a student's final grade based on multiple test scores.
+
+**Step 1: Wishful thinking approach**
+
+```javascript
+function calculateFinalGrade(test1, test2, test3) {
+    // I wish I had a function to calculate the average
+    const average = calculateAverage(test1, test2, test3);
+
+    // I wish I had a function to convert average to letter grade
+    const letterGrade = convertToLetterGrade(average);
+
+    return letterGrade;
+}
+```
+
+**Step 2: Implement the helper functions**
+
+```javascript
+function calculateAverage(score1, score2, score3) {
+    const total = score1 + score2 + score3;
+    return total / 3;
+}
+
+function convertToLetterGrade(average) {
+    if (average >= 90) {
+        return 'A';
+    } else if (average >= 80) {
+        return 'B';
+    } else if (average >= 70) {
+        return 'C';
+    } else if (average >= 60) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+
+function calculateFinalGrade(test1, test2, test3) {
+    const average = calculateAverage(test1, test2, test3);
+    const letterGrade = convertToLetterGrade(average);
+    return letterGrade;
+}
+```
+
+### 8.4 Example 3: Array Processing
+
+**Problem:** Find the sum of all even numbers in an array.
+
+**Step 1: Wishful thinking approach**
+
+```javascript
+function sumOfEvens(numbers) {
+    let total = 0;
+
+    for (let i = 0; i < numbers.length; i++) {
+        // I wish I had a function to check if a number is even
+        if (isEven(numbers[i])) {
+            total = total + numbers[i];
+        }
+    }
+
+    return total;
+}
+```
+
+**Step 2: Implement the helper function**
+
+```javascript
+function isEven(number) {
+    return number % 2 === 0;
+}
+
+function sumOfEvens(numbers) {
+    let total = 0;
+
+    for (let i = 0; i < numbers.length; i++) {
+        if (isEven(numbers[i])) {
+            total = total + numbers[i];
+        }
+    }
+
+    return total;
+}
+
+// Usage example
+const testArray = [1, 2, 3, 4, 5, 6];
+console.log(sumOfEvens(testArray)); // 12 (2 + 4 + 6)
+```
+
+### 8.5 Example 4: Complex Object Processing
+
+**Problem:** Calculate the total value of a shopping cart.
+
+**Step 1: Wishful thinking approach**
+
+```javascript
+function calculateCartTotal(cart) {
+    let total = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        // I wish I had a function to calculate item total
+        const itemTotal = calculateItemTotal(cart[i]);
+        total = total + itemTotal;
+    }
+
+    // I wish I had a function to apply tax
+    const finalTotal = addTax(total);
+
+    return finalTotal;
+}
+```
+
+**Step 2: Implement the helper functions**
+
+```javascript
+function calculateItemTotal(item) {
+    return item.price * item.quantity;
+}
+
+function addTax(subtotal) {
+    const taxRate = 0.08; // 8% tax
+    return subtotal + subtotal * taxRate;
+}
+
+function calculateCartTotal(cart) {
+    let total = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        const itemTotal = calculateItemTotal(cart[i]);
+        total = total + itemTotal;
+    }
+
+    const finalTotal = addTax(total);
+    return finalTotal;
+}
+
+// Usage example
+const shoppingCart = [
+    { name: 'Apple', price: 1.5, quantity: 3 },
+    { name: 'Bread', price: 2.0, quantity: 1 },
+    { name: 'Milk', price: 3.5, quantity: 2 },
+];
+
+console.log(calculateCartTotal(shoppingCart)); // 12.96
+```
+
+### 8.6 Benefits of Wishful Thinking
+
+1. **Simplifies complex problems**: Break big problems into smaller, manageable pieces
+2. **Improves code organization**: Creates cleaner, more modular code structure
+3. **Enables parallel development**: Different team members can work on different functions
+4. **Makes testing easier**: Each function can be tested independently
+5. **Enhances readability**: The main function reads like a high-level description of the solution
+
+### 8.7 When to Use Wishful Thinking
+
+Use wishful thinking when:
+
+-   The problem seems too complex to solve all at once
+-   You can identify clear subtasks within the problem
+-   You want to focus on the overall algorithm before implementation details
+-   You're working with a team and need to divide responsibilities
+
+**Remember**: Start with the big picture, then fill in the details. Don't get stuck on implementation details too early in the problem-solving process!
