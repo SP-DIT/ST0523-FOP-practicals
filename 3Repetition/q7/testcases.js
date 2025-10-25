@@ -59,13 +59,15 @@ module.exports = {
         },
         {
             input: [9],
-            expected: '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *',
+            expected:
+                '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *',
             isPublic: false,
             description: 'Right-angled triangle height 9 -> nine rows',
         },
         {
             input: [10],
-            expected: '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *',
+            expected:
+                '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *',
             isPublic: false,
             description: 'Right-angled triangle height 10 -> ten rows',
         },
@@ -89,31 +91,36 @@ module.exports = {
         },
         {
             input: [11],
-            expected: '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *',
+            expected:
+                '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *',
             isPublic: false,
             description: 'Right-angled triangle height 11 -> eleven rows',
         },
         {
             input: [12],
-            expected: '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *',
+            expected:
+                '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *',
             isPublic: false,
             description: 'Right-angled triangle height 12 -> twelve rows',
         },
         {
             input: [13],
-            expected: '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *',
+            expected:
+                '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *',
             isPublic: false,
             description: 'Right-angled triangle height 13 -> thirteen rows',
         },
         {
             input: [14],
-            expected: '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *\n* * * * * * * * * * * * * *',
+            expected:
+                '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *\n* * * * * * * * * * * * * *',
             isPublic: false,
             description: 'Right-angled triangle height 14 -> fourteen rows',
         },
         {
             input: [15],
-            expected: '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *\n* * * * * * * * * * * * * *\n* * * * * * * * * * * * * * *',
+            expected:
+                '*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *\n* * * * * * * * * * * * * *\n* * * * * * * * * * * * * * *',
             isPublic: false,
             description: 'Right-angled triangle height 15 -> fifteen rows',
         },

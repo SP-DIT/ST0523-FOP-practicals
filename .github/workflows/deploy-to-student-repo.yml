@@ -2,7 +2,7 @@ name: Deploy to Student Repository
 
 on:
     push:
-        branches: ['practical-*'] # Trigger on practical branches only
+        branches: ['practical-*'] # Trigger on practical branches only (after PR merge)
     workflow_dispatch: # Allow manual triggering
 
 env:
@@ -15,7 +15,13 @@ permissions:
     actions: read
 
 jobs:
-    deploy-student-version:
+    # First job: Run tests using the reusable test workflow
+    test:
+        uses: ./.github/workflows/test-practical.yml
+
+    # Second job: Deploy only if tests pass
+    deploy:
+        needs: test # Wait for test job to complete successfully
         runs-on: ubuntu-latest
         timeout-minutes: 10 # Prevent runaway jobs
 
@@ -59,6 +65,12 @@ jobs:
 
                   echo "TARGET_REPO=$REPO_NAME" >> $GITHUB_OUTPUT
                   echo "::notice::Deploying to repository: SP-DIT/$REPO_NAME"
+
+            - name: Tests passed - Proceeding with deployment
+              run: |
+                  BRANCH_NAME=${GITHUB_REF#refs/heads/}
+                  PRACTICAL_NUMBER=$(echo "$BRANCH_NAME" | grep -o '[0-9]\+')
+                  echo "::notice::✅ Tests passed for practical $PRACTICAL_NUMBER - Starting deployment process"
 
             - name: Generate GitHub App Token
               id: app-token
