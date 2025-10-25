@@ -1,17 +1,5 @@
-function absolute(num) {
-    // Return the absolute value without using built-in functions
-    if (num < 0) {
-        return -num;
-    }
-    return num;
-}
-
 function countMultiplesOfX(n, x) {
     // Count numbers between 1 and n (inclusive) divisible by x.
-    // Take absolute values of both n and x
-    n = absolute(n);
-    x = absolute(x);
-    
     // If n is 0 or x is 0, there are no valid multiples
     if (n === 0 || x === 0) return 0;
 
