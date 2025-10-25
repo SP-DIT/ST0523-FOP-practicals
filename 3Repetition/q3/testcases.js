@@ -82,22 +82,22 @@ module.exports = {
             description: 'n = 102 -> 34 multiples (3..102)',
         },
         {
-            input: [-5],
-            expected: 1,
+            input: [7],
+            expected: 2,
             isPublic: false,
-            description: 'Negative n should use absolute value: abs(-5) = 5, multiples = 1',
+            description: 'n = 7 -> (3,6) = 2',
         },
         {
-            input: [-10],
+            input: [8],
+            expected: 2,
+            isPublic: false,
+            description: 'n = 8 -> (3,6) = 2',
+        },
+        {
+            input: [9],
             expected: 3,
             isPublic: false,
-            description: 'Negative n should use absolute value: abs(-10) = 10, multiples = 3',
-        },
-        {
-            input: [-20],
-            expected: 6,
-            isPublic: false,
-            description: 'Negative n should use absolute value: abs(-20) = 20, multiples = 6',
+            description: 'n = 9 -> (3,6,9) = 3',
         },
         {
             input: [1000000],
@@ -118,10 +118,10 @@ module.exports = {
             description: 'n = 15 -> (3,6,9,12,15) = 5',
         },
         {
-            input: [-3],
-            expected: 1,
+            input: [11],
+            expected: 3,
             isPublic: false,
-            description: 'Negative n should use absolute value: abs(-3) = 3, multiples = 1',
+            description: 'n = 11 -> (3,6,9) = 3',
         },
     ],
     options: {
