@@ -4,8 +4,8 @@ on:
     push:
         branches: ['wip/practical-*'] # Trigger on WIP practical branches only
     pull_request:
-        branches: ['practical-*'] # Also test PRs to practical branches
-    workflow_call: # Allow this workflow to be called by other workflows
+        branches: ['practical-*'] # Test PRs to practical branches (primary use case)
+    workflow_call: # Allow this workflow to be called by deploy workflow
     workflow_dispatch: # Allow manual triggering
 
 # Optimize permissions for better security
@@ -35,8 +35,17 @@ jobs:
               run: |
                   echo "::group::Running Tests"
                   
-                  # Extract practical number from branch name
-                  BRANCH_NAME=${GITHUB_REF#refs/heads/}
+                  # Extract practical number from branch name or PR context
+                  if [[ "$GITHUB_REF" == refs/pull/* ]]; then
+                    # For PR context, use the head ref (source branch)
+                    BRANCH_NAME="${GITHUB_HEAD_REF}"
+                    echo "PR context detected - using head ref: $BRANCH_NAME"
+                  else
+                    # For push context, use the ref
+                    BRANCH_NAME=${GITHUB_REF#refs/heads/}
+                    echo "Push context detected - using branch: $BRANCH_NAME"
+                  fi
+                  
                   echo "Current branch: $BRANCH_NAME"
                   
                   # Extract the number from practical-X or wip/practical-X
@@ -64,7 +73,11 @@ jobs:
             - name: Test Summary
               if: always()
               run: |
-                  BRANCH_NAME=${GITHUB_REF#refs/heads/}
+                  if [[ "$GITHUB_REF" == refs/pull/* ]]; then
+                    BRANCH_NAME="${GITHUB_HEAD_REF}"
+                  else
+                    BRANCH_NAME=${GITHUB_REF#refs/heads/}
+                  fi
                   PRACTICAL_NUMBER=$(echo "$BRANCH_NAME" | grep -o '[0-9]\+')
                   
                   echo "## 🧪 Test Summary" >> $GITHUB_STEP_SUMMARY
