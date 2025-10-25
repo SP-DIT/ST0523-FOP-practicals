@@ -1,8 +1,6 @@
 name: Test Practical Solutions
 
 on:
-    push:
-        branches: ['wip/practical-*'] # Trigger on WIP practical branches only
     pull_request:
         branches: ['practical-*'] # Test PRs to practical branches (primary use case)
     workflow_call: # Allow this workflow to be called by deploy workflow
