@@ -8,21 +8,31 @@ function charAt(str, i) {
 
 function isVowel(char) {
     // Check if a character is a vowel (a, e, i, o, u) - case insensitive
-    return char === 'a' || char === 'e' || char === 'i' || char === 'o' || char === 'u' ||
-           char === 'A' || char === 'E' || char === 'I' || char === 'O' || char === 'U';
+    return (
+        char === 'a' ||
+        char === 'e' ||
+        char === 'i' ||
+        char === 'o' ||
+        char === 'u' ||
+        char === 'A' ||
+        char === 'E' ||
+        char === 'I' ||
+        char === 'O' ||
+        char === 'U'
+    );
 }
 
 function countVowels(str) {
     // Count how many vowels are in the string
     let count = 0;
-    
+
     for (let i = 0; i < str.length; i++) {
         let currentChar = charAt(str, i);
         if (isVowel(currentChar)) {
             count++;
         }
     }
-    
+
     return count;
 }
 

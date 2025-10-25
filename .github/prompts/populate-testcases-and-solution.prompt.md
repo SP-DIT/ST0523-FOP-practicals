@@ -10,7 +10,8 @@ Define the task to achieve, including specific requirements, constraints, and su
     1. You can search for "## ${input:problem}" in the README.md to find the relevant section.
 2. Populate the `testcase.js` file with 20 testcases of different normal and edge cases
 3. Generate a `solution.js` file that solves the problem.
-4. Stage and commit the changes.
+4. Generate a `code.js` file that contains only the function signature and sample calls with expected outputs as comments.
+5. Stage and commit the changes.
 
 # Constraints
 

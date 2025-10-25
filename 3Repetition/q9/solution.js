@@ -9,13 +9,13 @@ function removeLastDigit(number) {
 function digitSum(n, numberOfDigits) {
     let sum = 0;
     let currentNumber = n;
-    
+
     for (let i = 0; i < numberOfDigits; i++) {
         let lastDigit = getLastDigit(currentNumber);
         sum = sum + lastDigit;
         currentNumber = removeLastDigit(currentNumber);
     }
-    
+
     return sum;
 }
 

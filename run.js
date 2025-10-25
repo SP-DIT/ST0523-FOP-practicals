@@ -42,7 +42,8 @@ function readProblemSetInput() {
         process.exit(1);
     }
 
-    const folderName = folderNames[folderIndex.slice(1) - 3];
+    const problemSetNumber = folderIndex.slice(1); // Extract number after 'p'
+    const folderName = folderNames.find((name) => name.startsWith(problemSetNumber));
     if (!folderName) {
         console.error(`Problem set "${folderIndex}" does not exist.`);
         process.exit(1);
