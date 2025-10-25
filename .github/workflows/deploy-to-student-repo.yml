@@ -4,6 +4,8 @@ on:
     push:
         branches: ['practical-*'] # Trigger on practical branches only (after PR merge)
     workflow_dispatch: # Allow manual triggering
+    # Note: This workflow should NOT trigger on pull_request events
+    # Tests are handled separately by test-practical.yml
 
 env:
     # Configure the target student repository based on current branch/practical
@@ -144,8 +146,12 @@ jobs:
                   if git diff --staged --quiet; then
                     echo "::notice::No changes to deploy"
                   else
+                    # Get the practical number for commit message
+                    BRANCH_NAME=${GITHUB_REF#refs/heads/}
+                    PRACTICAL_NUMBER=$(echo "$BRANCH_NAME" | grep -o '[0-9]\+')
+                    
                     # Create a single squashed commit with clean message
-                    git commit -m "🎓 Practical content deployment - SP-DIT/ST0523-FOP-practicals (practical-1) - $(date '+%Y-%m-%d %H:%M:%S UTC') - Clean deployment with squashed commits"
+                    git commit -m "🎓 Practical content deployment - SP-DIT/ST0523-FOP-practicals (practical-${PRACTICAL_NUMBER}) - $(date '+%Y-%m-%d %H:%M:%S UTC') - Clean deployment with squashed commits"
 
                     # Delete the old main branch and rename temp-main to main
                     git branch -D main 2>/dev/null || true
