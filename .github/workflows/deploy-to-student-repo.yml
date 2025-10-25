@@ -104,9 +104,9 @@ jobs:
                     echo "✓ Replaced settings.json with student version"
                   fi
 
-                  # Clean up instructor directories efficiently
-                  rm -rf instructor/ instructor-notes/ solutions/ .github/workflows/deploy-to-student-repo.yml 2>/dev/null || true
-                  echo "✓ Cleaned up instructor directories"
+                  # Clean up instructor directories and GitHub workflows efficiently
+                  rm -rf instructor/ instructor-notes/ solutions/ .github/ 2>/dev/null || true
+                  echo "✓ Cleaned up instructor directories and GitHub workflows"
 
                   echo "::endgroup::"
 
