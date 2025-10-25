@@ -1,0 +1,81 @@
+name: Test Practical Solutions
+
+on:
+    push:
+        branches: ['wip/practical-*'] # Trigger on WIP practical branches only
+    pull_request:
+        branches: ['practical-*'] # Also test PRs to practical branches
+    workflow_call: # Allow this workflow to be called by other workflows
+    workflow_dispatch: # Allow manual triggering
+
+# Optimize permissions for better security
+permissions:
+    contents: read
+    actions: read
+
+jobs:
+    test-practical:
+        runs-on: ubuntu-latest
+        timeout-minutes: 5 # Quick testing timeout
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 1 # Shallow clone for better performance
+
+            - name: Setup Node.js with caching
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20' # Use LTS version
+                  cache: 'npm'
+                  cache-dependency-path: '**/package*.json'
+
+            - name: Run tests to validate practical solutions
+              run: |
+                  echo "::group::Running Tests"
+                  
+                  # Extract practical number from branch name
+                  BRANCH_NAME=${GITHUB_REF#refs/heads/}
+                  echo "Current branch: $BRANCH_NAME"
+                  
+                  # Extract the number from practical-X or wip/practical-X
+                  PRACTICAL_NUMBER=$(echo "$BRANCH_NAME" | grep -o '[0-9]\+')
+                  TEST_COMMAND="p${PRACTICAL_NUMBER}"
+                  
+                  echo "::notice::Detected practical number: $PRACTICAL_NUMBER"
+                  echo "::notice::Running test command: node run $TEST_COMMAND"
+                  
+                  # Set NODE_ENV to test to use solution.js files
+                  export NODE_ENV=test
+                  
+                  # Run the test for the detected practical
+                  if node run "$TEST_COMMAND"; then
+                    echo "::notice::✅ All tests passed for practical $PRACTICAL_NUMBER!"
+                    echo "::notice::🚀 Ready for merge to practical-$PRACTICAL_NUMBER branch"
+                  else
+                    echo "::error::❌ Tests failed for practical $PRACTICAL_NUMBER!"
+                    echo "::error::🔧 Please fix the issues before merging"
+                    exit 1
+                  fi
+                  
+                  echo "::endgroup::"
+
+            - name: Test Summary
+              if: always()
+              run: |
+                  BRANCH_NAME=${GITHUB_REF#refs/heads/}
+                  PRACTICAL_NUMBER=$(echo "$BRANCH_NAME" | grep -o '[0-9]\+')
+                  
+                  echo "## 🧪 Test Summary" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "**Branch:** \`$BRANCH_NAME\`" >> $GITHUB_STEP_SUMMARY
+                  echo "**Practical:** $PRACTICAL_NUMBER" >> $GITHUB_STEP_SUMMARY
+                  echo "**Purpose:** Continuous testing during development" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  if [ "${{ job.status }}" == "success" ]; then
+                    echo "✅ **Status:** All tests passed! Ready for merge." >> $GITHUB_STEP_SUMMARY
+                  else
+                    echo "❌ **Status:** Tests failed. Please review and fix." >> $GITHUB_STEP_SUMMARY
+                  fi
+                  echo "⏰ **Time:** $(date)" >> $GITHUB_STEP_SUMMARY
