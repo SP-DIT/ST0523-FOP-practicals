@@ -1,11 +1,27 @@
+function absolute(x) {
+    // Return the absolute value of x without using built-in functions
+    if (x < 0) {
+        return -x;
+    }
+    return x;
+}
+
 function countMultiplesOfThree(n) {
     // Count numbers between 1 and n (inclusive) divisible by 3.
-    // If n is less than 1, there are none.
-    if (typeof n !== 'number' || isNaN(n)) return 0;
-    if (n < 1) return 0;
+    // If negative, take the absolute value
+    n = absolute(n);
+    
+    // If n is 0, there are no multiples
+    if (n === 0) return 0;
 
-    // Using integer division is the simplest and efficient way.
-    return Math.floor(n / 3);
+    // Use a for-loop to count multiples of 3
+    let count = 0;
+    for (let i = 1; i <= n; i++) {
+        if (i % 3 === 0) {
+            count++;
+        }
+    }
+    return count;
 }
 
 module.exports = countMultiplesOfThree;
