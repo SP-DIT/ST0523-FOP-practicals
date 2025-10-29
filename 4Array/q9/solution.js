@@ -46,27 +46,27 @@ function isNonAscending(array) {
 function checkArray(array) {
     // Check patterns in order of specificity
     // More specific patterns should be checked first
-    
+
     if (isConstant(array)) {
         return 'Constant';
     }
-    
+
     if (isAscending(array)) {
         return 'Ascending';
     }
-    
+
     if (isDescending(array)) {
         return 'Descending';
     }
-    
+
     if (isNonDescending(array)) {
         return 'Non-descending';
     }
-    
+
     if (isNonAscending(array)) {
         return 'Non-ascending';
     }
-    
+
     return 'Unsorted';
 }
 
