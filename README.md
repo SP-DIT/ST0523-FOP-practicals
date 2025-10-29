@@ -1,4 +1,4 @@
-# Repetition Practical
+# Array Practical
 
 ## Debugging Your Code
 
@@ -104,245 +104,171 @@ Test case 16:   Passed ✅
 
 Use the detailed error messages from public test cases to identify and fix issues, then ensure your solution handles all edge cases tested by private test cases.
 
-## 1. Sum Numbers from 1 to N
+## 1. Sum of Array Elements
 
-Complete the following function that sums numbers from 1 to n.
+Complete the function that returns the sum of all elements in an array.
 
-This is a fundamental looping problem that introduces the concept of accumulating values over multiple iterations. One way to solve this problem is to iterate through numbers from 1 to n and sum up the values.
+This is a fundamental array processing problem that introduces the concept of iterating through an array and accumulating values. You'll need to loop through each element in the array and add them to a running total.
 
 ```js
-function sumFrom1ToN(n) {
+function sumArray(array) {
     // your code here
 }
 
-console.log(sumFrom1ToN(4)); // 10
-console.log(sumFrom1ToN(6)); // 21
+console.log(sumArray([1, 2, 3, 4, 5])); // 15
+console.log(sumArray([10, 20, 30])); // 60
 ```
 
-## 2. Sum Even Numbers
+## 2. Find Maximum in Array
 
-Complete the following function that sums only even numbers from 1 to n.
+Complete the function that returns the largest number in the array.
 
-> **Practice Wishful Thinking:** This builds on the previous problem but adds conditional logic. Use wishful thinking to break this down:
+This problem teaches you how to track and compare values while iterating through an array. You'll need to keep track of the largest value seen so far as you examine each element.
+
+```js
+function findMaxInArray(array) {
+    // your code here
+}
+
+console.log(findMaxInArray([3, 7, 2, 9, 5])); // 9
+console.log(findMaxInArray([-10, -5, -1])); // -1
+```
+
+## 3. Count Even Numbers in Array
+
+Complete the function that returns how many numbers in the array are even.
+
+> **Practice Wishful Thinking:** This builds on basic array iteration but adds conditional logic. Use wishful thinking to break this down:
 >
 > -   Wish for a function `isEven(number)` that checks if a number is even
-> -   Focus on the main algorithm: loop through numbers 1 to n, and only add to your sum if the number is even
+> -   Focus on the main algorithm: loop through the array, and only increment your counter if the current number is even
 > -   Write your solution using the imaginary `isEven` helper first, then implement the helper function afterward
 >
-> This approach lets you focus on the overall summation logic before worrying about the details of even number detection.
+> This approach lets you focus on the counting logic before worrying about the details of even number detection.
 
 ```js
-function isEven(x) {
-    // Refer back to Practical 2 on how to detect even numbers
-}
-
-function sumEvenNumbers(n) {
+function countEvenNumbers(array) {
     // your code here
 }
 
-console.log(sumEvenNumbers(5)); // 6 (2 + 4)
-console.log(sumEvenNumbers(10)); // 30 (2 + 4 + 6 + 8 + 10)
+console.log(countEvenNumbers([1, 2, 3, 4, 5])); // 2
+console.log(countEvenNumbers([10, 15, 20, 25])); // 2
 ```
 
-## 3. Count Multiples of Three
+## 4. Calculate Array Average
 
-Complete the following function that counts how many numbers between 1 and n are divisible by 3.
+Complete the function that returns the average value of all numbers in the array.
 
-> **Practice Wishful Thinking:** What functions can you wish for to aid you in solving this problem?
-
-```js
-function countMultiplesOfThree(n) {
-    // your code here
-}
-
-console.log(countMultiplesOfThree(10)); // 3 (3, 6, 9)
-console.log(countMultiplesOfThree(20)); // 6 (3, 6, 9, 12, 15, 18)
-```
-
-## 4. Count Multiples of X
-
-Like Question 3, but this time it is generalized to count any multiples of `x`.
-
-> **Practice Wishful Thinking:** What functions can you wish for to aid you in solving this problem?
-
-```js
-function countMultiplesOfX(n, x) {
-    // your code here
-}
-
-console.log(countMultiplesOfX(10, 3)); // 3 (3, 6, 9)
-console.log(countMultiplesOfX(20, 5)); // 4 (5, 10, 15, 20)
-```
-
-## 5. String Repetition
-
-Complete the following function that builds a new string by repeating a given string multiple times.
-
-```js
-function repeat(string, n) {
-    // your code here
-}
-
-console.log(repeat('hello', 3)); // Expected output: "hellohellohello"
-console.log(repeat('*#', 4)); // Expected output: "*#*#*#*#"
-```
-
-## 6. Count Vowels
-
-Complete the function that counts how many vowels (a, e, i, o, u) are in a string.
-
-This introduces string processing with loops. You'll need to examine each character in the string and check if it's a vowel.
-
-> **Practice Wishful Thinking:** The function `charAt(str, i)` is provided for you, what other functions do you need to help you with this problem? Perhaps one to check if a character is a vowel?
-
-```js
-// The `charAt` function is provided for you. It returns the character at a specific position.
-// Examples:
-//   charAt('abc', 0) returns 'a'
-//   charAt('donkey', 3) returns 'k'
-function charAt(str, i) {
-    return str[i];
-}
-
-function countVowels(str) {
-    // your code here
-}
-
-console.log(countVowels('apple')); // 2
-console.log(countVowels('javascript')); // 3
-console.log(countVowels('sky')); // 0
-```
-
-## 7. Right-Angled Triangle
-
-Complete the following function that returns an isosceles right-angled triangle of varying height.
-
-```
-height = 1
-*
-
-height = 2
-*
-* *
-
-height = 3
-*
-* *
-* * *
-
-height = 4
-*
-* *
-* * *
-* * * *
-```
-
-> **Practice Wishful Thinking:** How might the `repeat` function from Question 5 help you solve this problem?
-
-```js
-function rightAngledTriangle(height) {
-    // your code here
-}
-
-console.log(rightAngledTriangle(3));
-console.log(rightAngledTriangle(4));
-```
-
-## 8. Diamond
-
-Complete the following function that returns a diamond shape.
-
-```
-width = 1
-*
-
-width = 2
- *
-* *
- *
-
-width = 3
-  *
- * *
-* * *
- * *
-  *
-
-width = 4
-   *
-  * *
- * * *
-* * * *
- * * *
-  * *
-   *
-```
-
-Using width = 3 as an example, the actual string representation (with special characters) would be:
-
-```js
-'  *\n * *\n* * *\n * *\n  *';
-```
-
-> **Practice Wishful Thinking:** Consider what smaller functions you might need to help you piece together this shape. What patterns do you notice in the diamond structure?
-
-```js
-function diamond(width) {
-    // your code here
-}
-
-console.log(diamond(3));
-console.log(diamond(4));
-```
-
-## 9. Sum of Digits
-
-Complete the following function that returns the sum of all digits in a given number. The number of digits that `n` contains is provided to aid you in writing your loop.
-
-**Examples:**
-
--   12345 → 1 + 2 + 3 + 4 + 5 = 15
--   2025 → 2 + 0 + 2 + 5 = 9
-
-> **Practice Wishful Thinking:** Break this problem down by imagining you already have helper functions to solve the subproblems:
+> **Practice Wishful Thinking:** You already have a `sumArray` function from question 1 that adds up all elements in an array. Use wishful thinking to break this problem down:
 >
-> -   Wish for a function `getLastDigit(number)` that extracts the rightmost digit (hint: use `% 10`)
-> -   Wish for a function `removeLastDigit(number)` that removes the rightmost digit (hint: use `Math.floor(number / 10)`)
+> -   Wish for a function `sumArray(array)` that calculates the total sum
+> -   Wish for a function `getArrayLength(array)` that returns the number of elements
+> -   Focus on the main logic: average = total sum ÷ number of elements
 >
-> Write your main solution using these imaginary helpers first, focusing on the overall algorithm: repeatedly extract the last digit, add it to your sum, then remove it from the number. Once you understand this pattern, implement each helper function.
+> Write your main function using these imaginary helpers first, then implement them (or reuse the `sumArray` function you already have from question 1).
 
 ```js
-function digitSum(n, numberOfDigits) {
+function averageArray(array) {
     // your code here
 }
 
-console.log(digitSum(12345, 5)); // 15
-console.log(digitSum(9876, 4)); // 30
-console.log(digitSum(1001, 4)); // 2
+console.log(averageArray([1, 2, 3, 4, 5])); // 3
+console.log(averageArray([10, 20, 30])); // 20
 ```
 
-## 10. Challenge: Fibonacci Sequence
+## 5. Filter Positive Numbers
 
-The Fibonacci function can be expressed mathematically as follows:
+Complete the function that returns a new array containing only the positive numbers.
 
-$$
-\begin{equation}
-       fibonacci(n) =
-        \begin{cases}
-            0 & \text{if } n = 1 \\
-            1 & \text{if } n = 2 \\
-            fibonacci(n - 1) + fibonacci(n - 2) & \text{if } n > 2
-        \end{cases}
-    \end{equation}
-$$
+This problem introduces array creation and filtering. You'll need to examine each element and decide whether to include it in the result array.
 
-This is a recursive definition where, apart from the base cases of `n = 1` and `n = 2` (which evaluate to 0 and 1 respectively), we wishfully think that the `fibonacci` function works as intended for smaller values.
+> **Practice Wishful Thinking:** Break this filtering problem down by thinking about what helper functions might be useful. Consider what condition you need to check for each element, and how you might separate that logic from the main filtering algorithm.
 
 ```js
-function fibonacci(n) {
+function getPositiveNumbers(array) {
     // your code here
 }
 
-console.log(fibonacci(3)); // 1
-console.log(fibonacci(6)); // 5
+console.log(getPositiveNumbers([1, -3, 5, -2, 7])); // [1, 5, 7]
+console.log(getPositiveNumbers([-5, -1, -9])); // []
+```
+
+## 6. Reverse Array
+
+Complete the function that returns a new array with elements in reverse order.
+
+This problem teaches you how to build a new array by accessing elements in a different order than they appear in the original array.
+
+```js
+function reverseArray(array) {
+    // your code here
+}
+
+console.log(reverseArray([1, 2, 3])); // [3, 2, 1]
+console.log(reverseArray(['a', 'b', 'c', 'd'])); // ["d", "c", "b", "a"]
+```
+
+## 7. Generate Multiplication Array
+
+Complete the following function that returns an array containing the first k multiples of a given number n.
+
+This problem combines array creation with mathematical calculations. You'll need to use a loop to generate each multiple and store it into an array using `.push()`.
+
+> **Practice Wishful Thinking:** Consider what mathematical operations you need to perform repeatedly, and how you might break down the problem into smaller, manageable pieces.
+
+```js
+function multiplication(n, k) {
+    // your code here
+}
+
+console.log(multiplication(2, 5)); // [2, 4, 6, 8, 10]
+console.log(multiplication(3, 4)); // [3, 6, 9, 12]
+console.log(multiplication(5, 3)); // [5, 10, 15]
+console.log(multiplication(10, 0)); // []
+```
+
+## 8. Calculate Differences from Maximum
+
+Complete the function that returns a new array where each element represents how far that element is from the maximum value in the original array.
+
+This problem combines finding the maximum value with array transformation. For each element, you'll calculate the absolute difference between that element and the maximum value in the array.
+
+> **Practice Wishful Thinking:** Consider how you might break this problem into steps. Think about what you need to find first, and then what calculations you need to perform on each element of the array.
+
+```js
+function differencesFromMax(array) {
+    // your code here
+}
+
+console.log(differencesFromMax([1, 5, 3, 9, 2])); // [8, 4, 6, 0, 7] (differences from max value 9)
+console.log(differencesFromMax([10, 10, 10])); // [0, 0, 0] (all elements equal the max)
+console.log(differencesFromMax([3, 1, 4, 1, 5])); // [2, 4, 1, 4, 0] (differences from max value 5)
+```
+
+## 9. Analyze Array Pattern
+
+Complete the following function that determines whether an array of numbers is:
+
+-   **Ascending** – each element is greater than the previous
+-   **Non-descending** – each element is greater than or equal to the previous
+-   **Descending** – each element is smaller than the previous
+-   **Non-ascending** – each element is smaller than or equal to the previous
+-   **Constant** – all elements are equal
+-   **Unsorted** – none of the above
+
+This is a complex problem that requires you to analyze relationships between consecutive elements throughout the entire array.
+
+> **Practice Wishful Thinking:** This problem involves checking multiple conditions. Consider what helper functions might be useful for checking different types of patterns. Think about the order of your checks carefully – some patterns are more specific than others.
+
+```js
+function checkArray(array) {
+    // your code here
+}
+
+console.log(checkArray([1, 2, 3, 4, 5])); // 'Ascending'
+console.log(checkArray([5, 4, 3, 2, 1])); // 'Descending'
+console.log(checkArray([1, 1, 1, 1, 1])); // 'Constant'
+console.log(checkArray([1, 2, 2, 3, 4])); // 'Non-descending'
+console.log(checkArray([5, 4, 4, 3, 2])); // 'Non-ascending'
+console.log(checkArray([1, 2, 4, 3, 5])); // 'Unsorted'
 ```
