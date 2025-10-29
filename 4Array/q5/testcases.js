@@ -108,7 +108,8 @@ module.exports = {
             input: [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
             expected: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             isPublic: false,
-            description: 'Filter positive numbers from [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]',
+            description:
+                'Filter positive numbers from [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]',
         },
         {
             input: [[-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10]],
