@@ -24,6 +24,7 @@ class StudentFileProcessor {
             instructorFiles: 0,
             directories: 0,
             settings: 0,
+            hiddenFilesSkipped: 0,
         };
     }
 
@@ -42,6 +43,11 @@ class StudentFileProcessor {
 
             // Copy all files first (excluding target directory)
             await this.copyAllFiles(this.rootDir, this.outputDir);
+
+            // Log hidden files skipped
+            if (this.processedCount.hiddenFilesSkipped > 0) {
+                console.log(`🙈 Skipped ${this.processedCount.hiddenFilesSkipped} hidden files and directories`);
+            }
 
             // Process files in the output directory
             await this.removeSolutionFiles();
@@ -68,6 +74,13 @@ class StudentFileProcessor {
 
             // Skip the output directory itself to avoid recursion
             if (sourcePath === this.outputDir) {
+                continue;
+            }
+
+            // Skip hidden files and directories (starting with .)
+            // Exception: Allow .vscode directory as we need it for settings replacement
+            if (entry.startsWith('.') && entry !== '.vscode') {
+                this.processedCount.hiddenFilesSkipped++;
                 continue;
             }
 
@@ -142,14 +155,12 @@ class StudentFileProcessor {
     }
 
     /**
-     * Clean up instructor directories and GitHub workflows
+     * Clean up instructor directories
      */
     async cleanupDirectories() {
-        console.log('🧹 Cleaning up instructor directories and GitHub workflows...');
+        console.log('🧹 Cleaning up instructor directories...');
 
-        const directoriesToRemove = ['instructor', 'instructor-notes', 'solutions', '.github'];
-
-        const filesToRemove = ['.gitignore'];
+        const directoriesToRemove = ['instructor', 'instructor-notes', 'solutions'];
 
         // Remove directories
         for (const dirName of directoriesToRemove) {
@@ -163,21 +174,6 @@ class StudentFileProcessor {
                 }
             } catch (error) {
                 console.log(`   ⚠️  Could not remove ${dirName}/ directory: ${error.message}`);
-            }
-        }
-
-        // Remove files
-        for (const fileName of filesToRemove) {
-            const filePath = path.join(this.outputDir, fileName);
-
-            try {
-                if (fs.existsSync(filePath)) {
-                    await unlink(filePath);
-                    this.processedCount.directories++; // Using same counter for simplicity
-                    console.log(`   ✓ Removed ${fileName} file`);
-                }
-            } catch (error) {
-                console.log(`   ⚠️  Could not remove ${fileName} file: ${error.message}`);
             }
         }
     }
@@ -265,7 +261,8 @@ class StudentFileProcessor {
         console.log(`🎓 Instructor files removed: ${this.processedCount.instructorFiles}`);
         console.log(`📁 Directories cleaned: ${this.processedCount.directories}`);
         console.log(`⚙️  Settings files updated: ${this.processedCount.settings}`);
-        console.log(`📂 Student version available at: ${this.outputDir}`);
+        console.log(`� Hidden files skipped: ${this.processedCount.hiddenFilesSkipped}`);
+        console.log(`�📂 Student version available at: ${this.outputDir}`);
         console.log('═'.repeat(50));
     }
 }
