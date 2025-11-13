@@ -155,14 +155,12 @@ class StudentFileProcessor {
     }
 
     /**
-     * Clean up instructor directories and GitHub workflows
+     * Clean up instructor directories
      */
     async cleanupDirectories() {
-        console.log('🧹 Cleaning up instructor directories and GitHub workflows...');
+        console.log('🧹 Cleaning up instructor directories...');
 
-        const directoriesToRemove = ['instructor', 'instructor-notes', 'solutions', '.github'];
-
-        const filesToRemove = ['.gitignore'];
+        const directoriesToRemove = ['instructor', 'instructor-notes', 'solutions'];
 
         // Remove directories
         for (const dirName of directoriesToRemove) {
@@ -176,21 +174,6 @@ class StudentFileProcessor {
                 }
             } catch (error) {
                 console.log(`   ⚠️  Could not remove ${dirName}/ directory: ${error.message}`);
-            }
-        }
-
-        // Remove files
-        for (const fileName of filesToRemove) {
-            const filePath = path.join(this.outputDir, fileName);
-
-            try {
-                if (fs.existsSync(filePath)) {
-                    await unlink(filePath);
-                    this.processedCount.directories++; // Using same counter for simplicity
-                    console.log(`   ✓ Removed ${fileName} file`);
-                }
-            } catch (error) {
-                console.log(`   ⚠️  Could not remove ${fileName} file: ${error.message}`);
             }
         }
     }
