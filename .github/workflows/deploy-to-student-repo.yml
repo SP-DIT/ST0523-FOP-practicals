@@ -108,6 +108,10 @@ jobs:
                   rm -rf instructor/ instructor-notes/ solutions/ .github/ 2>/dev/null || true
                   echo "✓ Cleaned up instructor directories and GitHub workflows"
 
+                  # Remove instructor-specific files
+                  rm -f .gitignore 2>/dev/null || true
+                  echo "✓ Removed instructor-specific files (.gitignore)"
+
                   echo "::endgroup::"
 
             - name: Clone student repository
@@ -149,7 +153,7 @@ jobs:
                     # Get the practical number for commit message
                     BRANCH_NAME=${GITHUB_REF#refs/heads/}
                     PRACTICAL_NUMBER=$(echo "$BRANCH_NAME" | grep -o '[0-9]\+')
-                    
+
                     # Create a single squashed commit with clean message
                     git commit -m "🎓 Practical content deployment - SP-DIT/ST0523-FOP-practicals (practical-${PRACTICAL_NUMBER}) - $(date '+%Y-%m-%d %H:%M:%S UTC') - Clean deployment with squashed commits"
 
