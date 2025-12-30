@@ -5,7 +5,7 @@
         "plaintext": false,
         "markdown": false,
         "scminput": false,
-        "javascript": false
+        "javascript": true
     },
     "chat.extensionTools.enabled": true,
     "chat.agent.enabled": true

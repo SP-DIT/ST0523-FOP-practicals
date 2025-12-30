@@ -8,11 +8,13 @@ Define the task to achieve, including specific requirements, constraints, and su
 
 1. For the given problem, problem ${input:problem}, read the problem statement from the README.md from the root directory.
     1. You can search for "## ${input:problem}" in the README.md to find the relevant section.
-2. Populate the `testcase.js` file with 20 testcases of different normal and edge cases
-3. Generate a `solution.js` file that solves the problem.
-4. Generate a `code.js` file that contains only the function signature and sample calls with expected outputs as comments.
-5. You can refer to `./instructor/sample` directory for reference of the file formats.
-6. Stage and commit the changes.
+2. For the selected problem, do the following:
+    1. Create a new directory named `q${input:question}` under the problem set directory (e.g. ${input:problem}TopicName).
+    2. Populate the `testcase.js` file with 20 testcases of different normal and edge cases
+    3. Generate a `solution.js` file that solves the problem.
+    4. Generate a `code.js` file that contains only the function signature and sample calls with expected outputs as comments.
+3. You can refer to `./instructor/sample` directory for reference of the file formats.
+4. Stage and commit the changes.
 
 # Constraints
 
