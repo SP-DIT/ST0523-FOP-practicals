@@ -124,5 +124,11 @@ module.exports = {
             isPublic: false,
             description: 'Water vs Fire should be super effective',
         },
+        {
+            input: ['electric', 'electric', condensedTypeChart],
+            expected: 0.5,
+            isPublic: false,
+            description: 'Electric vs Electric should be not very effective',
+        },
     ],
 };
