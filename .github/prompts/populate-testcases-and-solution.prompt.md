@@ -44,7 +44,8 @@ Define the task to achieve, including specific requirements, constraints, and su
     },
     ```
 3. The first three testcases will be public.
-4. The available syntax to be used to solve the problems is to be read from `./instructor/syntax-list.md`
+4. For `code.js` and `solution.js` remember to include the `module.exports` statement at the end of the file.
+5. The available syntax to be used to solve the problems is to be read from `./instructor/syntax-list.md`
 
 # Success criteria
 
