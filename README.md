@@ -1,5 +1,7 @@
 # Objects Practical
 
+> Press `CTRL + SHIFT + V` to preview the rendered pdf
+
 ## 1. Create Pikachu Object
 
 Create a function that returns an object representing the pokemon "Pikachu" with specific properties.
