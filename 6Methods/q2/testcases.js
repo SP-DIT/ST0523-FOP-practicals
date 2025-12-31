@@ -93,12 +93,12 @@ module.exports = {
         {
             input: [50],
             commands: [
-                { method: 'deposit', params: [25.50] },
+                { method: 'deposit', params: [25.5] },
                 { method: 'getBalance', params: [] },
             ],
             expected: [
                 { value: undefined, options: {} },
-                { value: 75.50, options: {} },
+                { value: 75.5, options: {} },
             ],
             isPublic: false,
             description: 'Deposit with decimal: 50 + 25.50 = 75.50',
@@ -118,12 +118,8 @@ module.exports = {
         },
         {
             input: [0],
-            commands: [
-                { method: 'getBalance', params: [] },
-            ],
-            expected: [
-                { value: 0, options: {} },
-            ],
+            commands: [{ method: 'getBalance', params: [] }],
+            expected: [{ value: 0, options: {} }],
             isPublic: false,
             description: 'Zero initial balance: getBalance should return 0',
         },

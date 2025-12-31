@@ -14,8 +14,8 @@ function createShop(items) {
             return `Insufficient stock for ${itemName}`;
         },
         getAvailableItemList() {
-            return items.filter(item => item.quantity > 0);
-        }
+            return items.filter((item) => item.quantity > 0);
+        },
     };
 }
 

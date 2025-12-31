@@ -12,7 +12,8 @@ module.exports = {
             input: [200, 50, 100],
             expected: [100, 150],
             isPublic: true,
-            description: 'Transfer 100 from account1(200) to account2(50): account1 should have 100, account2 should have 150',
+            description:
+                'Transfer 100 from account1(200) to account2(50): account1 should have 100, account2 should have 150',
         },
         {
             input: [1000, 500, 250],
@@ -24,7 +25,8 @@ module.exports = {
             input: [100, 0, 100],
             expected: [0, 100],
             isPublic: true,
-            description: 'Transfer entire balance 100 from account1(100) to account2(0): account1 should have 0, account2 should have 100',
+            description:
+                'Transfer entire balance 100 from account1(100) to account2(0): account1 should have 0, account2 should have 100',
         },
         // Hidden test cases
         {
@@ -52,8 +54,8 @@ module.exports = {
             description: 'Transfer 300: account1=700, account2=800',
         },
         {
-            input: [100, 100, 25.50],
-            expected: [74.50, 125.50],
+            input: [100, 100, 25.5],
+            expected: [74.5, 125.5],
             isPublic: false,
             description: 'Transfer decimal amount: 100 - 25.50 = 74.50, 100 + 25.50 = 125.50',
         },
@@ -106,7 +108,7 @@ module.exports = {
             description: 'Large amounts: account1 sends 2500',
         },
         {
-            input: [150.75, 250.25, 50.50],
+            input: [150.75, 250.25, 50.5],
             expected: [100.25, 300.75],
             isPublic: false,
             description: 'Decimal balances and transfer: 150.75 - 50.50 = 100.25, 250.25 + 50.50 = 300.75',

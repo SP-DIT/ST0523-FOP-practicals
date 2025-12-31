@@ -1,21 +1,3 @@
-/*
-## 6. Create RPG Item Shop
-
-Given a list of items with their name, price, and quantity, create a shop object that manages inventory and sales. The shop object should have the following methods:
-
--   `buyItem(itemName, quantity)` - if sufficient stock exists:
-    -   Reduce the item's quantity
-    -   Return the total price (item price × quantity purchased)
-    -   If insufficient stock, return the string `"Insufficient stock for [itemName]"`
--   `getAvailableItemList()` - returns an array of items that have quantity greater than 0
-
-> **Practice Wishful Thinking**
->
-> 1. First think about what are the major steps
-> 2. Then think about implementing each of the steps
-> 3. Then consider how you might combine them together.
-*/
-
 function createShop(items) {
     // Your code here
 }

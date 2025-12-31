@@ -53,12 +53,8 @@ module.exports = {
         // Hidden test cases
         {
             input: [],
-            commands: [
-                { method: 'getCurrentQueue', params: [] },
-            ],
-            expected: [
-                { value: [], options: { type: 'JSON' } },
-            ],
+            commands: [{ method: 'getCurrentQueue', params: [] }],
+            expected: [{ value: [], options: { type: 'JSON' } }],
             isPublic: false,
             description: 'Empty queue initially',
         },
