@@ -19,6 +19,9 @@ Define the task to achieve, including specific requirements, constraints, and su
 # Constraints
 
 1. The testcase.js file follows the schema as shown below:
+
+    **For regular function testing (returns a single value):**
+
     ```js
     module.exports = {
         testcases: [
@@ -31,23 +34,91 @@ Define the task to achieve, including specific requirements, constraints, and su
             },
         ],
         options: {
-            type: 'floating point', // Optional field, options: "JSON" or "floating point"
+            type: 'floating point', // Optional field, options: undefined (exact match), 'floating point', 'JSON', or 'commands'
             precision: 6, // Optional field, number of decimal places for floating point comparison
         },
     };
     ```
-2. Each testcase should follow the following format:
+
+    **For command-based testing (returns an object with methods):**
+
+    ```js
+    module.exports = {
+        testcases: [
+            // Public test cases (first 3)
+            {
+                input: [5],
+                commands: [
+                    { method: 'getArea', params: [] },
+                    { method: 'getCircumference', params: [] },
+                ],
+                expected: [
+                    { value: 78.53981633974483, options: { type: 'floating point', precision: 3 } },
+                    { value: 31.41592653589793, options: { type: 'floating point', precision: 3 } },
+                ],
+                isPublic: true,
+                description: 'Circle with radius 5: getArea() and getCircumference()',
+            },
+        ],
+        options: {
+            type: 'commands', // MUST be 'commands' for command-based testing
+        },
+    };
+    ```
+
+2. Each testcase should follow the appropriate format:
+
+    **Regular testcase format:**
+
     ```json
     {
         input: [para1, para2, ...],
         expected: 'expected outcome',
         isPublic: true, // true for the first 3
         description: 'Short description to be displayed in CLI when the testcase fails'
-    },
+    }
     ```
-3. The first three testcases will be public.
-4. For `code.js` and `solution.js` remember to include the `module.exports` statement at the end of the file.
-5. The available syntax to be used to solve the problems is to be read from `./instructor/syntax-list.md`
+
+    **Command-based testcase format:**
+
+    ```json
+    {
+        input: [para1, para2, ...],
+        commands: [
+            { method: 'methodName', params: [param1, param2, ...] },
+            { method: 'anotherMethod', params: [] }
+        ],
+        expected: [
+            { value: expectedValue1, options: { type: 'floating point', precision: 3 } },
+            { value: expectedValue2, options: {} }
+        ],
+        isPublic: true,
+        description: 'Short description to be displayed in CLI when the testcase fails'
+    }
+    ```
+
+3. Options field types:
+
+    - `undefined` or omitted: Exact match comparison (===)
+    - `'floating point'`: Floating point comparison with precision
+    - `'JSON'`: Deep object equality comparison
+    - `'commands'`: Command-based testing for objects with methods
+
+4. For command-based tests:
+
+    - Each `expected` item must have a `value` property and optional `options` property
+    - The `options` for each command can specify comparison type per command
+    - Use this when testing functions that return objects with methods
+
+5. For command-based tests:
+
+    - Each `expected` item must have a `value` property and optional `options` property
+    - The `options` for each command can specify comparison type per command
+    - Use this when testing functions that return objects with methods
+
+6. The first three testcases will be public.
+7. For `code.js` and `solution.js` remember to include the `module.exports` statement at the end of the file.
+8. The available syntax to be used to solve the problems is to be read from `./instructor/syntax-list.md`
 
 # Success criteria
 

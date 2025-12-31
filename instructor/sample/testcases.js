@@ -1,3 +1,6 @@
+// Example 1: Regular function testing (returns a single value)
+// This is used when testing functions that return a direct result
+
 module.exports = {
     testcases: [
         // Public test cases (first 3)
@@ -124,7 +127,48 @@ module.exports = {
         },
     ],
     options: {
-        type: 'floating point',
-        precision: 6,
+        type: 'floating point', // Options: undefined (exact match), 'floating point', 'JSON', or 'commands'
+        precision: 6, // For floating point comparisons, number of decimal places
     },
 };
+
+// Example 2: Command-based testing (for objects with methods)
+// This is used when testing functions that return objects with methods that need to be called
+
+/*
+module.exports = {
+    testcases: [
+        // Public test cases (first 3)
+        {
+            input: [5],
+            commands: [
+                { method: 'getArea', params: [] },
+                { method: 'getCircumference', params: [] },
+            ],
+            expected: [
+                { value: 78.53981633974483, options: { type: 'floating point', precision: 3 } },
+                { value: 31.41592653589793, options: { type: 'floating point', precision: 3 } },
+            ],
+            isPublic: true,
+            description: 'Circle with radius 5: getArea() and getCircumference()',
+        },
+        {
+            input: [10],
+            commands: [
+                { method: 'getArea', params: [] },
+                { method: 'getCircumference', params: [] },
+            ],
+            expected: [
+                { value: 314.1592653589793, options: { type: 'floating point', precision: 3 } },
+                { value: 62.83185307179586, options: { type: 'floating point', precision: 3 } },
+            ],
+            isPublic: true,
+            description: 'Circle with radius 10: getArea() and getCircumference()',
+        },
+        // Add more test cases...
+    ],
+    options: {
+        type: 'commands', // MUST be 'commands' for command-based testing
+    },
+};
+*/
