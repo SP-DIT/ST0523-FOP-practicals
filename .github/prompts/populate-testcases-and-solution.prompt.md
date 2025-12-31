@@ -6,10 +6,10 @@ Define the task to achieve, including specific requirements, constraints, and su
 
 # Task to achieve
 
-1. For the given problem, problem ${input:problem}, read the problem statement from the README.md from the root directory.
-    1. You can search for "## ${input:problem}" in the README.md to find the relevant section.
+1. For the given problem, problem ${input:question}, read the problem statement from the README.md from the root directory.
+    1. You can search for "## ${input:question}" in the README.md to find the relevant section.
 2. For the selected problem, do the following:
-    1. Create a new directory named `q${input:question}` under the problem set directory (e.g. ${input:problem}TopicName).
+    1. Create a new directory named `q${input:question}` under the problem set directory (e.g. ${input:question}TopicName).
     2. Populate the `testcase.js` file with 20 testcases of different normal and edge cases
     3. Generate a `solution.js` file that solves the problem.
     4. Generate a `code.js` file that contains only the function signature and sample calls with expected outputs as comments.
@@ -123,7 +123,7 @@ Define the task to achieve, including specific requirements, constraints, and su
 # Success criteria
 
 1. You are to run the solution against the designed testcases and make sure all the test cases passes.
-    1. You can use `node run pX qY` where `pX` and `qY` corresponds to the problem set number and the question number. (e.g. `node run p${input:problem} q3`)
+    1. You can use `node run pX qY` where `pX` and `qY` corresponds to the problem set number and the question number. (e.g. `node run p${input:question} q3`)
     2. You need to set the NODE_ENV environment variable to `test` to run the testcases.
     3. We are very very likely using powershell so use the following to run the testcases:
         ```ps
