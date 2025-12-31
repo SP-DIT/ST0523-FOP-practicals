@@ -7,6 +7,7 @@ const { exit } = require('process');
 const { studentId, className } = package;
 if (
     process.env.NODE_ENV !== 'test' &&
+    process.env.NODE_ENV !== 'dev' &&
     (!studentId ||
         !className ||
         !/^(p|P)[0-9]{7}$/.test(studentId) ||
@@ -117,9 +118,15 @@ function getCodeAndTestCasesPath(folderName, subFolderName) {
 function silentRequire(codePath) {
     const originalLog = console.log;
     console.log = () => {};
-    const runCode = require(codePath); // Assuming code.js exports a `runCode` function
-    console.log = originalLog;
-    return runCode;
+    try {
+        const runCode = require(codePath);
+        console.log = originalLog;
+        return runCode;
+    } catch (error) {
+        console.log = originalLog;
+        // Re-throw with more context
+        throw new Error(`Failed to load ${codePath}: ${error.message}`);
+    }
 }
 
 function silentRunCode(runCode) {
@@ -181,6 +188,58 @@ function formatTestCaseOutput(input, expected, actual) {
     return `\t\tInput:\n${formattedInput}\n\t\tExpected:\n${formattedExpected}\n\t\tGot:\n${formattedActual}`;
 }
 
+// Function to format command-based test case output
+function formatCommandTestCaseOutput(input, commands, expected, actual) {
+    const inputStr = util.inspect(input, {
+        depth: 5,
+        maxArrayLength: 100,
+        maxStringLength: 200,
+        breakLength: 60,
+        compact: 5,
+        colors: false,
+        showHidden: false,
+    });
+
+    const formattedInput = inputStr
+        .split('\n')
+        .map((line) => `\t\t  ${line}`)
+        .join('\n');
+
+    let output = `\t\tInput:\n${formattedInput}\n\t\tCommands executed:\n`;
+
+    for (let i = 0; i < commands.length; i++) {
+        const command = commands[i];
+        const commandStr =
+            command.params.length > 0 ? `${command.method}(${command.params.join(', ')})` : `${command.method}()`;
+
+        const expectedStr = util.inspect(expected[i], {
+            depth: 5,
+            maxArrayLength: 100,
+            maxStringLength: 200,
+            breakLength: 60,
+            compact: false,
+            colors: false,
+            showHidden: false,
+        });
+
+        const actualStr = util.inspect(actual[i], {
+            depth: 5,
+            maxArrayLength: 100,
+            maxStringLength: 200,
+            breakLength: 60,
+            compact: false,
+            colors: false,
+            showHidden: false,
+        });
+
+        output += `\t\t  ${i + 1}. ${commandStr}\n`;
+        output += `\t\t     Expected: ${expectedStr}\n`;
+        output += `\t\t     Got: ${actualStr}\n`;
+    }
+
+    return output;
+}
+
 function deepEqual(a, b) {
     if (a === b) return true;
 
@@ -206,14 +265,74 @@ function compareResults(result, expected, options) {
     return result === expected;
 }
 
+// Function to run command-based test cases
+function runCommandBasedTest(runCode, testCase) {
+    const { input, expected, commands } = testCase;
+
+    // Create the object using the input parameters
+    const obj = runCode(...input);
+
+    // Execute each command and collect results
+    const actualResults = [];
+    let allPassed = true;
+
+    for (let i = 0; i < commands.length; i++) {
+        const command = commands[i];
+        const expectedItem = expected[i];
+
+        try {
+            // Check if method exists
+            if (typeof obj[command.method] !== 'function') {
+                throw new TypeError(`${command.method} is not a function or does not exist on the returned object`);
+            }
+
+            // Execute the method on the object
+            const actualResult = obj[command.method](...command.params);
+            actualResults.push(actualResult);
+
+            // Get comparison options (can be per-command or use defaults)
+            const compareOptions = expectedItem.options || {};
+
+            // Compare the result
+            const passed = compareResults(actualResult, expectedItem.value, compareOptions);
+
+            if (!passed) {
+                allPassed = false;
+            }
+        } catch (error) {
+            // If there's an error executing the command, treat it as a failed test
+            actualResults.push(`Error: ${error.message}`);
+            allPassed = false;
+        }
+    }
+
+    return {
+        passed: allPassed,
+        expected: expected.map((e) => e.value),
+        actual: actualResults,
+        commands,
+    };
+}
+
 // Function to run the test cases
 function runTestCases(runCode, testcases, options) {
     return testcases.map((testCase, testIndex) => {
         const { input, expected, isPublic, description } = testCase;
         try {
-            const result = runCode(...input);
-            const passed = compareResults(result, expected, options);
-            return { testIndex, passed, input, expected, isPublic, description, actual: result };
+            let result;
+
+            // Handle commands-based testing
+            if (options.type === 'commands') {
+                result = runCommandBasedTest(runCode, testCase);
+            } else {
+                // Handle regular testing (non-commands)
+                const actual = runCode(...input);
+                const passed = compareResults(actual, expected, options);
+                result = { passed, expected, actual };
+            }
+
+            // Return common structure with test-specific results
+            return { testIndex, input, isPublic, description, ...result };
         } catch (error) {
             return { testIndex, error: error };
         }
@@ -237,19 +356,33 @@ function runQuestions() {
     }
 
     const allResults = questions.map((question) => {
-        const { codePath, testCasesPath } = getCodeAndTestCasesPath(problemSet, question);
-        let runCode = silentRequire(codePath);
-        const { testcases, options = {} } = require(testCasesPath); // Destructure testcases and options
+        try {
+            const { codePath, testCasesPath } = getCodeAndTestCasesPath(problemSet, question);
+            let runCode = silentRequire(codePath);
+            const { testcases, options = {} } = require(testCasesPath); // Destructure testcases and options
 
-        if (options.monkeyPatch) {
-            runCode = options.monkeyPatch(runCode);
+            if (options.monkeyPatch) {
+                runCode = options.monkeyPatch(runCode);
+            }
+
+            runCode = silentRunCode(runCode);
+
+            // Run the test cases
+            const results = runTestCases(runCode, testcases, options);
+            return { question, results };
+        } catch (error) {
+            // If there's an error loading or running the question, return error for all tests
+            console.error(`\nError in ${problemSet}/${question}: ${error.message}\n`);
+            return {
+                question,
+                results: [
+                    {
+                        testIndex: 0,
+                        error: error,
+                    },
+                ],
+            };
         }
-
-        runCode = silentRunCode(runCode);
-
-        // Run the test cases
-        const results = runTestCases(runCode, testcases, options);
-        return { question, results };
     });
 
     // log results
@@ -296,7 +429,19 @@ function runQuestions() {
                         (testCase.description ? ` (${testCase.description})` : ''),
                 );
                 if (testCase.isPublic) {
-                    console.log(formatTestCaseOutput(testCase.input, testCase.expected, testCase.actual));
+                    // Use command-based formatting if commands are present
+                    if (testCase.commands) {
+                        console.log(
+                            formatCommandTestCaseOutput(
+                                testCase.input,
+                                testCase.commands,
+                                testCase.expected,
+                                testCase.actual,
+                            ),
+                        );
+                    } else {
+                        console.log(formatTestCaseOutput(testCase.input, testCase.expected, testCase.actual));
+                    }
                     console.log();
                 }
             }
