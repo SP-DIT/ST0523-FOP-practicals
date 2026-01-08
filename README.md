@@ -84,6 +84,7 @@ This problem introduces nested object access - you need to navigate through the 
 > So `typeChart["fire"]["water"]` would check the effectiveness of using `fire` to attack `water`.
 >
 > In question 6, the given typeChart is a condensed version
+> In question 7 onwards, the full typeChart is imported from the `./5Objects/typeChart.js` file.
 
 ```js
 const condensedTypeChart = {
