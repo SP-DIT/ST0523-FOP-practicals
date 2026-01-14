@@ -170,7 +170,7 @@ console.log(scoreStats([100, 98, 95, 97, 96]));
 
 ## 5. Create Number Sequence Object with State Management
 
-Given an array of numbers, create a object that iterates through the numbers with the following methods:
+Given an array of numbers, create a object that iterates through the numbers in the array with the following methods:
 
 -   `next()`: returns the next number in the sequence and advances the position. When the end is reached, it loops back to the beginning
 -   `reset()`: resets the sequence back to the start (position 0)
