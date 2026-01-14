@@ -1,167 +1,195 @@
-# Objects with Methods Practical
+# Mock EST Set A - Practice Questions
 
 > Press `CTRL + SHIFT + V` to preview the rendered pdf
 
-## 1. Create Circle Object with Methods
+## 1. Find the Shape with the Largest Area
 
-Given the radius of a circle, create a circle object with methods to calculate its area and circumference.
+Given an array of shape objects, find and return the shape with the largest area.
 
-This problem introduces you to creating objects with methods (functions stored as properties). You'll need to:
+Each shape object has a `type` property that identifies whether it's a `'circle'`, `'rectangle'`, or `'triangle'`, along with the properties needed to calculate its area:
 
--   Create an object with a `radius` property
--   Add two methods:
--   `getArea()`: returns the area (π × radius²)
--   `getCircumference()`: returns the circumference (2 × π × radius)
+**Area Formulas:**
 
-**Hints**
+-   Circle: `π × radius × radius`
+-   Rectangle: `width × height`
+-   Triangle: `0.5 × base × height`
 
--   Use the `this` keyword to access the object's `radius` property within the methods
+**Hints:**
+
 -   Use `Math.PI` for the value of π
 
 ```js
-function createCircle(radius) {
+function largestArea(shapes) {
     // Your code here
 }
 
 // Example usage:
-const circle = createCircle(5);
-console.log(circle.getArea()); // 78.53981633974483
-console.log(circle.getCircumference()); // 31.41592653589793
+console.log(
+    largestArea([
+        { type: 'circle', radius: 3 },
+        { type: 'rectangle', width: 4, height: 5 },
+        { type: 'triangle', base: 6, height: 7 },
+        { type: 'rectangle', width: 3, height: 5 },
+    ]),
+); // { type: 'rectangle', width: 4, height: 5 }
+// The first rectangle has the largest area: 20
+
+console.log(
+    largestArea([
+        { type: 'circle', radius: 6 },
+        { type: 'rectangle', width: 4, height: 5 },
+        { type: 'circle', radius: 10 },
+        { type: 'triangle', base: 6, height: 7 },
+        { type: 'triangle', base: 3, height: 7 },
+    ]),
+); // { type: 'circle', radius: 10 }
+// The second circle has the largest area: 314.16 (approximately)
 ```
 
-## 2. Create Bank Account Object
+---
 
-Given the `initialBalance`, create a bank account object with methods to `deposit`, `withdraw`, and `checkBalance`.
+## 2. Calculate Total Contribution from Young Male Volunteers
 
-This problem builds on object methods by introducing state management. The object needs to:
+Given an array of volunteer objects, calculate the total contribution time from male volunteers who are below 30 years of age.
 
--   `deposit(amount)`: adds to the balance
--   `withdraw(amount)`: subtracts from the balance
--   `getBalance()`: returns the current balance
+Each volunteer object has the following properties:
 
-**Hint:** All three methods will need to use `this.balance` to work with the account's balance.
+-   `name`: string
+-   `age`: number
+-   `gender`: string (`'male'` or `'female'`)
+-   `contribution`: number (hours contributed)
 
 ```js
-function createBankAccount(initialBalance) {
+function totalTimeYoungMaleVolunteers(volunteers) {
     // Your code here
 }
 
 // Example usage:
-const account = createBankAccount(100);
-account.deposit(50);
-account.withdraw(30);
-console.log(account.getBalance()); // 120
+console.log(
+    totalTimeYoungMaleVolunteers([
+        { name: 'John', age: 25, gender: 'male', contribution: 5 },
+        { name: 'Jane', age: 22, gender: 'female', contribution: 8 },
+        { name: 'Mike', age: 28, gender: 'male', contribution: 10 },
+        { name: 'Emily', age: 32, gender: 'female', contribution: 7 },
+        { name: 'Tom', age: 32, gender: 'male', contribution: 7 },
+    ]),
+); // 15
+// John (5) + Mike (10) = 15
+
+console.log(
+    totalTimeYoungMaleVolunteers([
+        { name: 'Alice', age: 27, gender: 'female', contribution: 6 },
+        { name: 'Bob', age: 24, gender: 'male', contribution: 9 },
+        { name: 'Charlie', age: 29, gender: 'male', contribution: 4 },
+        { name: 'Diana', age: 31, gender: 'female', contribution: 10 },
+        { name: 'Elliot', age: 12, gender: 'male', contribution: 10 },
+    ]),
+); // 23
+// Bob (9) + Charlie (4) + Elliot (10) = 23
 ```
 
-## 3. Add Transfer Method to Bank Account
+---
 
-Continuing from Question 2, add a transfer method that moves money between accounts.
+## 3. Set Weight Category for Each Patient
 
--   `transfer(anotherAccount)`: Withdraw from current account and deposit into `anotherAccount`.
+Given an array of patient objects with `name`, `weight` (in kg), and `height` (in meters), add a `category` property to each patient based on their BMI.
 
-```js
-function createBankAccount(initialBalance) {
-    // Reuse your code from Q2 and add the additional method
-}
+**BMI Calculation:**
 
-// Example usage:
-const account1 = createBankAccount(200);
-const account2 = createBankAccount(50);
-account1.transfer(100, account2);
-console.log(account1.getBalance()); // 100
-console.log(account2.getBalance()); // 150
-```
+$$
+BMI = weight (kg) / (height (m) × height (m))
+$$
 
-## 4. Create RPG Character with Health System
-
-Given the `maxHealth` of a character, create a character object for an RPG game with the following methods.
-
--   `takeDamage(amount)`: reduces health by the amount, but health cannot go below 0
--   `heal(amount)`: increases health by the amount, but health cannot exceed `maxHealth`
--   `getHealth()`: returns the current health
--   `isAlive()`: returns `true` if health is greater than 0, `false` otherwise
-
-**Hint:** Use conditional statements to ensure health stays within valid bounds (0 to maxHealth).
+| Category    | BMI Range       |
+| ----------- | --------------- |
+| Underweight | BMI < 18.5      |
+| Normal      | 18.5 ≤ BMI < 25 |
+| Overweight  | 25 ≤ BMI < 30   |
+| Obesity     | BMI ≥ 30        |
 
 ```js
-function createCharacter(maxHealth) {
+function setWeightCategory(patients) {
     // Your code here
 }
 
 // Example usage:
-const character = createCharacter(100); // maxHealth of 100
-console.log(character.takeDamage(30)); // 70, character takes 30 damage and has 70 health left
-console.log(character.heal(20)); // 90, character heals 20 and has 90 health
-console.log(character.getHealth()); // 90, current health is 90
-console.log(character.isAlive()); // true, character is alive
-console.log(character.takeDamage(80)); // 10, character takes 80 damage and has 10 health left
-console.log(character.heal(120)); // 100, character heals 120 but health caps at maxHealth of 100
-console.log(character.takeDamage(999)); // 0, character takes 999 damage and health drops to 0
-console.log(character.isAlive()); // false, character is dead
+console.log(
+    setWeightCategory([
+        { name: 'Alice', weight: 50, height: 1.6 },
+        { name: 'Bob', weight: 80, height: 1.75 },
+        { name: 'Charlie', weight: 55, height: 1.8 },
+    ]),
+);
+// [
+//   { name: 'Alice', weight: 50, height: 1.6, category: 'Normal' },
+//   { name: 'Bob', weight: 80, height: 1.75, category: 'Overweight' },
+//   { name: 'Charlie', weight: 55, height: 1.8, category: 'Underweight' },
+// ]
+
+console.log(
+    setWeightCategory([
+        { name: 'David', weight: 90, height: 1.9 },
+        { name: 'Eva', weight: 45, height: 1.5 },
+        { name: 'Frank', weight: 70, height: 1.7 },
+    ]),
+);
+// [
+//   { name: 'David', weight: 90, height: 1.9, category: 'Normal' },
+//   { name: 'Eva', weight: 45, height: 1.5, category: 'Underweight' },
+//   { name: 'Frank', weight: 70, height: 1.7, category: 'Overweight' },
+// ]
 ```
 
-## 5. Create Queue System
+---
 
-Create a queue system object that manages customer queue numbers, similar to what you see at McDonald's or bubble tea shops.
+## 4. Calculate Score Statistics
 
--   `takeANumber()` - assigns the next queue number (starting from 1), adds it to the queue, and returns it
--   `serveNextCustomer()` - returns the first customer's number from the queue and removes them from the queue
--   `getCurrentQueue()` - returns the array of all queue numbers currently waiting
+Given an array of scores, return an object containing statistical information about the scores:
 
-**Note:** This is a First In, First Out system - customers who arrive first should be served first.
+-   `highest`: the highest score in the array
+-   `lowest`: the lowest score in the array
+-   `average`: the average score
 
 ```js
-function createQueueSystem() {
+function scoreStats(scores) {
     // Your code here
 }
 
 // Example usage:
-const queue = createQueueSystem();
-console.log(queue.takeANumber()); // 1
-console.log(queue.takeANumber()); // 2
-console.log(queue.getCurrentQueue()); // [1, 2]
-console.log(queue.serveNextCustomer()); // 1
-console.log(queue.getCurrentQueue()); // [2]
-console.log(queue.takeANumber()); // 3
-console.log(queue.getCurrentQueue()); // [2, 3]
+console.log(scoreStats([85, 92, 78, 90, 88]));
+// { highest: 92, lowest: 78, average: 86.6... }
+
+console.log(scoreStats([70, 75, 80, 85, 90, 95]));
+// { highest: 95, lowest: 70, average: 82.5... }
+
+console.log(scoreStats([100, 98, 95, 97, 96]));
+// { highest: 100, lowest: 95, average: 97.2... }
 ```
 
-## 6. Create RPG Item Shop
+---
 
-Given a list of items with their name, price, and quantity, create a shop object that manages inventory and sales. The shop object should have the following methods:
+## 5. Create Number Sequence Object with State Management
 
--   `buyItem(itemName, quantity)` - if sufficient stock exists:
-    -   Reduce the item's quantity
-    -   Return the total price (item price × quantity purchased)
-    -   If insufficient stock, return the string `"Insufficient stock for [itemName]"`
--   `getAvailableItemList()` - returns an array of items that have quantity greater than 0
+Given an array of numbers, create a object that iterates through the numbers with the following methods:
 
-> **Practice Wishful Thinking**
->
-> 1. First think about what are the major steps
-> 2. Then think about implementing each of the steps
-> 3. Then consider how you might combine them together.
+-   `next()`: returns the next number in the sequence and advances the position. When the end is reached, it loops back to the beginning
+-   `reset()`: resets the sequence back to the start (position 0)
+-   `current()`: returns the current number without advancing the position
 
 ```js
-function createShop(items) {
+function createNumberSequence(numbers) {
     // Your code here
 }
 
 // Example usage:
-const shop = createShop([
-    { name: 'Health Potion', price: 10, quantity: 5 },
-    { name: 'Mana Potion', price: 15, quantity: 3 },
-]);
+const sequence = createNumberSequence([10, 20, 30]);
 
-console.log(shop.buyItem('Health Potion', 2)); // 20
-console.log(shop.getAvailableItemList());
-//    [ { name: 'Health Potion', price: 10, quantity: 3 }, { name: 'Mana Potion', price: 15, quantity: 3 } ]
-//    Health Potion quantity reduced to 3
-
-console.log(shop.buyItem('Mana Potion', 4)); // "Insufficient stock for Mana Potion"
-console.log(shop.buyItem('Mana Potion', 3)); // 45
-
-console.log(shop.getAvailableItemList());
-//    [ { name: 'Health Potion', price: 10, quantity: 3 } ]
-//    Mana Potion is now out of stock and omitted from the list
+console.log(sequence.current()); // 10 - starts at first element
+console.log(sequence.next()); // 20 - moves to next and returns it
+console.log(sequence.next()); // 30 - moves to next and returns it
+console.log(sequence.next()); // 10 - loops back to start
+console.log(sequence.next()); // 20 - continues from start
+sequence.reset();
+console.log(sequence.current()); // 10 - back at the beginning after reset
+console.log(sequence.next()); // 20 - continues from reset position
 ```
