@@ -1,0 +1,277 @@
+module.exports = {
+    testcases: [
+        // Public test cases (first 3)
+        {
+            input: [],
+            commands: [
+                { method: 'moveUp', params: [1] },
+                { method: 'moveLeft', params: [1] },
+                { method: 'moveDown', params: [2] },
+                { method: 'moveRight', params: [3] },
+                { method: 'moveRight', params: [3] },
+                { method: 'moveDown', params: [3] },
+            ],
+            expected: [
+                { value: [0, 9], options: { type: 'JSON' } },
+                { value: [9, 9], options: { type: 'JSON' } },
+                { value: [9, 1], options: { type: 'JSON' } },
+                { value: [2, 1], options: { type: 'JSON' } },
+                { value: [5, 1], options: { type: 'JSON' } },
+                { value: [5, 4], options: { type: 'JSON' } },
+            ],
+            isPublic: true,
+            description: 'Example sequence from README',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveRight', params: [5] },
+                { method: 'moveDown', params: [5] },
+            ],
+            expected: [
+                { value: [5, 0], options: { type: 'JSON' } },
+                { value: [5, 5], options: { type: 'JSON' } },
+            ],
+            isPublic: true,
+            description: 'Move to center of grid',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveRight', params: [9] },
+                { method: 'moveRight', params: [1] },
+            ],
+            expected: [
+                { value: [9, 0], options: { type: 'JSON' } },
+                { value: [0, 0], options: { type: 'JSON' } },
+            ],
+            isPublic: true,
+            description: 'Move to right edge and wrap around',
+        },
+        // Hidden test cases
+        {
+            input: [],
+            commands: [
+                { method: 'moveDown', params: [9] },
+                { method: 'moveDown', params: [1] },
+            ],
+            expected: [
+                { value: [0, 9], options: { type: 'JSON' } },
+                { value: [0, 0], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Move to bottom edge and wrap around',
+        },
+        {
+            input: [],
+            commands: [{ method: 'moveUp', params: [1] }],
+            expected: [{ value: [0, 9], options: { type: 'JSON' } }],
+            isPublic: false,
+            description: 'Move up from starting position wraps to bottom',
+        },
+        {
+            input: [],
+            commands: [{ method: 'moveLeft', params: [1] }],
+            expected: [{ value: [9, 0], options: { type: 'JSON' } }],
+            isPublic: false,
+            description: 'Move left from starting position wraps to right',
+        },
+        {
+            input: [],
+            commands: [{ method: 'moveRight', params: [10] }],
+            expected: [{ value: [0, 0], options: { type: 'JSON' } }],
+            isPublic: false,
+            description: 'Move right 10 steps wraps back to start',
+        },
+        {
+            input: [],
+            commands: [{ method: 'moveDown', params: [10] }],
+            expected: [{ value: [0, 0], options: { type: 'JSON' } }],
+            isPublic: false,
+            description: 'Move down 10 steps wraps back to start',
+        },
+        {
+            input: [],
+            commands: [{ method: 'moveRight', params: [15] }],
+            expected: [{ value: [5, 0], options: { type: 'JSON' } }],
+            isPublic: false,
+            description: 'Move right 15 steps with wrapping',
+        },
+        {
+            input: [],
+            commands: [{ method: 'moveUp', params: [15] }],
+            expected: [{ value: [0, 5], options: { type: 'JSON' } }],
+            isPublic: false,
+            description: 'Move up 15 steps with wrapping',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveRight', params: [5] },
+                { method: 'moveDown', params: [5] },
+                { method: 'moveLeft', params: [5] },
+                { method: 'moveUp', params: [5] },
+            ],
+            expected: [
+                { value: [5, 0], options: { type: 'JSON' } },
+                { value: [5, 5], options: { type: 'JSON' } },
+                { value: [0, 5], options: { type: 'JSON' } },
+                { value: [0, 0], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Move in a square pattern back to start',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveRight', params: [9] },
+                { method: 'moveDown', params: [9] },
+                { method: 'moveRight', params: [1] },
+                { method: 'moveDown', params: [1] },
+            ],
+            expected: [
+                { value: [9, 0], options: { type: 'JSON' } },
+                { value: [9, 9], options: { type: 'JSON' } },
+                { value: [0, 9], options: { type: 'JSON' } },
+                { value: [0, 0], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Navigate to corner and wrap back to start',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveRight', params: [3] },
+                { method: 'moveUp', params: [2] },
+                { method: 'moveLeft', params: [1] },
+                { method: 'moveDown', params: [4] },
+            ],
+            expected: [
+                { value: [3, 0], options: { type: 'JSON' } },
+                { value: [3, 8], options: { type: 'JSON' } },
+                { value: [2, 8], options: { type: 'JSON' } },
+                { value: [2, 2], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Complex movement pattern',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveUp', params: [5] },
+                { method: 'moveUp', params: [5] },
+            ],
+            expected: [
+                { value: [0, 5], options: { type: 'JSON' } },
+                { value: [0, 0], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Move up twice, wrapping around',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveLeft', params: [5] },
+                { method: 'moveLeft', params: [5] },
+            ],
+            expected: [
+                { value: [5, 0], options: { type: 'JSON' } },
+                { value: [0, 0], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Move left twice, wrapping around',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveRight', params: [7] },
+                { method: 'moveDown', params: [8] },
+                { method: 'moveLeft', params: [3] },
+                { method: 'moveUp', params: [4] },
+            ],
+            expected: [
+                { value: [7, 0], options: { type: 'JSON' } },
+                { value: [7, 8], options: { type: 'JSON' } },
+                { value: [4, 8], options: { type: 'JSON' } },
+                { value: [4, 4], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Navigate to middle of grid',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveRight', params: [1] },
+                { method: 'moveRight', params: [1] },
+                { method: 'moveRight', params: [1] },
+                { method: 'moveDown', params: [1] },
+                { method: 'moveDown', params: [1] },
+                { method: 'moveDown', params: [1] },
+            ],
+            expected: [
+                { value: [1, 0], options: { type: 'JSON' } },
+                { value: [2, 0], options: { type: 'JSON' } },
+                { value: [3, 0], options: { type: 'JSON' } },
+                { value: [3, 1], options: { type: 'JSON' } },
+                { value: [3, 2], options: { type: 'JSON' } },
+                { value: [3, 3], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Multiple single-step moves',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveUp', params: [3] },
+                { method: 'moveRight', params: [8] },
+                { method: 'moveDown', params: [6] },
+                { method: 'moveLeft', params: [12] },
+            ],
+            expected: [
+                { value: [0, 7], options: { type: 'JSON' } },
+                { value: [8, 7], options: { type: 'JSON' } },
+                { value: [8, 3], options: { type: 'JSON' } },
+                { value: [6, 3], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Large steps with wrapping on left',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveRight', params: [4] },
+                { method: 'moveDown', params: [6] },
+                { method: 'moveUp', params: [12] },
+                { method: 'moveLeft', params: [8] },
+            ],
+            expected: [
+                { value: [4, 0], options: { type: 'JSON' } },
+                { value: [4, 6], options: { type: 'JSON' } },
+                { value: [4, 4], options: { type: 'JSON' } },
+                { value: [6, 4], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Mixed movements with wrapping',
+        },
+        {
+            input: [],
+            commands: [
+                { method: 'moveDown', params: [25] },
+                { method: 'moveRight', params: [33] },
+                { method: 'moveUp', params: [10] },
+                { method: 'moveLeft', params: [20] },
+            ],
+            expected: [
+                { value: [0, 5], options: { type: 'JSON' } },
+                { value: [3, 5], options: { type: 'JSON' } },
+                { value: [3, 5], options: { type: 'JSON' } },
+                { value: [3, 5], options: { type: 'JSON' } },
+            ],
+            isPublic: false,
+            description: 'Very large step counts with multiple wraps',
+        },
+    ],
+    options: {
+        type: 'commands',
+    },
+};
