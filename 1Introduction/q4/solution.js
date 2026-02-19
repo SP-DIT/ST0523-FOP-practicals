@@ -7,21 +7,10 @@ function aSquareMinusBSquare(a, b) {
     return result;
 }
 
-function multipleSquareMinusSquare(a, b, c, d) {
-    // Calculate (a² - b²)² - (c² - d²)²
-    // First calculate a² - b² and c² - d²
-    const firstExpression = aSquareMinusBSquare(a, b);
-    const secondExpression = aSquareMinusBSquare(c, d);
-
-    // Finally subtract: (a² - b²)² - (c² - d²)²
-    const result = aSquareMinusBSquare(firstExpression, secondExpression);
-    return result;
-}
-
-module.exports = multipleSquareMinusSquare;
+module.exports = aSquareMinusBSquare;
 
 // examples - these should work when the solution is implemented
 
-console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
-console.log(multipleSquareMinusSquare(3, 2, 2, 1)); // 16
-console.log(multipleSquareMinusSquare(5, 1, 3, 0)); // 495
+console.log(aSquareMinusBSquare(10, 1)); // 99
+console.log(aSquareMinusBSquare(5, 3)); // 16
+console.log(aSquareMinusBSquare(4, 2)); // 12

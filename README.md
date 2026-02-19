@@ -128,29 +128,7 @@ function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBi
 console.log(make3Messages('John', 1994, 'Mary', 1999, 'Tom', 1986, 2025)); // "John (31), Mary (26), Tom (39)"
 ```
 
-## 3. Calculate $a^2 - b^2$
-
-> Hint: $a \times a = a^2$
-
-```js
-function aSquareMinusBSquare(a, b) {}
-
-console.log(aSquareMinusBSquare(10, 1)); // 99
-```
-
-## 4. Calculate $(a^2 - b^2)^2 - (c^2 - d^2)^2$
-
-> Hint: Reuse `aSquareMinusBSquare`
-
-```js
-function aSquareMinusBSquare(a, b) {}
-
-function multipleSquareMinusSquare(a, b, c, d) {}
-
-console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
-```
-
-## 5. Multiple wrapper
+## 3. Multiple wrapper
 
 Implement a function `wrapper(a, b, c, message)` that returns a string which wraps the message in a specific pattern of characters.
 
@@ -198,17 +176,24 @@ function wrapper(a, b, c, message) {}
 console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"
 ```
 
-## 6. Challenge
+## 4. Calculate $a^2 - b^2$
 
-Same question as 5, but using as little `+` operator in the entire program as possible.
+> Hint: $a \times a = a^2$
 
-You can use as many variables and functions as you want, and you cannot use anything else not taught in the module so far.
+```js
+function aSquareMinusBSquare(a, b) {}
 
-i.e. Apart from creating variables and functions, you can't use things like:
+console.log(aSquareMinusBSquare(10, 1)); // 99
+```
 
-1. for-loop
-2. template literals (e.g. `${a}${a}${a}`)
-3. String methods (e.g. `'a'.repeat(3)`)
-4. Or any other mechanisms not taught in the module.
+## 5. Calculate $(a^2 - b^2)^2 - (c^2 - d^2)^2$
 
-> Hint: It is possible to achieve this with just 1 `+` operator. You can use new functions and variables to recreate the above behaviors.
+> Hint: Reuse `aSquareMinusBSquare`
+
+```js
+function aSquareMinusBSquare(a, b) {}
+
+function multipleSquareMinusSquare(a, b, c, d) {}
+
+console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
+```

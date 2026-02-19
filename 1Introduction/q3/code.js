@@ -1,7 +1,7 @@
-function aSquareMinusBSquare(a, b) {}
+function wrapper(a, b, c, message) {}
 
-module.exports = aSquareMinusBSquare;
+module.exports = wrapper;
 
 // examples
 
-console.log(aSquareMinusBSquare(10, 1)); // 99
+console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"

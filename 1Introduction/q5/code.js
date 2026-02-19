@@ -1,7 +1,11 @@
-function wrapper(a, b, c, message) {}
+function aSquareMinusBSquare(a, b) {
+    // You can copy your solution from q3.
+}
 
-module.exports = wrapper;
+function multipleSquareMinusSquare(a, b, c, d) {}
+
+module.exports = multipleSquareMinusSquare;
 
 // examples
 
-console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"
+console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40

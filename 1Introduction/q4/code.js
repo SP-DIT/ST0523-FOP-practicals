@@ -1,11 +1,7 @@
-function aSquareMinusBSquare(a, b) {
-    // You can copy your solution from q3.
-}
+function aSquareMinusBSquare(a, b) {}
 
-function multipleSquareMinusSquare(a, b, c, d) {}
-
-module.exports = multipleSquareMinusSquare;
+module.exports = aSquareMinusBSquare;
 
 // examples
 
-console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
+console.log(aSquareMinusBSquare(10, 1)); // 99
