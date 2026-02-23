@@ -1,5 +1,13 @@
-function wrapper(a, b, c, message) {
-    return a + a + a + b + b + c + message + c + b + b + a + a + a;
+function add(x, y) {
+    return x + y;
 }
 
-module.exports = wrapper;
+function multiplyBy3(x) {
+    return add(x, add(x, x));
+}
+
+module.exports = multiplyBy3;
+
+// examples
+
+console.log(multiplyBy3(4)); // 12

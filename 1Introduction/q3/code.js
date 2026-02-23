@@ -1,7 +1,13 @@
-function wrapper(a, b, c, message) {}
+function add(x, y) {
+    x + y;
+}
 
-module.exports = wrapper;
+function multiplyBy3(x) {
+    return add(x, add(x, x));
+}
+
+module.exports = multiplyBy3;
 
 // examples
 
-console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"
+console.log(multiplyBy3(4)); // 12

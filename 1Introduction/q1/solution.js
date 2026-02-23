@@ -1,10 +1,9 @@
-function makeMessage(name, yearOfBirth, currentYear) {
-    const age = currentYear - yearOfBirth;
-    return name + ' (' + age + ')';
+function evaluate() {
+    return (48 / 2) * (9 + 3);
 }
 
-module.exports = makeMessage;
+module.exports = evaluate;
 
 // examples
 
-console.log(makeMessage('John', 1994, 2025)); // "John (31)"
+console.log(evaluate()); // 288

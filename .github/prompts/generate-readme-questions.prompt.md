@@ -45,6 +45,7 @@ Define the task to achieve, including specific requirements, constraints, and su
     - Preserve all example function calls and expected outputs from the source file
     - Format them properly in code blocks
     - Ensure examples are clear and help students understand the expected behavior
+    - For **fix-the-error** questions, keep the original function body exactly as given (including the buggy/error code) so students can debug from the provided code
 
 5. **Available Syntax:**
 
@@ -78,6 +79,7 @@ Define the task to achieve, including specific requirements, constraints, and su
 4. **Consistency with Source:**
 
     - Function signatures match the source file exactly
+    - For fix-the-error questions, the code block includes the original erroneous implementation from the source file
     - Example inputs and outputs are preserved accurately
     - Original intent and context of each question is maintained
 

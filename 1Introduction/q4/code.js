@@ -1,7 +1,11 @@
-function aSquareMinusBSquare(a, b) {}
+function greetings(name) {
+    const message = 'Hello, ';
+    message = message + name;
+    return message;
+}
 
-module.exports = aSquareMinusBSquare;
+module.exports = greetings;
 
 // examples
 
-console.log(aSquareMinusBSquare(10, 1)); // 99
+console.log(greetings('Ali')); // "Hello, Ali"

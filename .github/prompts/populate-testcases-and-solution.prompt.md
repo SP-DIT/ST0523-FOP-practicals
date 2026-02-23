@@ -13,6 +13,7 @@ Define the task to achieve, including specific requirements, constraints, and su
     2. Populate the `testcase.js` file with 20 testcases of different normal and edge cases
     3. Generate a `solution.js` file that solves the problem.
     4. Generate a `code.js` file that contains only the function signature and sample calls with expected outputs as comments.
+    5. If the problem is a **fix-the-error** question, retain the original buggy code in `code.js` function body (do not replace it with an empty stub).
 3. You can refer to `./instructor/sample` directory for reference of the file formats.
 4. Stage and commit the changes.
 
@@ -119,6 +120,10 @@ Define the task to achieve, including specific requirements, constraints, and su
 6. The first three testcases will be public.
 7. For `code.js` and `solution.js` remember to include the `module.exports` statement at the end of the file.
 8. The available syntax to be used to solve the problems is to be read from `./instructor/syntax-list.md`
+9. **Fix-the-error special rules:**
+
+    - `code.js` must preserve the original erroneous implementation for students to debug.
+    - `solution.js` must contain the corrected implementation.
 
 # Success criteria
 
