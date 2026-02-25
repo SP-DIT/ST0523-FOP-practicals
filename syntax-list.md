@@ -116,14 +116,14 @@ Use the `run.js` file in the root directory to test your solutions against the p
 
 ```bash
 # Test a specific question (e.g., Practical 2, Question 1)
-C:\...\Practical 4> node run.js p2 q1
+C:\...\Practical 4> node run.js q1
 
 # Test other questions by changing the parameters
-C:\...\Practical 4> node run.js p2 q2
-C:\...\Practical 4> node run.js p2 q3
+C:\...\Practical 4> node run.js q2
+C:\...\Practical 4> node run.js q3
 ```
 
-Where `pX` represents the practical number and `qY` represents the question number. This will run your code against predefined test cases and show you which tests pass or fail, helping you identify issues in your implementation.
+Where `qX` represents the question number. This will run your code against predefined test cases and show you which tests pass or fail, helping you identify issues in your implementation.
 
 #### 0.2.1 Understanding Test Output
 

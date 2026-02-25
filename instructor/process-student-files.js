@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
+const archiver = require('archiver');
 const puppeteer = require('puppeteer');
 
 // Promisify fs methods for async/await usage
@@ -21,16 +22,19 @@ const writeFile = promisify(fs.writeFile);
 class StudentFileProcessor {
     constructor(rootDir = process.cwd()) {
         this.rootDir = rootDir;
-        this.outputDir = path.join(rootDir, 'student-version');
+        this.archiveDir = path.join(rootDir, 'output');
+        this.outputDir = path.join(this.archiveDir, 'student-version');
+        this.archivePath = path.join(this.archiveDir, 'student-version.zip');
         this.processedCount = {
             solutionFiles: 0,
             instructorFiles: 0,
             directories: 0,
             settings: 0,
             hiddenFilesSkipped: 0,
+            archivesCreated: 0,
         };
         this.skipFiles = ['package-lock.json'];
-        this.skipDirectories = [path.basename(this.outputDir), 'node_modules'];
+        this.skipDirectories = [path.basename(this.outputDir), path.basename(this.archiveDir), 'node_modules'];
         this.allowedHiddenEntries = ['.vscode'];
         this.markdownToConvert = ['README.md', 'syntax-list.md'];
     }
@@ -45,6 +49,12 @@ class StudentFileProcessor {
         console.log('─'.repeat(50));
 
         try {
+            // Clean up previous build output
+            if (fs.existsSync(this.archiveDir)) {
+                await this.removeDirectory(this.archiveDir);
+                console.log('🧹 Removed previous output directory');
+            }
+
             // Create output directory
             await this.ensureDirectory(this.outputDir);
 
@@ -63,6 +73,7 @@ class StudentFileProcessor {
             await this.replaceSettingsFile();
             await this.cleanupDirectories();
             await this.convertMarkdownToPdf();
+            await this.createStudentArchive();
 
             this.printSummary();
         } catch (error) {
@@ -318,7 +329,8 @@ class StudentFileProcessor {
                     });
 
                     // Inject markdown HTML into external template
-                    const fullHtml = htmlTemplate.replace('{{CONTENT}}', html);
+                    const title = path.basename(readmePath, path.extname(readmePath));
+                    const fullHtml = htmlTemplate.replace('{{TITLE}}', title).replace('{{CONTENT}}', html);
 
                     // Launch Puppeteer and render PDF
                     const browser = await puppeteer.launch({
@@ -383,6 +395,35 @@ class StudentFileProcessor {
                 console.log(`   ⚠️  Could not remove ${dirName}/ directory: ${error.message}`);
             }
         }
+    }
+
+    /**
+     * Create zip archive for student-version directory
+     */
+    async createStudentArchive() {
+        console.log('🗜️  Creating student-version.zip...');
+
+        await this.ensureDirectory(this.archiveDir);
+
+        return new Promise((resolve, reject) => {
+            const output = fs.createWriteStream(this.archivePath);
+            const archive = archiver('zip', { zlib: { level: 9 } });
+
+            output.on('close', () => {
+                this.processedCount.archivesCreated++;
+                console.log(
+                    `   ✓ Created ${path.relative(this.rootDir, this.archivePath)} (${archive.pointer()} bytes)`,
+                );
+                resolve();
+            });
+
+            output.on('error', reject);
+            archive.on('error', reject);
+
+            archive.pipe(output);
+            archive.directory(this.outputDir, false);
+            archive.finalize();
+        });
     }
 
     /**
@@ -472,7 +513,9 @@ class StudentFileProcessor {
         console.log(`📁 Directories cleaned: ${this.processedCount.directories}`);
         console.log(`⚙️  Settings files updated: ${this.processedCount.settings}`);
         console.log(`🙈 Hidden files skipped: ${this.processedCount.hiddenFilesSkipped}`);
+        console.log(`🗜️  Archives created: ${this.processedCount.archivesCreated}`);
         console.log(`📂 Student version available at: ${this.outputDir}`);
+        console.log(`📦 Student zip available at: ${this.archivePath}`);
         console.log('═'.repeat(50));
     }
 }
