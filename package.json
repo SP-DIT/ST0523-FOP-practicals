@@ -1,0 +1,13 @@
+{
+    "studentId": "YOUR STUDENT ID e.g. p1121782",
+    "className": "YOUR CLASS e.g. DIT/FT/1A/01",
+    "dependencies": {
+        "highlight.js": "^11.11.1",
+        "katex": "^0.16.32",
+        "marked": "^17.0.3",
+        "puppeteer": "^24.37.5"
+    },
+    "scripts": {
+        "bundle": "node ./instructor/process-student-files.js"
+    }
+}
