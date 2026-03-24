@@ -1,0 +1,127 @@
+module.exports = {
+    testcases: [
+        {
+            input: [[1, 2, 3]],
+            expected: [3, 5],
+            isPublic: true,
+            description: 'Adjacent sums of [1, 2, 3] should be [3, 5]',
+        },
+        {
+            input: [[10, 20, 30]],
+            expected: [30, 50],
+            isPublic: true,
+            description: 'Adjacent sums of [10, 20, 30] should be [30, 50]',
+        },
+        {
+            input: [[5]],
+            expected: [],
+            isPublic: true,
+            description: 'Single-element array should return empty array',
+        },
+        {
+            input: [[]],
+            expected: [],
+            isPublic: false,
+            description: 'Empty array should return empty array',
+        },
+        {
+            input: [[2, 4]],
+            expected: [6],
+            isPublic: false,
+            description: 'Two elements [2, 4] should return [6]',
+        },
+        {
+            input: [[0, 0, 0]],
+            expected: [0, 0],
+            isPublic: false,
+            description: 'Adjacent sums of zeros should stay zero',
+        },
+        {
+            input: [[-1, -2, -3]],
+            expected: [-3, -5],
+            isPublic: false,
+            description: 'Adjacent sums of negatives should be [-3, -5]',
+        },
+        {
+            input: [[5, -3, 2]],
+            expected: [2, -1],
+            isPublic: false,
+            description: 'Mixed signs [5, -3, 2] should return [2, -1]',
+        },
+        {
+            input: [[1.5, 2.5, 3]],
+            expected: [4, 5.5],
+            isPublic: false,
+            description: 'Adjacent sums with decimals should be [4, 5.5]',
+        },
+        {
+            input: [[0.1, 0.2, 0.3]],
+            expected: [0.30000000000000004, 0.5],
+            isPublic: false,
+            description: 'Small decimal sums should be [0.3, 0.5]',
+        },
+        {
+            input: [[100, 200, 300, 400]],
+            expected: [300, 500, 700],
+            isPublic: false,
+            description: 'Adjacent sums of [100, 200, 300, 400] should be [300, 500, 700]',
+        },
+        {
+            input: [[-10, 10]],
+            expected: [0],
+            isPublic: false,
+            description: 'Adjacent sums of [-10, 10] should be [0]',
+        },
+        {
+            input: [[7, 8, 9, 10, 11]],
+            expected: [15, 17, 19, 21],
+            isPublic: false,
+            description: 'Increasing sequence should produce correct adjacent sums',
+        },
+        {
+            input: [[1, 1, 1, 1, 1]],
+            expected: [2, 2, 2, 2],
+            isPublic: false,
+            description: 'Repeated ones should produce repeated twos',
+        },
+        {
+            input: [[3, 6, 9, 12]],
+            expected: [9, 15, 21],
+            isPublic: false,
+            description: 'Multiples of 3 should sum to [9, 15, 21]',
+        },
+        {
+            input: [[999999, 1, 1000000]],
+            expected: [1000000, 1000001],
+            isPublic: false,
+            description: 'Large numbers should sum correctly with neighbors',
+        },
+        {
+            input: [[-0.5, 0.5, -1.5, 1.5]],
+            expected: [0, -1, 0],
+            isPublic: false,
+            description: 'Decimal mixed signs should return [0, -1, 0]',
+        },
+        {
+            input: [[13, 0, -13, 26, -26]],
+            expected: [13, -13, 13, 0],
+            isPublic: false,
+            description: 'Mixed values should preserve order of adjacent sums',
+        },
+        {
+            input: [[1, 2, 3, 4, 5, 6]],
+            expected: [3, 5, 7, 9, 11],
+            isPublic: false,
+            description: 'Adjacent sums of 1..6 should be odd sequence',
+        },
+        {
+            input: [[42, 42]],
+            expected: [84],
+            isPublic: false,
+            description: 'Adjacent sums of [42, 42] should be [84]',
+        },
+    ],
+    options: {
+        type: 'JSON',
+    },
+};

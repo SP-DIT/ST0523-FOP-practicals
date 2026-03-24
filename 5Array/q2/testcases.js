@@ -1,0 +1,127 @@
+module.exports = {
+    testcases: [
+        {
+            input: [[1, 2, 3, 4, 5]],
+            expected: [1, 3, 5],
+            isPublic: true,
+            description: 'Odd numbers from [1, 2, 3, 4, 5] should be [1, 3, 5]',
+        },
+        {
+            input: [[10, 15, 20, 25]],
+            expected: [15, 25],
+            isPublic: true,
+            description: 'Odd numbers from [10, 15, 20, 25] should be [15, 25]',
+        },
+        {
+            input: [[2, 4, 6, 8]],
+            expected: [],
+            isPublic: true,
+            description: 'All-even array should return empty array',
+        },
+        {
+            input: [[1, 3, 5, 7]],
+            expected: [1, 3, 5, 7],
+            isPublic: false,
+            description: 'All-odd array should be returned unchanged',
+        },
+        {
+            input: [[]],
+            expected: [],
+            isPublic: false,
+            description: 'Empty array should return empty array',
+        },
+        {
+            input: [[0]],
+            expected: [],
+            isPublic: false,
+            description: 'Zero is even so result should be empty',
+        },
+        {
+            input: [[-1, -2, -3, -4]],
+            expected: [-1, -3],
+            isPublic: false,
+            description: 'Odd negative numbers should be kept',
+        },
+        {
+            input: [[-10, -9, -8, -7, -6, -5]],
+            expected: [-9, -7, -5],
+            isPublic: false,
+            description: 'Mixed negative numbers should keep odd negatives only',
+        },
+        {
+            input: [[11]],
+            expected: [11],
+            isPublic: false,
+            description: 'Single odd number should return one-element array',
+        },
+        {
+            input: [[12]],
+            expected: [],
+            isPublic: false,
+            description: 'Single even number should return empty array',
+        },
+        {
+            input: [[100, 101, 102, 103, 104]],
+            expected: [101, 103],
+            isPublic: false,
+            description: 'Keep odd numbers from a larger sequence',
+        },
+        {
+            input: [[5, 5, 5, 5]],
+            expected: [5, 5, 5, 5],
+            isPublic: false,
+            description: 'Repeated odd values should all be kept',
+        },
+        {
+            input: [[6, 6, 6, 6]],
+            expected: [],
+            isPublic: false,
+            description: 'Repeated even values should produce empty result',
+        },
+        {
+            input: [[1, -1, 2, -2, 3, -3]],
+            expected: [1, -1, 3, -3],
+            isPublic: false,
+            description: 'Keep odd values regardless of sign',
+        },
+        {
+            input: [[999999, 1000000, 1000001]],
+            expected: [999999, 1000001],
+            isPublic: false,
+            description: 'Large values should still filter odd numbers correctly',
+        },
+        {
+            input: [[7, 8, 9, 10, 11, 12, 13]],
+            expected: [7, 9, 11, 13],
+            isPublic: false,
+            description: 'Alternating odd and even values should keep odd positions',
+        },
+        {
+            input: [[2, 2, 3, 3, 4, 4, 5, 5]],
+            expected: [3, 3, 5, 5],
+            isPublic: false,
+            description: 'Duplicates should preserve count and order for odd values',
+        },
+        {
+            input: [[-101, -100, -99, -98]],
+            expected: [-101, -99],
+            isPublic: false,
+            description: 'Negative odd values at front and middle should be retained',
+        },
+        {
+            input: [[13, 0, -13, 26, -26]],
+            expected: [13, -13],
+            isPublic: false,
+            description: 'Zero and even values should be excluded while odd values remain',
+        },
+        {
+            input: [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
+            expected: [1, 3, 5, 7, 9],
+            isPublic: false,
+            description: 'Odd numbers from 1 to 10 should be [1, 3, 5, 7, 9]',
+        },
+    ],
+    options: {
+        type: 'JSON',
+    },
+};

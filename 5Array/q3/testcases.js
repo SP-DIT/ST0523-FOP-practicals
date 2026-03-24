@@ -1,0 +1,127 @@
+module.exports = {
+    testcases: [
+        {
+            input: [[1, 2, 3]],
+            expected: [2, 4, 6],
+            isPublic: true,
+            description: 'Doubling [1, 2, 3] should return [2, 4, 6]',
+        },
+        {
+            input: [[10, 20, 30]],
+            expected: [20, 40, 60],
+            isPublic: true,
+            description: 'Doubling [10, 20, 30] should return [20, 40, 60]',
+        },
+        {
+            input: [[]],
+            expected: [],
+            isPublic: true,
+            description: 'Doubling an empty array should return an empty array',
+        },
+        {
+            input: [[0]],
+            expected: [0],
+            isPublic: false,
+            description: 'Doubling [0] should return [0]',
+        },
+        {
+            input: [[7]],
+            expected: [14],
+            isPublic: false,
+            description: 'Doubling [7] should return [14]',
+        },
+        {
+            input: [[-1, -2, -3]],
+            expected: [-2, -4, -6],
+            isPublic: false,
+            description: 'Doubling negatives should keep sign and double magnitude',
+        },
+        {
+            input: [[5, -3, 0, 8]],
+            expected: [10, -6, 0, 16],
+            isPublic: false,
+            description: 'Doubling mixed values should process each element in order',
+        },
+        {
+            input: [[1.5, 2.5, 3.5]],
+            expected: [3, 5, 7],
+            isPublic: false,
+            description: 'Doubling decimals [1.5, 2.5, 3.5] should be [3, 5, 7]',
+        },
+        {
+            input: [[0.1, 0.2, 0.3]],
+            expected: [0.2, 0.4, 0.6],
+            isPublic: false,
+            description: 'Doubling small decimals should work correctly',
+        },
+        {
+            input: [[100, 200, 300, 400]],
+            expected: [200, 400, 600, 800],
+            isPublic: false,
+            description: 'Doubling larger positive integers should be correct',
+        },
+        {
+            input: [[-10, 10]],
+            expected: [-20, 20],
+            isPublic: false,
+            description: 'Doubling [-10, 10] should be [-20, 20]',
+        },
+        {
+            input: [[1, 1, 1, 1, 1]],
+            expected: [2, 2, 2, 2, 2],
+            isPublic: false,
+            description: 'Repeated values should all be doubled',
+        },
+        {
+            input: [[2, 4, 6, 8, 10]],
+            expected: [4, 8, 12, 16, 20],
+            isPublic: false,
+            description: 'Even numbers should all double correctly',
+        },
+        {
+            input: [[3, 6, 9, 12]],
+            expected: [6, 12, 18, 24],
+            isPublic: false,
+            description: 'Multiples of 3 should each be doubled',
+        },
+        {
+            input: [[999999, 1000000]],
+            expected: [1999998, 2000000],
+            isPublic: false,
+            description: 'Large numbers should double without truncation',
+        },
+        {
+            input: [[-0.5, -1.25, 2.75]],
+            expected: [-1, -2.5, 5.5],
+            isPublic: false,
+            description: 'Mixed sign decimals should double correctly',
+        },
+        {
+            input: [[13, 0, -13, 26, -26]],
+            expected: [26, 0, -26, 52, -52],
+            isPublic: false,
+            description: 'Mixed sequence should preserve order after doubling',
+        },
+        {
+            input: [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
+            expected: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+            isPublic: false,
+            description: 'Values from 1 to 10 should map to doubles from 2 to 20',
+        },
+        {
+            input: [[50, 25, 0, -25, -50]],
+            expected: [100, 50, 0, -50, -100],
+            isPublic: false,
+            description: 'Symmetric positive/negative values should double correctly',
+        },
+        {
+            input: [[42]],
+            expected: [84],
+            isPublic: false,
+            description: 'Single value [42] should become [84]',
+        },
+    ],
+    options: {
+        type: 'JSON',
+    },
+};

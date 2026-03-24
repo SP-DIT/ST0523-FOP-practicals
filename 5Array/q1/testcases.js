@@ -1,0 +1,128 @@
+module.exports = {
+    testcases: [
+        {
+            input: [[1, 2, 3]],
+            expected: 6,
+            isPublic: true,
+            description: 'Sum of [1, 2, 3] should be 6',
+        },
+        {
+            input: [[10, 20, 30]],
+            expected: 60,
+            isPublic: true,
+            description: 'Sum of [10, 20, 30] should be 60',
+        },
+        {
+            input: [[7]],
+            expected: 7,
+            isPublic: true,
+            description: 'Sum of single element [7] should be 7',
+        },
+        {
+            input: [[]],
+            expected: 0,
+            isPublic: false,
+            description: 'Sum of empty array should be 0',
+        },
+        {
+            input: [[0]],
+            expected: 0,
+            isPublic: false,
+            description: 'Sum of [0] should be 0',
+        },
+        {
+            input: [[-5, -3, -2]],
+            expected: -10,
+            isPublic: false,
+            description: 'Sum of all negative numbers should be -10',
+        },
+        {
+            input: [[5, -3, 2]],
+            expected: 4,
+            isPublic: false,
+            description: 'Sum of mixed positive and negative numbers should be 4',
+        },
+        {
+            input: [[100, 200, 300, 400]],
+            expected: 1000,
+            isPublic: false,
+            description: 'Sum of [100, 200, 300, 400] should be 1000',
+        },
+        {
+            input: [[1, 1, 1, 1, 1]],
+            expected: 5,
+            isPublic: false,
+            description: 'Sum of repeated ones should be 5',
+        },
+        {
+            input: [[-10, 10]],
+            expected: 0,
+            isPublic: false,
+            description: 'Sum of [-10, 10] should be 0',
+        },
+        {
+            input: [[2.5, 3.5, 4]],
+            expected: 10,
+            isPublic: false,
+            description: 'Sum of [2.5, 3.5, 4] should be 10',
+        },
+        {
+            input: [[1.1, 2.2, 3.3]],
+            expected: 6.6,
+            isPublic: false,
+            description: 'Sum of decimals [1.1, 2.2, 3.3] should be 6.6',
+        },
+        {
+            input: [[0.1, 0.2, 0.3]],
+            expected: 0.6,
+            isPublic: false,
+            description: 'Sum of decimals [0.1, 0.2, 0.3] should be 0.6',
+        },
+        {
+            input: [[50, 25, 25]],
+            expected: 100,
+            isPublic: false,
+            description: 'Sum of [50, 25, 25] should be 100',
+        },
+        {
+            input: [[999]],
+            expected: 999,
+            isPublic: false,
+            description: 'Sum of [999] should be 999',
+        },
+        {
+            input: [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
+            expected: 55,
+            isPublic: false,
+            description: 'Sum of numbers 1 to 10 should be 55',
+        },
+        {
+            input: [[15, 25, 35, 45]],
+            expected: 120,
+            isPublic: false,
+            description: 'Sum of [15, 25, 35, 45] should be 120',
+        },
+        {
+            input: [[-1, -2, -3, -4]],
+            expected: -10,
+            isPublic: false,
+            description: 'Sum of [-1, -2, -3, -4] should be -10',
+        },
+        {
+            input: [[3, 6, 9, 12]],
+            expected: 30,
+            isPublic: false,
+            description: 'Sum of multiples of 3 should be 30',
+        },
+        {
+            input: [[1000000, 2000000, 3000000]],
+            expected: 6000000,
+            isPublic: false,
+            description: 'Sum of large numbers should be 6000000',
+        },
+    ],
+    options: {
+        type: 'floating point',
+        precision: 6,
+    },
+};
