@@ -24,7 +24,7 @@ Add brackets so the exponent expression matches this order.
 
 ```js
 function square3Time(x) {
-    return x ** (2 ** (2 ** 2));
+    return x ** 2 ** 2 ** 2;
 }
 
 console.log(square3Time(2)); // 256
