@@ -1,169 +1,286 @@
-# Practical 2
+# Practical 4
 
-> Press `CTRL + SHIFT + V` to preview the rendered pdf
+## 1. Fix the bug: sumToN(n)
 
-## 1. Fix the expression error
+The function below is trying to compute the sum from 1 to `n` (both inclusive).
 
-The function should evaluate the expression $48 ÷ 2(9 + 3)$.
-
-Your task is to fix the syntax error in the expression so the function returns the correct value.
+Find and fix the bug.
 
 ```js
-function evaluate() {
-    return 48 / 2(9 + 3);
+function sumToN(n) {
+    let sum = 0;
+    for (let i = 0; i < n; i++) {
+        sum += i;
+    }
+    return sum;
 }
 
-console.log(evaluate()); // 288
+console.log(sumToN(5)); // 1+2+3+4+5 = 15
+console.log(sumToN(7)); // 1+2+3+4+5+6+7 = 28
 ```
 
-## 2. Square a value 3 times
+## 2. Fix the bug: factorial(n)
 
-The function should square `x` three times in sequence. i.e. $((x^2)^2)^2$
+The function below is trying to compute the factorial of `n`, which is the product of all positive integers from 1 to `n`.
 
-Add brackets so the exponent expression matches this order.
+Find and fix the bug.
 
 ```js
-function square3Time(x) {
-    return x ** (2 ** (2 ** 2));
+function factorial(n) {
+    let result = 1;
+    for (let i = 0; i < n; i++) {
+        result *= i;
+    }
+    return result;
 }
 
-console.log(square3Time(2)); // 256
-console.log(square3Time(3)); // 6561
+console.log(factorial(5)); // 5*4*3*2*1 = 120
+console.log(factorial(7)); // 7*6*5*4*3*2*1 = 5040
 ```
 
-## 3. Build `multiplyBy3` using `add`
+## 3. Fix the bug: isPrime(num)
 
-Fix the code so `multiplyBy3(x)` correctly returns `x * 3` by reusing `add(x, y)`.
+The function below is trying to check if a number is prime.
+
+A number is prime if it is greater than 1 and has no positive divisors other than 1 and itself.
+
+Find and fix the bug.
 
 ```js
-function add(x, y) {
-    x + y;
+function isPrime(num) {
+    if (num <= 1) {
+        // 0, 1 and negative numbers are not prime
+        return false;
+    }
+
+    for (let i = 2; i <= num; i++) {
+        if (num % i === 0) {
+            return false;
+        }
+    }
+    return true;
 }
 
-function multiplyBy3(x) {
-    return add(x, add(x, x));
+console.log(isPrime(2)); // true
+console.log(isPrime(3)); // true
+console.log(isPrime(4)); // false
+console.log(isPrime(5)); // true
+console.log(isPrime(10)); // false
+```
+
+## 4. Sum Numbers from N to M
+
+Complete the following function that sums numbers from `n` to `m` (both inclusive).
+
+Assume `n <= m`.
+
+```js
+function sumFromNToM(n, m) {
+    // your code here
 }
 
-console.log(multiplyBy3(4)); // 12
+console.log(sumFromNToM(1, 4)); // 10
+console.log(sumFromNToM(3, 6)); // 18
 ```
 
-## 4. Fix string message assignment
+## 5. Sum Even Numbers
 
-The function should return a greeting message for the given name.
+Complete the following function that sums only even numbers from 1 to n.
+
+> **Practice Wishful Thinking:** This builds on the previous problem but adds conditional logic. Use wishful thinking to break this down:
+>
+> -   Wish for a function `isEven(number)` that checks if a number is even
+> -   Focus on the main algorithm: loop through numbers 1 to n, and only add to your sum if the number is even
+> -   Write your solution using the imaginary `isEven` helper first, then implement the helper function afterward
+>
+> This approach lets you focus on the overall summation logic before worrying about the details of even number detection.
 
 ```js
-function greetings(name) {
-    const message = 'Hello, ';
-    message = message + name;
-    return message;
+function isEven(x) {
+    // Refer back to Practical 2 on how to detect even numbers
 }
 
-console.log(greetings('Ali')); // "Hello, Ali"
-```
-
-## 5. Fix the full name variable
-
-The function should return the full name by joining `firstName` and `lastName` with one space.
-
-```js
-function displayName(firstName, lastName) {
-	const full name = firstName + ' ' + lastName;
-	return full name;
+function sumEvenNumbers(n) {
+    // your code here
 }
 
-console.log(displayName('John', 'Tan')); // "John Tan"
+console.log(sumEvenNumbers(5)); // 6 (2 + 4)
+console.log(sumEvenNumbers(10)); // 30 (2 + 4 + 6 + 8 + 10)
 ```
 
-## 6. Make a message
+## 6. Count Multiples of Three
 
-Given the name, year of birth, and current year, return a message indicating the person's name and age.
+Complete the following function that counts how many numbers between 1 and n are divisible by 3.
+
+> **Practice Wishful Thinking:** What functions can you wish for to aid you in solving this problem?
 
 ```js
-function makeMessage(name, yearOfBirth, currentYear) {}
+function countMultiplesOfThree(n) {
+    // your code here
+}
 
-console.log(makeMessage('John', 1994, 2025)); // "John (31)"
+console.log(countMultiplesOfThree(10)); // 3 (3, 6, 9)
+console.log(countMultiplesOfThree(20)); // 6 (3, 6, 9, 12, 15, 18)
 ```
 
-## 7. Make 3 messages
+## 7. Count Multiples of X
 
-Given the name and the year of birth of 3 different person, along with the current year, return a message listing the name and age of the 3 person, each separated by a comma.
+Like Question 6, but this time it is generalized to count any multiples of `x`.
 
-> Hint: You should reuse your code from the previous question
+> **Practice Wishful Thinking:** What functions can you wish for to aid you in solving this problem?
 
 ```js
-function makeMessage(name, yearOfBirth, currentYear) {}
+function countMultiplesOfX(n, x) {
+    // your code here
+}
 
-function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBirth3, currentYear) {}
-
-console.log(make3Messages('John', 1994, 'Mary', 1999, 'Tom', 1986, 2025)); // "John (31), Mary (26), Tom (39)"
+console.log(countMultiplesOfX(10, 3)); // 3 (3, 6, 9)
+console.log(countMultiplesOfX(20, 5)); // 4 (5, 10, 15, 20)
 ```
 
-## 8. Multiple wrapper
+## 8. String Repetition
 
-Implement a function `wrapper(a, b, c, message)` that returns a string which wraps the message in a specific pattern of characters.
-
-`a`, `b`, and `c` are single-character strings used as wrapping characters.
-
-The output string should be constructed as follows:
-
-1. The string starts with three repetitions of character `a`.
-2. This is followed by two repetitions of character `b`.
-3. Then a single instance of character `c`.
-4. Next comes the original `message` string.
-5. After the message, repeat character `c` once again.
-6. Then repeat character `b` twice.
-7. Finally, end the string with three repetitions of character `a`.
-
-Example 1:
+Complete the following function that builds a new string by repeating a given string multiple times.
 
 ```js
-wrapper('#', '%', '*', 'message');
+function repeat(string, n) {
+    // your code here
+}
+
+console.log(repeat('hello', 3)); // Expected output: "hellohellohello"
+console.log(repeat('*#', 4)); // Expected output: "*#*#*#*#"
 ```
 
-Output 1:
+## 9. Count Vowels
+
+Complete the function that counts how many vowels (a, e, i, o, u) are in a string.
+
+This introduces string processing with loops. You'll need to examine each character in the string and check if it's a vowel.
+
+> **Practice Wishful Thinking:** The function `charAt(str, i)` is provided for you, what other functions do you need to help you with this problem? Perhaps one to check if a character is a vowel?
 
 ```js
-###%%*message*%%###
+// The `charAt` function is provided for you. It returns the character at a specific position.
+// Examples:
+//   charAt('abc', 0) returns 'a'
+//   charAt('donkey', 3) returns 'k'
+function charAt(str, i) {
+    return str[i];
+}
+
+function countVowels(str) {
+    // your code here
+}
+
+console.log(countVowels('apple')); // 2
+console.log(countVowels('javascript')); // 3
+console.log(countVowels('sky')); // 0
 ```
 
-Example 2:
+## 10. Sum of Digits
+
+Complete the following function that returns the sum of all digits in a given number. The number of digits that `n` contains is provided to aid you in writing your loop.
+
+**Examples:**
+
+-   12345 → 1 + 2 + 3 + 4 + 5 = 15
+-   2025 → 2 + 0 + 2 + 5 = 9
+
+> **Practice Wishful Thinking:** Break this problem down by imagining you already have helper functions to solve the subproblems:
+>
+> -   Wish for a function `getLastDigit(number)` that extracts the rightmost digit (hint: use `% 10`)
+> -   Wish for a function `removeLastDigit(number)` that removes the rightmost digit (hint: use `Math.floor(number / 10)`)
+>
+> Write your main solution using these imaginary helpers first, focusing on the overall algorithm: repeatedly extract the last digit, add it to your sum, then remove it from the number. Once you understand this pattern, implement each helper function.
 
 ```js
-wrapper('@', 'B', '(', 'message');
+function digitSum(n, numberOfDigits) {
+    // your code here
+}
+
+console.log(digitSum(12345, 5)); // 15
+console.log(digitSum(9876, 4)); // 30
+console.log(digitSum(1001, 4)); // 2
 ```
 
-Output 2:
+## 11. Right-Angled Triangle
+
+Complete the following function that returns an isosceles right-angled triangle of varying height.
 
 ```
-@@@BB(message(BB@@@
+height = 1
+*
+
+height = 2
+*
+* *
+
+height = 3
+*
+* *
+* * *
+
+height = 4
+*
+* *
+* * *
+* * * *
 ```
 
-Code
+> **Practice Wishful Thinking:** How might the `repeat` function from Question 8 help you solve this problem?
 
 ```js
-function wrapper(a, b, c, message) {}
+function rightAngledTriangle(height) {
+    // your code here
+}
 
-console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"
+console.log(rightAngledTriangle(3));
+console.log(rightAngledTriangle(4));
 ```
 
-## 9. Calculate $a^2 - b^2$
+## 12. Diamond
 
-> Hint: $a \times a = a^2$
+Complete the following function that returns a diamond shape.
 
-```js
-function aSquareMinusBSquare(a, b) {}
+```
+width = 1
+*
 
-console.log(aSquareMinusBSquare(10, 1)); // 99
+width = 2
+ *
+* *
+ *
+
+width = 3
+  *
+ * *
+* * *
+ * *
+  *
+
+width = 4
+   *
+  * *
+ * * *
+* * * *
+ * * *
+  * *
+   *
 ```
 
-## 10. Calculate $(a^2 - b^2)^2 - (c^2 - d^2)^2$
-
-> Hint: Reuse `aSquareMinusBSquare`
+Using width = 3 as an example, the actual string representation (with special characters) would be:
 
 ```js
-function aSquareMinusBSquare(a, b) {}
+'  *\n * *\n* * *\n * *\n  *';
+```
 
-function multipleSquareMinusSquare(a, b, c, d) {}
+> **Practice Wishful Thinking:** Consider what smaller functions you might need to help you piece together this shape. What patterns do you notice in the diamond structure?
 
-console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
+```js
+function diamond(width) {
+    // your code here
+}
+
+console.log(diamond(3));
+console.log(diamond(4));
 ```
