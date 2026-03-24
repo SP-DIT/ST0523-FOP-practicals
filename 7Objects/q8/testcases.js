@@ -1,0 +1,127 @@
+module.exports = {
+    testcases: [
+        {
+            input: ['Alice', 10],
+            expected: { name: 'Alice', age: 10, category: 'Child' },
+            isPublic: true,
+            description: 'Returns Child category for age 10',
+        },
+        {
+            input: ['Bob', 16],
+            expected: { name: 'Bob', age: 16, category: 'Teenager' },
+            isPublic: true,
+            description: 'Returns Teenager category for age 16',
+        },
+        {
+            input: ['Charlie', 30],
+            expected: { name: 'Charlie', age: 30, category: 'Adult' },
+            isPublic: true,
+            description: 'Returns Adult category for age 30',
+        },
+        {
+            input: ['David', 70],
+            expected: { name: 'David', age: 70, category: 'Senior' },
+            isPublic: false,
+            description: 'Returns Senior category for age 70',
+        },
+        {
+            input: ['Eve', 0],
+            expected: { name: 'Eve', age: 0, category: 'Child' },
+            isPublic: false,
+            description: 'Handles lower boundary age 0 as Child',
+        },
+        {
+            input: ['Finn', 12],
+            expected: { name: 'Finn', age: 12, category: 'Child' },
+            isPublic: false,
+            description: 'Handles upper Child boundary age 12',
+        },
+        {
+            input: ['Gina', 13],
+            expected: { name: 'Gina', age: 13, category: 'Teenager' },
+            isPublic: false,
+            description: 'Handles lower Teenager boundary age 13',
+        },
+        {
+            input: ['Hank', 19],
+            expected: { name: 'Hank', age: 19, category: 'Teenager' },
+            isPublic: false,
+            description: 'Handles upper Teenager boundary age 19',
+        },
+        {
+            input: ['Iris', 20],
+            expected: { name: 'Iris', age: 20, category: 'Adult' },
+            isPublic: false,
+            description: 'Handles lower Adult boundary age 20',
+        },
+        {
+            input: ['Jack', 64],
+            expected: { name: 'Jack', age: 64, category: 'Adult' },
+            isPublic: false,
+            description: 'Handles upper Adult boundary age 64',
+        },
+        {
+            input: ['Kate', 65],
+            expected: { name: 'Kate', age: 65, category: 'Senior' },
+            isPublic: false,
+            description: 'Handles lower Senior boundary age 65',
+        },
+        {
+            input: ['Liam', 120],
+            expected: { name: 'Liam', age: 120, category: 'Senior' },
+            isPublic: false,
+            description: 'Handles very high age values as Senior',
+        },
+        {
+            input: ['Mia', 1],
+            expected: { name: 'Mia', age: 1, category: 'Child' },
+            isPublic: false,
+            description: 'Returns Child for very young age',
+        },
+        {
+            input: ['Noah', 18],
+            expected: { name: 'Noah', age: 18, category: 'Teenager' },
+            isPublic: false,
+            description: 'Returns Teenager for typical teen age',
+        },
+        {
+            input: ['Owen', 21],
+            expected: { name: 'Owen', age: 21, category: 'Adult' },
+            isPublic: false,
+            description: 'Returns Adult for early adulthood age',
+        },
+        {
+            input: ['Pia', 66],
+            expected: { name: 'Pia', age: 66, category: 'Senior' },
+            isPublic: false,
+            description: 'Returns Senior for age above 65',
+        },
+        {
+            input: ['Quin', 11],
+            expected: { name: 'Quin', age: 11, category: 'Child' },
+            isPublic: false,
+            description: 'Returns Child for age 11',
+        },
+        {
+            input: ['Ray', 14],
+            expected: { name: 'Ray', age: 14, category: 'Teenager' },
+            isPublic: false,
+            description: 'Returns Teenager for age 14',
+        },
+        {
+            input: ['Sara', 45],
+            expected: { name: 'Sara', age: 45, category: 'Adult' },
+            isPublic: false,
+            description: 'Returns Adult for mid-range adult age',
+        },
+        {
+            input: ['Tina', 90],
+            expected: { name: 'Tina', age: 90, category: 'Senior' },
+            isPublic: false,
+            description: 'Returns Senior for advanced age values',
+        },
+    ],
+    options: {
+        type: 'JSON',
+    },
+};

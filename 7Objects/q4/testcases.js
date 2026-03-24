@@ -1,0 +1,128 @@
+module.exports = {
+    testcases: [
+        {
+            input: [{ weight: 70, height: 1.75 }],
+            expected: 70 / (1.75 * 1.75),
+            isPublic: true,
+            description: 'Calculates BMI for 70kg and 1.75m correctly',
+        },
+        {
+            input: [{ weight: 60, height: 1.6 }],
+            expected: 60 / (1.6 * 1.6),
+            isPublic: true,
+            description: 'Calculates BMI for 60kg and 1.60m correctly',
+        },
+        {
+            input: [{ weight: 80, height: 1.8 }],
+            expected: 80 / (1.8 * 1.8),
+            isPublic: true,
+            description: 'Calculates BMI for 80kg and 1.80m correctly',
+        },
+        {
+            input: [{ weight: 50, height: 1.5 }],
+            expected: 50 / (1.5 * 1.5),
+            isPublic: false,
+            description: 'Calculates BMI for lighter person with average height',
+        },
+        {
+            input: [{ weight: 90, height: 1.9 }],
+            expected: 90 / (1.9 * 1.9),
+            isPublic: false,
+            description: 'Calculates BMI for heavier person with taller height',
+        },
+        {
+            input: [{ weight: 45, height: 1.55 }],
+            expected: 45 / (1.55 * 1.55),
+            isPublic: false,
+            description: 'Calculates BMI for lower weight and shorter height',
+        },
+        {
+            input: [{ weight: 100, height: 2 }],
+            expected: 100 / (2 * 2),
+            isPublic: false,
+            description: 'Calculates BMI when height is exactly 2.0m',
+        },
+        {
+            input: [{ weight: 72.5, height: 1.65 }],
+            expected: 72.5 / (1.65 * 1.65),
+            isPublic: false,
+            description: 'Calculates BMI with decimal weight and height values',
+        },
+        {
+            input: [{ weight: 0, height: 1.7 }],
+            expected: 0 / (1.7 * 1.7),
+            isPublic: false,
+            description: 'Returns zero BMI when weight is zero',
+        },
+        {
+            input: [{ weight: 65, height: 1 }],
+            expected: 65 / (1 * 1),
+            isPublic: false,
+            description: 'Calculates BMI when height is exactly 1.0m',
+        },
+        {
+            input: [{ weight: 54, height: 1.2 }],
+            expected: 54 / (1.2 * 1.2),
+            isPublic: false,
+            description: 'Calculates BMI for shorter height edge within numeric domain',
+        },
+        {
+            input: [{ weight: 68, height: 1.72 }],
+            expected: 68 / (1.72 * 1.72),
+            isPublic: false,
+            description: 'Calculates BMI for common adult body measurements',
+        },
+        {
+            input: [{ weight: 85, height: 1.68 }],
+            expected: 85 / (1.68 * 1.68),
+            isPublic: false,
+            description: 'Calculates BMI for higher weight with average height',
+        },
+        {
+            input: [{ weight: 57, height: 1.63 }],
+            expected: 57 / (1.63 * 1.63),
+            isPublic: false,
+            description: 'Calculates BMI for lower-mid weight range correctly',
+        },
+        {
+            input: [{ weight: 110, height: 1.95 }],
+            expected: 110 / (1.95 * 1.95),
+            isPublic: false,
+            description: 'Calculates BMI for high weight and tall height values',
+        },
+        {
+            input: [{ weight: 40, height: 1.45 }],
+            expected: 40 / (1.45 * 1.45),
+            isPublic: false,
+            description: 'Calculates BMI for low weight and short height values',
+        },
+        {
+            input: [{ weight: 95.2, height: 1.82 }],
+            expected: 95.2 / (1.82 * 1.82),
+            isPublic: false,
+            description: 'Calculates BMI with one-decimal weight and two-decimal height',
+        },
+        {
+            input: [{ weight: 73, height: 1.7 }],
+            expected: 73 / (1.7 * 1.7),
+            isPublic: false,
+            description: 'Calculates BMI for another common adult measurement set',
+        },
+        {
+            input: [{ weight: 62.3, height: 1.58 }],
+            expected: 62.3 / (1.58 * 1.58),
+            isPublic: false,
+            description: 'Calculates BMI with decimal weight and medium-short height',
+        },
+        {
+            input: [{ weight: 49.5, height: 1.52 }],
+            expected: 49.5 / (1.52 * 1.52),
+            isPublic: false,
+            description: 'Calculates BMI for smaller body measurements correctly',
+        },
+    ],
+    options: {
+        type: 'floating point',
+        precision: 6,
+    },
+};

@@ -1,0 +1,127 @@
+module.exports = {
+    testcases: [
+        {
+            input: [{ username: 'Alice', password: 'oldPw123' }, 'oldPw123', 'newSecurePw456'],
+            expected: { username: 'Alice', password: 'newSecurePw456' },
+            isPublic: true,
+            description: 'Updates password when old password matches exactly',
+        },
+        {
+            input: [{ username: 'Bob', password: 'myOldPass789' }, 'wrongOldPass', 'newPass123'],
+            expected: { username: 'Bob', password: 'myOldPass789' },
+            isPublic: true,
+            description: 'Keeps original password when old password is incorrect',
+        },
+        {
+            input: [{ username: 'Charlie', password: 'charliePass456' }, 'charliePass456', 'charlieNewPass789'],
+            expected: { username: 'Charlie', password: 'charlieNewPass789' },
+            isPublic: true,
+            description: 'Updates password for another valid matching case',
+        },
+        {
+            input: [{ username: 'Diana', password: 'abcDEF123' }, 'ABCdef123', 'newOne456'],
+            expected: { username: 'Diana', password: 'abcDEF123' },
+            isPublic: false,
+            description: 'Password comparison is case-sensitive',
+        },
+        {
+            input: [{ username: 'Ethan', password: '' }, '', 'filledNow'],
+            expected: { username: 'Ethan', password: 'filledNow' },
+            isPublic: false,
+            description: 'Allows updating from empty string password when matched',
+        },
+        {
+            input: [{ username: 'Fiona', password: 'old' }, 'old', ''],
+            expected: { username: 'Fiona', password: '' },
+            isPublic: false,
+            description: 'Allows updating to empty string as new password',
+        },
+        {
+            input: [{ username: 'Gabe', password: 'pass with spaces' }, 'pass with spaces', 'new pass value'],
+            expected: { username: 'Gabe', password: 'new pass value' },
+            isPublic: false,
+            description: 'Handles passwords containing spaces',
+        },
+        {
+            input: [{ username: 'Hana', password: 'spaceEnd ' }, 'spaceEnd', 'changed'],
+            expected: { username: 'Hana', password: 'spaceEnd ' },
+            isPublic: false,
+            description: 'Does not trim whitespace when comparing old password',
+        },
+        {
+            input: [{ username: 'Ian', password: '123456' }, '123456', '654321'],
+            expected: { username: 'Ian', password: '654321' },
+            isPublic: false,
+            description: 'Updates numeric-looking string passwords correctly',
+        },
+        {
+            input: [{ username: 'Jade', password: 'sameValue' }, 'sameValue', 'sameValue'],
+            expected: { username: 'Jade', password: 'sameValue' },
+            isPublic: false,
+            description: 'Works when new password is the same as old password',
+        },
+        {
+            input: [{ username: 'Ken', password: 'oldPw', role: 'admin' }, 'oldPw', 'newPw'],
+            expected: { username: 'Ken', password: 'newPw', role: 'admin' },
+            isPublic: false,
+            description: 'Preserves additional account properties after update',
+        },
+        {
+            input: [{ username: 'Lia', password: 'oldPw', role: 'user' }, 'wrong', 'newPw'],
+            expected: { username: 'Lia', password: 'oldPw', role: 'user' },
+            isPublic: false,
+            description: 'Preserves additional properties when update does not happen',
+        },
+        {
+            input: [{ username: 'Moe', password: 'A1!a1!' }, 'A1!a1!', 'B2@b2@'],
+            expected: { username: 'Moe', password: 'B2@b2@' },
+            isPublic: false,
+            description: 'Handles special characters in old and new passwords',
+        },
+        {
+            input: [{ username: 'Nia', password: 'first' }, 'second', 'third'],
+            expected: { username: 'Nia', password: 'first' },
+            isPublic: false,
+            description: 'Keeps password unchanged for non-matching old value',
+        },
+        {
+            input: [{ username: 'Omar', password: 'p@ssword' }, 'p@ssword', 'P@SSWORD'],
+            expected: { username: 'Omar', password: 'P@SSWORD' },
+            isPublic: false,
+            description: 'Can update to same letters with different case',
+        },
+        {
+            input: [{ username: 'Pia', password: 'alpha-beta' }, 'alpha-beta', 'beta-alpha'],
+            expected: { username: 'Pia', password: 'beta-alpha' },
+            isPublic: false,
+            description: 'Updates hyphenated password strings correctly',
+        },
+        {
+            input: [{ username: 'Quin', password: "old'quote" }, "old'quote", "new'quote"],
+            expected: { username: 'Quin', password: "new'quote" },
+            isPublic: false,
+            description: 'Handles apostrophes in password strings',
+        },
+        {
+            input: [{ username: 'Rae', password: 'line1_line2' }, 'line1_line2', 'line2_line3'],
+            expected: { username: 'Rae', password: 'line2_line3' },
+            isPublic: false,
+            description: 'Handles underscore-containing passwords correctly',
+        },
+        {
+            input: [{ username: 'Sara', password: 'old.password' }, 'old.password', 'new.password'],
+            expected: { username: 'Sara', password: 'new.password' },
+            isPublic: false,
+            description: 'Handles dot-separated password strings correctly',
+        },
+        {
+            input: [{ username: 'Tina', password: 'oldPassFinal' }, 'oldPassFinalX', 'newPassFinal'],
+            expected: { username: 'Tina', password: 'oldPassFinal' },
+            isPublic: false,
+            description: 'Rejects near-match old password and keeps original value',
+        },
+    ],
+    options: {
+        type: 'JSON',
+    },
+};
