@@ -15,7 +15,6 @@ Define the task to achieve, including specific requirements, constraints, and su
     4. Generate a `code.js` file that contains only the function signature and sample calls with expected outputs as comments.
     5. If the problem is a **fix-the-error** question, retain the original buggy code in `code.js` function body (do not replace it with an empty stub).
 3. You can refer to `./instructor/sample` directory for reference of the file formats.
-4. Stage and commit the changes.
 
 # Constraints
 
@@ -128,10 +127,10 @@ Define the task to achieve, including specific requirements, constraints, and su
 # Success criteria
 
 1. You are to run the solution against the designed testcases and make sure all the test cases passes.
-    1. You can use `node run pX qY` where `pX` and `qY` corresponds to the problem set number and the question number. (e.g. `node run p${input:question} q3`)
+    1. You can use `node run qY` where `qY` corresponds to the question number. (e.g. `node run q3`)
     2. You need to set the NODE_ENV environment variable to `test` to run the testcases.
     3. We are very very likely using powershell so use the following to run the testcases:
         ```ps
-        $env:NODE_ENV="test"; node run pX qY
+        $env:NODE_ENV="test"; node run qY
         ```
 2. You are to fix the test cases and/or the solution.js file accordingly.

@@ -1,0 +1,107 @@
+module.exports = {
+    testcases: [
+        {
+            input: [[4, 3, 2, 5, 1]],
+            expected: [1, 2, 3, 4, 5],
+            isPublic: true,
+            description: 'Sample unsorted array should be sorted ascending',
+        },
+        {
+            input: [[10, 9, 8, 7, 6]],
+            expected: [6, 7, 8, 9, 10],
+            isPublic: true,
+            description: 'Descending array should be sorted ascending',
+        },
+        {
+            input: [[1, 2, 3, 4, 5]],
+            expected: [1, 2, 3, 4, 5],
+            isPublic: true,
+            description: 'Already sorted array remains unchanged',
+        },
+        { input: [[]], expected: [], isPublic: false, description: 'Empty array stays empty' },
+        { input: [[7]], expected: [7], isPublic: false, description: 'Single-element array stays same' },
+        { input: [[2, 1]], expected: [1, 2], isPublic: false, description: 'Two-element swap case' },
+        { input: [[1, 1, 1]], expected: [1, 1, 1], isPublic: false, description: 'All equal elements remain equal' },
+        {
+            input: [[3, 1, 2, 1]],
+            expected: [1, 1, 2, 3],
+            isPublic: false,
+            description: 'Array with duplicates sorted correctly',
+        },
+        {
+            input: [[-1, -3, -2, -5]],
+            expected: [-5, -3, -2, -1],
+            isPublic: false,
+            description: 'Negative numbers sorted correctly',
+        },
+        {
+            input: [[0, -1, 5, -3, 2]],
+            expected: [-3, -1, 0, 2, 5],
+            isPublic: false,
+            description: 'Mixed sign values sorted correctly',
+        },
+        {
+            input: [[9, 8, 7, 1, 2, 3]],
+            expected: [1, 2, 3, 7, 8, 9],
+            isPublic: false,
+            description: 'Mixed descending and ascending chunks',
+        },
+        {
+            input: [[5, 4, 3, 2, 1, 0]],
+            expected: [0, 1, 2, 3, 4, 5],
+            isPublic: false,
+            description: 'Six values in reverse order',
+        },
+        {
+            input: [[2, 2, 1, 1, 3, 3]],
+            expected: [1, 1, 2, 2, 3, 3],
+            isPublic: false,
+            description: 'Repeated pairs sorted correctly',
+        },
+        {
+            input: [[100, 50, 20, 10]],
+            expected: [10, 20, 50, 100],
+            isPublic: false,
+            description: 'Coin-like values sort ascending',
+        },
+        {
+            input: [[8, 6, 7, 5, 3, 0, 9]],
+            expected: [0, 3, 5, 6, 7, 8, 9],
+            isPublic: false,
+            description: 'General unsorted set sorts correctly',
+        },
+        {
+            input: [[4, 4, 4, 2, 2, 1]],
+            expected: [1, 2, 2, 4, 4, 4],
+            isPublic: false,
+            description: 'High duplicates with small tail sort correctly',
+        },
+        {
+            input: [[-10, 10, 0]],
+            expected: [-10, 0, 10],
+            isPublic: false,
+            description: 'Three mixed sign values sorted',
+        },
+        {
+            input: [[1, 3, 2, 4, 6, 5]],
+            expected: [1, 2, 3, 4, 5, 6],
+            isPublic: false,
+            description: 'Almost sorted with pair swaps',
+        },
+        {
+            input: [[11, -1, 7, 7, 3]],
+            expected: [-1, 3, 7, 7, 11],
+            isPublic: false,
+            description: 'Duplicates and negative sorted together',
+        },
+        {
+            input: [[9, 1, 9, 1, 9, 1]],
+            expected: [1, 1, 1, 9, 9, 9],
+            isPublic: false,
+            description: 'Alternating duplicates sorted correctly',
+        },
+    ],
+    options: {
+        type: 'JSON',
+    },
+};

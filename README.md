@@ -1,169 +1,222 @@
-# Practical 2
+# Practical 6
 
-> Press `CTRL + SHIFT + V` to preview the rendered pdf
+## 1. Fix the Bug: Count Positive Numbers
 
-## 1. Fix the expression error
-
-The function should evaluate the expression $48 ÷ 2(9 + 3)$.
-
-Your task is to fix the syntax error in the expression so the function returns the correct value.
+The code below tries to count the number of positive numbers in an array using a `while` loop.
+Fix the bug so that it correctly counts all positive values.
 
 ```js
-function evaluate() {
-    return 48 / 2(9 + 3);
+function countPositiveNumbers(array) {
+    let count = 0;
+    let i = 1;
+    while (i < array.length) {
+        i = i + 1;
+        if (array[i] > 0) {
+            count = count + 1;
+        }
+    }
+    return count;
 }
 
-console.log(evaluate()); // 288
+console.log(countPositiveNumbers([-1, 0, 1, 2, 3])); // should return 3
+console.log(countPositiveNumbers([-5, -4, -3, -2, -1])); // should return 0
+console.log(countPositiveNumbers([1, 2, 3, 4, 5])); // should return 5
 ```
 
-## 2. Square a value 3 times
+## 2. Fix the Bug: Count Divisions by Two
 
-The function should square `x` three times in sequence. i.e. $((x^2)^2)^2$
-
-Add brackets so the exponent expression matches this order.
+The function below tries to count the number of times a number can be divided by `2`.
+Fix the loop condition so the counting logic works correctly.
 
 ```js
-function square3Time(x) {
-    return x ** (2 ** (2 ** 2));
+function countDivisionsByTwo(number) {
+    let count = 0;
+    while (number % 2) {
+        number = number / 2;
+        count = count + 1;
+    }
+    return count;
 }
 
-console.log(square3Time(2)); // 256
-console.log(square3Time(3)); // 6561
+console.log(countDivisionsByTwo(16)); // should return 4
+console.log(countDivisionsByTwo(10)); // should return 1
+console.log(countDivisionsByTwo(1)); // should return 0
 ```
 
-## 3. Build `multiplyBy3` using `add`
+## 3. Fix the Bug: Calculate Number of Chickens
 
-Fix the code so `multiplyBy3(x)` correctly returns `x * 3` by reusing `add(x, y)`.
+On a farm, chickens have `2` legs and cows have `4` legs.
+Given the number of animals and total number of legs, the code below tries to calculate the number of chickens by testing possible values. Fix the bug.
 
 ```js
-function add(x, y) {
-    x + y;
+function calculateChickens(numberOfAnimals, numberOfLegs) {
+    let numberOfChickens = 0;
+    let numberOfCows = numberOfAnimals - numberOfChickens;
+    while (numberOfChickens * 2 + numberOfCows * 4 > numberOfLegs) {
+        numberOfChickens = numberOfChickens + 1;
+        numberOfCows = numberOfCows + 1;
+    }
+    return numberOfChickens;
 }
 
-function multiplyBy3(x) {
-    return add(x, add(x, x));
+console.log(calculateChickens(5, 14)); // 3 (3 chickens and 2 cows, 3*2 + 2*4 = 6 + 8 = 14)
+console.log(calculateChickens(10, 28)); // 6 (6 chickens and 4 cows, 6*2 + 4*4 = 12 + 16 = 28)
+```
+
+## 4. Withdraw Until Target Balance
+
+Given:
+
+-   starting balance
+-   target balance
+-   withdrawal amount
+
+Keep withdrawing while the next withdrawal does not make the balance go below target. Return the final balance.
+
+```js
+function calculateFinalBalance(startingBalance, targetBalance, withdrawalAmount) {
+    // Your code here
 }
 
-console.log(multiplyBy3(4)); // 12
+console.log(calculateFinalBalance(100, 20, 15)); // should return 25 (100 > 85 > 70 > 55 > 40 > 25, any further withdrawal would make it less than the target balance of 20)
+console.log(calculateFinalBalance(50, 10, 12)); // should return 14 (50 > 38 > 26 > 14, any further withdrawal would make it less than the target balance of 10)
+console.log(calculateFinalBalance(80, 30, 20)); // should return 40 (80 > 60 > 40, any further withdrawal would make it less than the target balance of 30)
 ```
 
-## 4. Fix string message assignment
+## 5. Secret Number Guessing Game
 
-The function should return a greeting message for the given name.
+The secret number is between `1` and `100`. Count how many guesses are needed using this strategy:
+
+1. Start with guess `50`
+2. If guess is too low, guess halfway between current lower bound and upper bound
+3. If guess is too high, guess halfway between lower bound and current upper bound
+4. Use `Math.floor()` for midpoint
+5. Stop when guess is correct
 
 ```js
-function greetings(name) {
-    const message = 'Hello, ';
-    message = message + name;
-    return message;
+function countGuesses(secretNumber) {
+    // Your code here
 }
 
-console.log(greetings('Ali')); // "Hello, Ali"
+console.log(countGuesses(1)); // should return 6 (50, 25, 12, 6, 3, 1)
+console.log(countGuesses(100)); // should return 7 (50, 75, 88, 94, 97, 99, 100)
+console.log(countGuesses(50)); // should return 1 (50)
 ```
 
-## 5. Fix the full name variable
+## 6. Remove Duplicates from Sorted Array
 
-The function should return the full name by joining `firstName` and `lastName` with one space.
+Given a sorted array, remove duplicate elements and return the new array.
 
 ```js
-function displayName(firstName, lastName) {
-	const full name = firstName + ' ' + lastName;
-	return full name;
+function removeDuplicates(array) {
+    // Your code here
 }
 
-console.log(displayName('John', 'Tan')); // "John Tan"
+console.log(removeDuplicates([1, 1, 2, 2, 3])); // [1, 2, 3]
+console.log(removeDuplicates([1, 2, 3, 4, 5])); // [1, 2, 3, 4, 5]
+console.log(removeDuplicates([1, 1, 1, 1, 1])); // [1]
 ```
 
-## 6. Make a message
+## 7. Reverse String
 
-Given the name, year of birth, and current year, return a message indicating the person's name and age.
+Given a string, return its reversed string.
+Do this **without** using `split()`, `reverse()`, or `join()`.
 
 ```js
-function makeMessage(name, yearOfBirth, currentYear) {}
+function reverseString(str) {
+    // Your code here
+}
 
-console.log(makeMessage('John', 1994, 2025)); // "John (31)"
+console.log(reverseString('hello')); // "olleh"
+console.log(reverseString('world')); // "dlrow"
 ```
 
-## 7. Make 3 messages
+## 8. Selection Sort (Ascending)
 
-Given the name and the year of birth of 3 different person, along with the current year, return a message listing the name and age of the 3 person, each separated by a comma.
+Sort an array in ascending order using selection sort:
 
-> Hint: You should reuse your code from the previous question
+1.  starting with the first element
+    1. Loop through the array and find the minimum element in the array.
+    2. Swap the minimum element with the first element of the array.
+2.  start again but now starting from the second element
+    1. Loop through the array starting from the second element and find the minimum element in the array.
+    2. Swap the minimum element with the second element of the array.
+3.  start again but now starting from the third element
+    1. Loop through the array starting from the third element and find the minimum element in the array.
+    2. Swap the minimum element with the third element of the array.
+4.  Repeat the steps until the last element is reached.
+
+Example: [4, 3, 2, 5, 1]
+
+1.  Find the minimum element in the array which is 1 and swap it with the first element, resulting in [1, 3, 2, 5, 4].
+2.  Find the minimum element in the array starting from the second element which is 2 and swap it with the second element, resulting in [1, 2, 3, 5, 4].
+3.  Find the minimum element in the array starting from the third element which is 3 and swap it with the third element, resulting in [1, 2, 3, 5, 4].
+4.  Find the minimum element in the array starting from the fourth element which is 4 and swap it with the fourth element, resulting in [1, 2, 3, 4, 5].
+5.  Find the minimum element in the array starting from the fifth element which is 5 and swap it with the fifth element, resulting in [1, 2, 3, 4, 5].
+
+The function `swap(array, i, j)` has been provided for you.
 
 ```js
-function makeMessage(name, yearOfBirth, currentYear) {}
+function swap(array, i, j) {
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
 
-function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBirth3, currentYear) {}
+function selectionSort(array) {
+    // Your code here
+}
 
-console.log(make3Messages('John', 1994, 'Mary', 1999, 'Tom', 1986, 2025)); // "John (31), Mary (26), Tom (39)"
+console.log(selectionSort([4, 3, 2, 5, 1])); // [1, 2, 3, 4, 5]
+console.log(selectionSort([10, 9, 8, 7, 6])); // [6, 7, 8, 9, 10]
+console.log(selectionSort([1, 2, 3, 4, 5])); // [1, 2, 3, 4, 5]
 ```
 
-## 8. Multiple wrapper
+## 9. Coin Change
 
-Implement a function `wrapper(a, b, c, message)` that returns a string which wraps the message in a specific pattern of characters.
+Given an amount of money (in cents), return the minimum number of coins needed using Singapore coin values `[100, 50, 20, 10]`.
 
-`a`, `b`, and `c` are single-character strings used as wrapping characters.
+The steps to solve this problem are:
 
-The output string should be constructed as follows:
+1. Start with the largest coin value and keep subtracting it from the amount until the amount is less than the coin value.
+2. Move to the next largest coin value and repeat step 1 until the amount is 0.
+3. Count the number of coins used in the process.
 
-1. The string starts with three repetitions of character `a`.
-2. This is followed by two repetitions of character `b`.
-3. Then a single instance of character `c`.
-4. Next comes the original `message` string.
-5. After the message, repeat character `c` once again.
-6. Then repeat character `b` twice.
-7. Finally, end the string with three repetitions of character `a`.
-
-Example 1:
+For example, if the amount is 170 and the coin values are [100, 50, 20, 10], the minimum number of coins needed is 3 (one 100, one 50, and one 20).
 
 ```js
-wrapper('#', '%', '*', 'message');
+function coinChange(amount) {
+    const coins = [100, 50, 20, 10];
+    // Your code here
+}
+
+console.log(coinChange(170)); // should return 3 (one 100, one 50, and one 20)
+console.log(coinChange(30)); // should return 2 (one 20 and one 10)
+console.log(coinChange(80)); // should return 3 (one 50, one 20, and one 10)
 ```
 
-Output 1:
+## 10. Greatest Common Divisor (GCD)
+
+The GCD of two numbers is the largest number that divides both without remainder.
+For this question, you can safely assume that:
+
+-   Both parameters must be positive numbers.
+-   Assume `a > b`.
+
+Use this strategy:
+
+1. Get the remainder of `a` divided by `b`
+2. If remainder is `0`, `b` is the GCD
+3. If the remainder is not 0, then
+   3.1. replace the `a` with the `b` number and
+   3.2. replace the `b` with the remainder, and repeat steps 1 to 3 until the remainder is 0.
 
 ```js
-###%%*message*%%###
-```
+function calculateGCD(a, b) {
+    // Your code here
+}
 
-Example 2:
-
-```js
-wrapper('@', 'B', '(', 'message');
-```
-
-Output 2:
-
-```
-@@@BB(message(BB@@@
-```
-
-Code
-
-```js
-function wrapper(a, b, c, message) {}
-
-console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"
-```
-
-## 9. Calculate $a^2 - b^2$
-
-> Hint: $a \times a = a^2$
-
-```js
-function aSquareMinusBSquare(a, b) {}
-
-console.log(aSquareMinusBSquare(10, 1)); // 99
-```
-
-## 10. Calculate $(a^2 - b^2)^2 - (c^2 - d^2)^2$
-
-> Hint: Reuse `aSquareMinusBSquare`
-
-```js
-function aSquareMinusBSquare(a, b) {}
-
-function multipleSquareMinusSquare(a, b, c, d) {}
-
-console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
+console.log(calculateGCD(48, 18)); // should return 6
+console.log(calculateGCD(98, 56)); // should return 14
+console.log(calculateGCD(101, 10)); // should return 1
 ```

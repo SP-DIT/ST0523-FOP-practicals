@@ -1,0 +1,107 @@
+module.exports = {
+    testcases: [
+        {
+            input: [[1, 1, 2, 2, 3]],
+            expected: [1, 2, 3],
+            isPublic: true,
+            description: 'Sample duplicate groups should collapse',
+        },
+        {
+            input: [[1, 2, 3, 4, 5]],
+            expected: [1, 2, 3, 4, 5],
+            isPublic: true,
+            description: 'Already unique sorted array remains unchanged',
+        },
+        {
+            input: [[1, 1, 1, 1, 1]],
+            expected: [1],
+            isPublic: true,
+            description: 'All duplicates should produce one element',
+        },
+        { input: [[]], expected: [], isPublic: false, description: 'Empty array returns empty array' },
+        { input: [[7]], expected: [7], isPublic: false, description: 'Single element array returns itself' },
+        {
+            input: [[0, 0, 1, 1, 1, 2]],
+            expected: [0, 1, 2],
+            isPublic: false,
+            description: 'Multiple duplicate groups with zero',
+        },
+        {
+            input: [[-3, -3, -2, -1, -1]],
+            expected: [-3, -2, -1],
+            isPublic: false,
+            description: 'Negative sorted values deduplicate correctly',
+        },
+        { input: [[-5, -5, -5, -5]], expected: [-5], isPublic: false, description: 'All same negative values' },
+        {
+            input: [[1, 1, 2, 3, 3, 4, 5, 5]],
+            expected: [1, 2, 3, 4, 5],
+            isPublic: false,
+            description: 'Mixed duplicate blocks deduplicate',
+        },
+        {
+            input: [[2, 2, 2, 3, 4, 4, 5]],
+            expected: [2, 3, 4, 5],
+            isPublic: false,
+            description: 'Duplicates at beginning and middle',
+        },
+        {
+            input: [[1, 2, 2, 2, 2, 2]],
+            expected: [1, 2],
+            isPublic: false,
+            description: 'Long duplicate tail compresses to one',
+        },
+        {
+            input: [[-2, -2, 0, 0, 3, 3]],
+            expected: [-2, 0, 3],
+            isPublic: false,
+            description: 'Three duplicate groups with sign changes',
+        },
+        {
+            input: [[10, 10, 20, 20, 30, 30, 40]],
+            expected: [10, 20, 30, 40],
+            isPublic: false,
+            description: 'Evenly repeated values deduplicate',
+        },
+        { input: [[1, 1, 1, 2]], expected: [1, 2], isPublic: false, description: 'Prefix duplicates and unique tail' },
+        {
+            input: [[1, 2, 3, 3]],
+            expected: [1, 2, 3],
+            isPublic: false,
+            description: 'Suffix duplicate handled correctly',
+        },
+        {
+            input: [[-10, -9, -9, -8, -8, -8, -7]],
+            expected: [-10, -9, -8, -7],
+            isPublic: false,
+            description: 'Negative range with repeated values',
+        },
+        {
+            input: [[0, 1, 1, 1, 1, 2, 2, 3]],
+            expected: [0, 1, 2, 3],
+            isPublic: false,
+            description: 'Dense duplicate center',
+        },
+        {
+            input: [[5, 5, 6, 6, 7, 8, 8, 9, 9]],
+            expected: [5, 6, 7, 8, 9],
+            isPublic: false,
+            description: 'Alternating unique and duplicate groups',
+        },
+        {
+            input: [[100, 100, 100, 101, 102, 102]],
+            expected: [100, 101, 102],
+            isPublic: false,
+            description: 'Large values deduplicate',
+        },
+        {
+            input: [[-1, 0, 0, 0, 1, 1]],
+            expected: [-1, 0, 1],
+            isPublic: false,
+            description: 'Crossing zero with duplicates',
+        },
+    ],
+    options: {
+        type: 'JSON',
+    },
+};
