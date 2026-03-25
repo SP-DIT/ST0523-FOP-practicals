@@ -1,169 +1,193 @@
-# Practical 2
+# Objects with Methods Practical
 
 > Press `CTRL + SHIFT + V` to preview the rendered pdf
 
-## 1. Fix the expression error
+## 1. Create Circle Object with Methods
 
-The function should evaluate the expression $48 ÷ 2(9 + 3)$.
+Given the radius of a circle, create a circle object with methods to calculate its area and circumference.
 
-Your task is to fix the syntax error in the expression so the function returns the correct value.
+This problem introduces you to creating objects with methods (functions stored as properties). You'll need to:
+
+-   Create an object with a `radius` property
+-   Add two methods:
+-   `getArea()`: returns the area (π × radius²)
+-   `getCircumference()`: returns the circumference (2 × π × radius)
+
+**Hints**
+
+-   Use the `this` keyword to access the object's `radius` property within the methods
+-   Use `Math.PI` for the value of π
 
 ```js
-function evaluate() {
-    return 48 / 2(9 + 3);
+function createCircle(radius) {
+    // Your code here
 }
 
-console.log(evaluate()); // 288
+// Example usage:
+const circle = createCircle(5);
+console.log(circle.getArea()); // 78.53981633974483
+console.log(circle.getCircumference()); // 31.41592653589793
 ```
 
-## 2. Square a value 3 times
+## 2. Create Bank Account Object
 
-The function should square `x` three times in sequence. i.e. $((x^2)^2)^2$
+Given the `initialBalance`, create a bank account object with methods to `deposit`, `withdraw`, and `checkBalance`.
 
-Add brackets so the exponent expression matches this order.
+This problem builds on object methods by introducing state management. The object needs to:
+
+-   `deposit(amount)`: adds to the balance
+-   `withdraw(amount)`: subtracts from the balance
+-   `getBalance()`: returns the current balance
+
+**Hint:** All three methods will need to use `this.balance` to work with the account's balance.
 
 ```js
-function square3Time(x) {
-    return x ** (2 ** (2 ** 2));
+function createBankAccount(initialBalance) {
+    // Your code here
 }
 
-console.log(square3Time(2)); // 256
-console.log(square3Time(3)); // 6561
+// Example usage:
+const account = createBankAccount(100);
+account.deposit(50);
+account.withdraw(30);
+console.log(account.getBalance()); // 120
 ```
 
-## 3. Build `multiplyBy3` using `add`
+## 3. Add Transfer Method to Bank Account
 
-Fix the code so `multiplyBy3(x)` correctly returns `x * 3` by reusing `add(x, y)`.
+Continuing from Question 2, add a transfer method that moves money between accounts.
+
+-   `transfer(anotherAccount)`: Withdraw from current account and deposit into `anotherAccount`.
 
 ```js
-function add(x, y) {
-    x + y;
+function createBankAccount(initialBalance) {
+    // Reuse your code from Q2 and add the additional method
 }
 
-function multiplyBy3(x) {
-    return add(x, add(x, x));
+// Example usage:
+const account1 = createBankAccount(200);
+const account2 = createBankAccount(50);
+account1.transfer(100, account2);
+console.log(account1.getBalance()); // 100
+console.log(account2.getBalance()); // 150
+```
+
+## 4. Create RPG Character with Health System
+
+Given the `maxHealth` of a character, create a character object for an RPG game with the following methods.
+
+-   `takeDamage(amount)`: reduces health by the amount, but health cannot go below 0
+-   `heal(amount)`: increases health by the amount, but health cannot exceed `maxHealth`
+-   `getHealth()`: returns the current health
+-   `isAlive()`: returns `true` if health is greater than 0, `false` otherwise
+
+**Hint:** Use conditional statements to ensure health stays within valid bounds (0 to maxHealth).
+
+```js
+function createCharacter(maxHealth) {
+    // Your code here
 }
 
-console.log(multiplyBy3(4)); // 12
+// Example usage:
+const character = createCharacter(100); // maxHealth of 100
+console.log(character.takeDamage(30)); // 70, character takes 30 damage and has 70 health left
+console.log(character.heal(20)); // 90, character heals 20 and has 90 health
+console.log(character.getHealth()); // 90, current health is 90
+console.log(character.isAlive()); // true, character is alive
+console.log(character.takeDamage(80)); // 10, character takes 80 damage and has 10 health left
+console.log(character.heal(120)); // 100, character heals 120 but health caps at maxHealth of 100
+console.log(character.takeDamage(999)); // 0, character takes 999 damage and health drops to 0
+console.log(character.isAlive()); // false, character is dead
 ```
 
-## 4. Fix string message assignment
+## 5. Create Queue System
 
-The function should return a greeting message for the given name.
+Create a queue system object that manages customer queue numbers, similar to what you see at McDonald's or bubble tea shops.
+
+-   `takeANumber()` - assigns the next queue number (starting from 1), adds it to the queue, and returns it
+-   `serveNextCustomer()` - returns the first customer's number from the queue and removes them from the queue
+-   `getCurrentQueue()` - returns the array of all queue numbers currently waiting
+
+**Note:** This is a First In, First Out system - customers who arrive first should be served first.
 
 ```js
-function greetings(name) {
-    const message = 'Hello, ';
-    message = message + name;
-    return message;
+function createQueueSystem() {
+    // Your code here
 }
 
-console.log(greetings('Ali')); // "Hello, Ali"
+// Example usage:
+const queue = createQueueSystem();
+console.log(queue.takeANumber()); // 1
+console.log(queue.takeANumber()); // 2
+console.log(queue.getCurrentQueue()); // [1, 2]
+console.log(queue.serveNextCustomer()); // 1
+console.log(queue.getCurrentQueue()); // [2]
+console.log(queue.takeANumber()); // 3
+console.log(queue.getCurrentQueue()); // [2, 3]
 ```
 
-## 5. Fix the full name variable
+## 6. Create RPG Item Shop
 
-The function should return the full name by joining `firstName` and `lastName` with one space.
+Given a list of items with their name, price, and quantity, create a shop object that manages inventory and sales. The shop object should have the following methods:
+
+-   `buyItem(itemName, quantity)` - if sufficient stock exists:
+    -   Reduce the item's quantity
+    -   Return the total price (item price × quantity purchased)
+    -   If insufficient stock, return the string `"Insufficient stock for [itemName]"`
+-   `getAvailableItemList()` - returns an array of items that have quantity greater than 0
+
+> **Practice Wishful Thinking**
+>
+> 1. First think about what are the major steps
+> 2. Then think about implementing each of the steps
+> 3. Then consider how you might combine them together.
 
 ```js
-function displayName(firstName, lastName) {
-	const full name = firstName + ' ' + lastName;
-	return full name;
+function createShop(items) {
+    // Your code here
 }
 
-console.log(displayName('John', 'Tan')); // "John Tan"
+// Example usage:
+const shop = createShop([
+    { name: 'Health Potion', price: 10, quantity: 5 },
+    { name: 'Mana Potion', price: 15, quantity: 3 },
+]);
+
+console.log(shop.buyItem('Health Potion', 2)); // 20
+console.log(shop.getAvailableItemList());
+//    [ { name: 'Health Potion', price: 10, quantity: 3 }, { name: 'Mana Potion', price: 15, quantity: 3 } ]
+//    Health Potion quantity reduced to 3
+
+console.log(shop.buyItem('Mana Potion', 4)); // "Insufficient stock for Mana Potion"
+console.log(shop.buyItem('Mana Potion', 3)); // 45
+
+console.log(shop.getAvailableItemList());
+//    [ { name: 'Health Potion', price: 10, quantity: 3 } ]
+//    Mana Potion is now out of stock and omitted from the list
 ```
 
-## 6. Make a message
+## 7. Create Number Sequence Object with State Management
 
-Given the name, year of birth, and current year, return a message indicating the person's name and age.
+Given an array of numbers, create a object that iterates through the numbers in the array with the following methods:
+
+-   `next()`: returns the next number in the sequence and advances the position. When the end is reached, it loops back to the beginning
+-   `reset()`: resets the sequence back to the start (position 0)
+-   `current()`: returns the current number without advancing the position
 
 ```js
-function makeMessage(name, yearOfBirth, currentYear) {}
+function createNumberSequence(numbers) {
+    // Your code here
+}
 
-console.log(makeMessage('John', 1994, 2025)); // "John (31)"
-```
+// Example usage:
+const sequence = createNumberSequence([10, 20, 30]);
 
-## 7. Make 3 messages
-
-Given the name and the year of birth of 3 different person, along with the current year, return a message listing the name and age of the 3 person, each separated by a comma.
-
-> Hint: You should reuse your code from the previous question
-
-```js
-function makeMessage(name, yearOfBirth, currentYear) {}
-
-function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBirth3, currentYear) {}
-
-console.log(make3Messages('John', 1994, 'Mary', 1999, 'Tom', 1986, 2025)); // "John (31), Mary (26), Tom (39)"
-```
-
-## 8. Multiple wrapper
-
-Implement a function `wrapper(a, b, c, message)` that returns a string which wraps the message in a specific pattern of characters.
-
-`a`, `b`, and `c` are single-character strings used as wrapping characters.
-
-The output string should be constructed as follows:
-
-1. The string starts with three repetitions of character `a`.
-2. This is followed by two repetitions of character `b`.
-3. Then a single instance of character `c`.
-4. Next comes the original `message` string.
-5. After the message, repeat character `c` once again.
-6. Then repeat character `b` twice.
-7. Finally, end the string with three repetitions of character `a`.
-
-Example 1:
-
-```js
-wrapper('#', '%', '*', 'message');
-```
-
-Output 1:
-
-```js
-###%%*message*%%###
-```
-
-Example 2:
-
-```js
-wrapper('@', 'B', '(', 'message');
-```
-
-Output 2:
-
-```
-@@@BB(message(BB@@@
-```
-
-Code
-
-```js
-function wrapper(a, b, c, message) {}
-
-console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"
-```
-
-## 9. Calculate $a^2 - b^2$
-
-> Hint: $a \times a = a^2$
-
-```js
-function aSquareMinusBSquare(a, b) {}
-
-console.log(aSquareMinusBSquare(10, 1)); // 99
-```
-
-## 10. Calculate $(a^2 - b^2)^2 - (c^2 - d^2)^2$
-
-> Hint: Reuse `aSquareMinusBSquare`
-
-```js
-function aSquareMinusBSquare(a, b) {}
-
-function multipleSquareMinusSquare(a, b, c, d) {}
-
-console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
+console.log(sequence.current()); // 10 - starts at first element
+console.log(sequence.next()); // 20 - moves to next and returns it
+console.log(sequence.next()); // 30 - moves to next and returns it
+console.log(sequence.next()); // 10 - loops back to start
+console.log(sequence.next()); // 20 - continues from start
+sequence.reset();
+console.log(sequence.current()); // 10 - back at the beginning after reset
+console.log(sequence.next()); // 20 - continues from reset position
 ```
