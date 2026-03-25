@@ -1,169 +1,309 @@
-# Practical 2
+# Practical 8 - Array of Objects
 
-> Press `CTRL + SHIFT + V` to preview the rendered pdf
+## 1. Calculate Total Cart Price
 
-## 1. Fix the expression error
+Given an array of cart items where each item has:
 
-The function should evaluate the expression $48 ÷ 2(9 + 3)$.
+-   `price`
+-   `quantity`
 
-Your task is to fix the syntax error in the expression so the function returns the correct value.
+Return the cart total by summing `price * quantity` for every item.
 
 ```js
-function evaluate() {
-    return 48 / 2(9 + 3);
+function calculateCartTotal(cart) {
+    // Your code here
 }
 
-console.log(evaluate()); // 288
+console.log(
+    calculateCartTotal([
+        { price: 999.99, quantity: 2 },
+        { price: 49.99, quantity: 5 },
+    ]),
+); // Output: 2249.93
+console.log(
+    calculateCartTotal([
+        { price: 19.99, quantity: 3 },
+        { price: 5.99, quantity: 10 },
+    ]),
+); // Output: 119.89
 ```
 
-## 2. Square a value 3 times
+## 2. Convert Objects to HTML Table String
 
-The function should square `x` three times in sequence. i.e. $((x^2)^2)^2$
+Given an array of student objects, return a single HTML table string with:
 
-Add brackets so the exponent expression matches this order.
+-   One header row (`<th>`) for property names
+-   One data row (`<td>`) per student
+
+### Hint
+
+-   Build the output string piece by piece.
+-   Start with `"<table>"`, append header, append rows, then close with `"</table>"`.
 
 ```js
-function square3Time(x) {
-    return x ** (2 ** (2 ** 2));
+function objectsToTable(objects) {
+    // Your code here
 }
 
-console.log(square3Time(2)); // 256
-console.log(square3Time(3)); // 6561
+console.log(
+    objectsToTable([
+        { name: 'Alice', age: 20, grade: 'A' },
+        { name: 'Bob', age: 22, grade: 'B' },
+    ]),
+);
+// Output: "<table><tr><th>name</th><th>age</th><th>grade</th></tr><tr><td>Alice</td><td>20</td><td>A</td></tr><tr><td>Bob</td><td>22</td><td>B</td></tr></table>"
+console.log(
+    objectsToTable([
+        { name: 'Charlie', age: 19, grade: 'A' },
+        { name: 'David', age: 21, grade: 'C' },
+    ]),
+);
+// Output: "<table><tr><th>name</th><th>age</th><th>grade</th></tr><tr><td>Charlie</td><td>19</td><td>A</td></tr><tr><td>David</td><td>21</td><td>C</td></tr></table>"
 ```
 
-## 3. Build `multiplyBy3` using `add`
+## 3. Login Validation
 
-Fix the code so `multiplyBy3(x)` correctly returns `x * 3` by reusing `add(x, y)`.
+Given:
+
+-   an array of accounts (`username`, `password`)
+-   one login attempt (`username`, `password`)
+
+Return:
+
+-   `"Success"` if both username and password match
+-   `"Wrong Password"` if username exists but password is wrong
+-   `"User Not Found"` if username does not exist
 
 ```js
-function add(x, y) {
-    x + y;
+function login(accounts, loginAttempt) {
+    // Your code here
 }
 
-function multiplyBy3(x) {
-    return add(x, add(x, x));
+console.log(
+    login(
+        [
+            { username: 'Alice', password: 'password123' },
+            { username: 'Bob', password: 'myPass456' },
+        ],
+        { username: 'Alice', password: 'password123' },
+    ),
+); // Output: "Success"
+console.log(
+    login(
+        [
+            { username: 'Alice', password: 'password123' },
+            { username: 'Bob', password: 'myPass456' },
+        ],
+        { username: 'Bob', password: 'wrongPass' },
+    ),
+); // Output: "Wrong Password"
+console.log(
+    login(
+        [
+            { username: 'Alice', password: 'password123' },
+            { username: 'Bob', password: 'myPass456' },
+        ],
+        { username: 'Charlie', password: 'charliePass789' },
+    ),
+); // Output: "User Not Found"
+```
+
+## 4. Delete User
+
+Given an array of account objects and a username, return a new accounts array with that user removed.
+
+### Hint
+
+-   Think: "Filter"
+
+```js
+function deleteUser(accounts, usernameToDelete) {
+    // Your code here
 }
 
-console.log(multiplyBy3(4)); // 12
+console.log(
+    deleteUser(
+        [
+            { username: 'Alice', password: 'password123' },
+            { username: 'Bob', password: 'myPass456' },
+        ],
+        'Alice',
+    ),
+); // Output: [{ username: "Bob", password: "myPass456" }]
+console.log(
+    deleteUser(
+        [
+            { username: 'Charlie', password: 'charliePass789' },
+            { username: 'David', password: 'davidPass456' },
+        ],
+        'Charlie',
+    ),
+); // Output: [{ username: "David", password: "davidPass456" }]
+console.log(
+    deleteUser(
+        [
+            { username: 'Eve', password: 'evePass123' },
+            { username: 'Frank', password: 'frankPass456' },
+        ],
+        'Grace',
+    ),
+); // Output: [{ username: "Eve", password: "evePass123" }, { username: "Frank", password: "frankPass456" }]
 ```
 
-## 4. Fix string message assignment
+## 5. Find the Shape with the Largest Area
 
-The function should return a greeting message for the given name.
+Given an array of shape objects, find and return the shape with the largest area.
+
+Each shape object has a `type` property that identifies whether it's a `'circle'`, `'rectangle'`, or `'triangle'`, along with the properties needed to calculate its area:
+
+**Area Formulas:**
+
+-   Circle: `π × radius × radius`
+-   Rectangle: `width × height`
+-   Triangle: `0.5 × base × height`
+
+**Hints:**
+
+-   Use `Math.PI` for the value of π
 
 ```js
-function greetings(name) {
-    const message = 'Hello, ';
-    message = message + name;
-    return message;
+function largestArea(shapes) {
+    // Your code here
 }
 
-console.log(greetings('Ali')); // "Hello, Ali"
+// Example usage:
+console.log(
+    largestArea([
+        { type: 'circle', radius: 3 },
+        { type: 'rectangle', width: 4, height: 5 },
+        { type: 'triangle', base: 6, height: 7 },
+        { type: 'rectangle', width: 3, height: 5 },
+    ]),
+); // { type: 'rectangle', width: 4, height: 5 }
+// The first rectangle has the largest area: 20
+
+console.log(
+    largestArea([
+        { type: 'circle', radius: 6 },
+        { type: 'rectangle', width: 4, height: 5 },
+        { type: 'circle', radius: 10 },
+        { type: 'triangle', base: 6, height: 7 },
+        { type: 'triangle', base: 3, height: 7 },
+    ]),
+); // { type: 'circle', radius: 10 }
+// The second circle has the largest area: 314.16 (approximately)
 ```
 
-## 5. Fix the full name variable
+## 6. Calculate Total Contribution from Young Male Volunteers
 
-The function should return the full name by joining `firstName` and `lastName` with one space.
+Given an array of volunteer objects, calculate the total contribution time from male volunteers who are below 30 years of age.
+
+Each volunteer object has the following properties:
+
+-   `name`: string
+-   `age`: number
+-   `gender`: string (`'male'` or `'female'`)
+-   `contribution`: number (hours contributed)
 
 ```js
-function displayName(firstName, lastName) {
-	const full name = firstName + ' ' + lastName;
-	return full name;
+function totalTimeYoungMaleVolunteers(volunteers) {
+    // Your code here
 }
 
-console.log(displayName('John', 'Tan')); // "John Tan"
+// Example usage:
+console.log(
+    totalTimeYoungMaleVolunteers([
+        { name: 'John', age: 25, gender: 'male', contribution: 5 },
+        { name: 'Jane', age: 22, gender: 'female', contribution: 8 },
+        { name: 'Mike', age: 28, gender: 'male', contribution: 10 },
+        { name: 'Emily', age: 32, gender: 'female', contribution: 7 },
+        { name: 'Tom', age: 32, gender: 'male', contribution: 7 },
+    ]),
+); // 15
+// John (5) + Mike (10) = 15
+
+console.log(
+    totalTimeYoungMaleVolunteers([
+        { name: 'Alice', age: 27, gender: 'female', contribution: 6 },
+        { name: 'Bob', age: 24, gender: 'male', contribution: 9 },
+        { name: 'Charlie', age: 29, gender: 'male', contribution: 4 },
+        { name: 'Diana', age: 31, gender: 'female', contribution: 10 },
+        { name: 'Elliot', age: 12, gender: 'male', contribution: 10 },
+    ]),
+); // 23
+// Bob (9) + Charlie (4) + Elliot (10) = 23
 ```
 
-## 6. Make a message
+## 7. Set Weight Category for Each Patient
 
-Given the name, year of birth, and current year, return a message indicating the person's name and age.
+Given an array of patient objects with `name`, `weight` (in kg), and `height` (in meters), add a `category` property to each patient based on their BMI.
+
+**BMI Calculation:**
+
+$$
+BMI = weight (kg) / (height (m) × height (m))
+$$
+
+| Category    | BMI Range       |
+| ----------- | --------------- |
+| Underweight | BMI < 18.5      |
+| Normal      | 18.5 ≤ BMI < 25 |
+| Overweight  | 25 ≤ BMI < 30   |
+| Obesity     | BMI ≥ 30        |
 
 ```js
-function makeMessage(name, yearOfBirth, currentYear) {}
+function setWeightCategory(patients) {
+    // Your code here
+}
 
-console.log(makeMessage('John', 1994, 2025)); // "John (31)"
+// Example usage:
+console.log(
+    setWeightCategory([
+        { name: 'Alice', weight: 50, height: 1.6 },
+        { name: 'Bob', weight: 80, height: 1.75 },
+        { name: 'Charlie', weight: 55, height: 1.8 },
+    ]),
+);
+// [
+//   { name: 'Alice', weight: 50, height: 1.6, category: 'Normal' },
+//   { name: 'Bob', weight: 80, height: 1.75, category: 'Overweight' },
+//   { name: 'Charlie', weight: 55, height: 1.8, category: 'Underweight' },
+// ]
+
+console.log(
+    setWeightCategory([
+        { name: 'David', weight: 90, height: 1.9 },
+        { name: 'Eva', weight: 45, height: 1.5 },
+        { name: 'Frank', weight: 70, height: 1.7 },
+    ]),
+);
+// [
+//   { name: 'David', weight: 90, height: 1.9, category: 'Normal' },
+//   { name: 'Eva', weight: 45, height: 1.5, category: 'Underweight' },
+//   { name: 'Frank', weight: 70, height: 1.7, category: 'Overweight' },
+// ]
 ```
 
-## 7. Make 3 messages
+## 8. Calculate Score Statistics
 
-Given the name and the year of birth of 3 different person, along with the current year, return a message listing the name and age of the 3 person, each separated by a comma.
+Given an array of scores, return an object containing statistical information about the scores:
 
-> Hint: You should reuse your code from the previous question
+-   `highest`: the highest score in the array
+-   `lowest`: the lowest score in the array
+-   `average`: the average score
 
 ```js
-function makeMessage(name, yearOfBirth, currentYear) {}
+function scoreStats(scores) {
+    // Your code here
+}
 
-function make3Messages(name1, yearOfBirth1, name2, yearOfBirth2, name3, yearOfBirth3, currentYear) {}
+// Example usage:
+console.log(scoreStats([85, 92, 78, 90, 88]));
+// { highest: 92, lowest: 78, average: 86.6... }
 
-console.log(make3Messages('John', 1994, 'Mary', 1999, 'Tom', 1986, 2025)); // "John (31), Mary (26), Tom (39)"
-```
+console.log(scoreStats([70, 75, 80, 85, 90, 95]));
+// { highest: 95, lowest: 70, average: 82.5... }
 
-## 8. Multiple wrapper
-
-Implement a function `wrapper(a, b, c, message)` that returns a string which wraps the message in a specific pattern of characters.
-
-`a`, `b`, and `c` are single-character strings used as wrapping characters.
-
-The output string should be constructed as follows:
-
-1. The string starts with three repetitions of character `a`.
-2. This is followed by two repetitions of character `b`.
-3. Then a single instance of character `c`.
-4. Next comes the original `message` string.
-5. After the message, repeat character `c` once again.
-6. Then repeat character `b` twice.
-7. Finally, end the string with three repetitions of character `a`.
-
-Example 1:
-
-```js
-wrapper('#', '%', '*', 'message');
-```
-
-Output 1:
-
-```js
-###%%*message*%%###
-```
-
-Example 2:
-
-```js
-wrapper('@', 'B', '(', 'message');
-```
-
-Output 2:
-
-```
-@@@BB(message(BB@@@
-```
-
-Code
-
-```js
-function wrapper(a, b, c, message) {}
-
-console.log(wrapper('#', '%', '*', 'message')); // "###%%*message*%%###"
-```
-
-## 9. Calculate $a^2 - b^2$
-
-> Hint: $a \times a = a^2$
-
-```js
-function aSquareMinusBSquare(a, b) {}
-
-console.log(aSquareMinusBSquare(10, 1)); // 99
-```
-
-## 10. Calculate $(a^2 - b^2)^2 - (c^2 - d^2)^2$
-
-> Hint: Reuse `aSquareMinusBSquare`
-
-```js
-function aSquareMinusBSquare(a, b) {}
-
-function multipleSquareMinusSquare(a, b, c, d) {}
-
-console.log(multipleSquareMinusSquare(4, 3, 2, 1)); // 40
+console.log(scoreStats([100, 98, 95, 97, 96]));
+// { highest: 100, lowest: 95, average: 97.2... }
 ```
